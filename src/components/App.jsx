@@ -1,10 +1,11 @@
 import { GlobalStyle } from './GlobalStyle';
+import { StyledContainer } from './App.styled';
 
 export const App = () => {
   return (
-    <div>
+    <StyledContainer>
       <GlobalStyle />
-      Тут всякое такое
-    </div>
+      Работает !
+    </StyledContainer>
   );
 };
