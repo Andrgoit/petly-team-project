@@ -1,11 +1,21 @@
 import { GlobalStyle } from './GlobalStyle';
+
+import { StyledContainer } from './App.styled';
+
+
 import SharedLayout from './SharedLayout/SharedLayout';
+
 export const App = () => {
   return (
-    <div>
+    <StyledContainer>
       <GlobalStyle />
-      <SharedLayout />
-      Тут всякое такое
+ <SharedLayout />
+      Работает !
+    </StyledContainer>
+
+     
+     
     </div>
+
   );
 };
