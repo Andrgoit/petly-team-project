@@ -17,7 +17,7 @@ export default function SharedLayout() {
       <Routes>
         //public route
         <Route path="/news" element={<NewsPage />} />
-        <Route path="/notices" element={<NoticesPage />} />
+        <Route path="/notices/:categoryName" element={<NoticesPage />} />
         <Route path="/friends" element={<OurFriendsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
