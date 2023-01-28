@@ -15,13 +15,13 @@ export default function SharedLayout() {
     <Suspense fallback={<p>Loading...</p>}>
       <Header />
       <Routes>
-        //public route
+        {/* public route */}
         <Route path="/news" element={<NewsPage />} />
         <Route path="/notices/:categoryName" element={<NoticesPage />} />
         <Route path="/friends" element={<OurFriendsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        //private route to do
+        {/* private route to do */}
         <Route path="/user" element={<UserPage />} />
       </Routes>
     </Suspense>
