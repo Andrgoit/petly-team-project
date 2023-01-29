@@ -57,6 +57,7 @@ export const theme = {
     f: '24px',
     g: '28px',
     h: '32px',
+    j: '48px',
   },
   fontWeights: {
     normal: 400,
@@ -66,6 +67,7 @@ export const theme = {
   lineHeights: {
     a: 1.125,
     b: 1.5,
+    c: 1.36,
   },
   borders: {
     none: 'none',

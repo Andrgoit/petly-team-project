@@ -12,9 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={theme}>
       {/*  */}
       {/* для гита */}
-      <BrowserRouter basename="/petly-team-project/">
-        {/*  */}
-        {/* <BrowserRouter> */}
+      {/* <BrowserRouter basename="/petly-team-project/"> */}
+      {/*  */}
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </ThemeProvider>
