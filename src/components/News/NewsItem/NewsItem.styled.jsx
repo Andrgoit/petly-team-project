@@ -7,9 +7,9 @@ export const Line = styled.span`
   width: 200px;
   height: 4px;
 
-  background: linear-gradient(90deg, #ff634e 0%, #ffdf48 105.44%);
-  border-radius: 40px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: ${p => p.theme.colors.news.gradient};
+  border-radius: ${p => p.theme.radii.lg};
+  box-shadow: ${p => p.theme.colors.news.shadow};
 
   @media screen and (min-width: 768px) {
     width: 280px;
@@ -23,26 +23,25 @@ export const Line = styled.span`
 
 export const Item = styled.li`
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   @media screen and (min-width: 768px) {
     margin-bottom: 0;
   }
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h3`
   margin-bottom: 16px;
 
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 1.375;
-  letter-spacing: -0.01em;
+  font-weight: ${p => p.theme.fontWeights.bold};
+  font-size: ${p => p.theme.fontSizes.f};
+  letter-spacing: ${p => p.theme.letterSpacing.a};
 `;
 
 export const Description = styled.p`
   margin-bottom: 20px;
-  font-size: 16px;
-  line-height: 1.375;
-
-  color: #111321;
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -63,21 +62,17 @@ export const Wrapper = styled.div`
 `;
 
 export const Date = styled.time`
-  font-size: 16px;
-  line-height: 1.375;
-  color: rgba(17, 17, 17, 0.6);
+  color: ${p => p.theme.colors.news.date};
 `;
 
 export const Link = styled.a`
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.375;
+  font-weight: ${p => p.theme.fontWeights.preBold};
   text-decoration-line: underline;
-  color: #f59256;
+  color: ${p => p.theme.colors.news.readMore};
 
   &:hover,
   &:focus {
     scale: 1.1;
-    color: #ff634e;
+    color: ${p => p.theme.colors.news.readMoreFocus};
   }
 `;

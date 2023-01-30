@@ -8,12 +8,12 @@ import {
   Link,
 } from './NewsItem.styled';
 
-function NewsItem({ id, date, description, title, url }) {
+function NewsItem({ text, date, title, url }) {
   return (
     <Item>
       <Line> </Line>
       <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Description>{text}</Description>
       <Wrapper>
         <Date>{date}</Date>
         <Link href={url} target="_blank">

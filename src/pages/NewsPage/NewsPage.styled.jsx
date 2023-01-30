@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1`
-  /* text-align: center; */
-  font-size: 24px;
-  font-weight: 700;
+export const Title = styled.h2`
+  font-size: ${p => p.theme.fontSizes.f};
+  font-weight: ${p => p.theme.fontWeights.bold};
 
-  line-height: 1.375;
-  margin: 0;
   @media screen and (min-width: 768px) {
-    font-size: 48px;
+    font-size: ${p => p.theme.fontSizes.j};
   }
 `;
 
 export const Section = styled.section`
   padding-top: 40px;
   padding-bottom: 100px;
-  background-color: #fdf7f2;
+
+  font-size: ${p => p.theme.fontSizes.c};
+  line-height: ${p => p.theme.lineHeights.d};
+  color: ${p => p.theme.colors.news.text};
 
   @media screen and (min-width: 1280px) {
     padding-top: 60px;

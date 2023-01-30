@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 
 import NewsList from 'components/News/NewsList';
 
+import { getNews } from 'services/API/API';
+
 function NewsPage() {
   const [data, setData] = useState({
     news: [],
@@ -12,7 +14,8 @@ function NewsPage() {
   });
 
   const [q, setQ] = useState('');
-
+  //   console.log(()=> await getNews());
+  getNews();
   useEffect(() => {
     const func = () => {
       setData(prev => ({
@@ -21,13 +24,11 @@ function NewsPage() {
       }));
 
       axios
-        .get(
-          'https://newsapi.org/v2/top-headlines?country=ua&apiKey=a933128c6f994d8d836111cf94a277de'
-        )
-        .then(test =>
+        .get('https://petly-backend.onrender.com/api/news')
+        .then(response =>
           setData(prev => ({
             ...prev,
-            news: test.data.articles,
+            news: response.data,
             loading: false,
           }))
         )
