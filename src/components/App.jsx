@@ -8,9 +8,7 @@ export const App = () => {
   return (
     <StyledContainer>
       <GlobalStyle />
-        <SharedLayout />
-      Работает !
+      <SharedLayout />
     </StyledContainer>
-
   );
 };
