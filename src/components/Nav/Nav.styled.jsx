@@ -32,6 +32,7 @@ export const StyledLink = styled(NavLink)`
 
   &:active {
     color: ${p => p.theme.colors.home.secTitle};
+    font-weight: ${p => p.theme.fontWeights.preBold};
   }
 
   @media (min-width: 768px) {
