@@ -30,7 +30,12 @@ export const StyledLink = styled(NavLink)`
   color: ${p => p.theme.colors.home.primTitle};
   text-decoration: none;
 
-  &:active {
+  &:hover,
+  &:focus {
+    color: ${p => p.theme.colors.home.secTitle};
+  }
+
+  &.active {
     color: ${p => p.theme.colors.home.secTitle};
     font-weight: ${p => p.theme.fontWeights.preBold};
   }
@@ -42,7 +47,7 @@ export const StyledLink = styled(NavLink)`
   @media (min-width: 1300px) {
     font-size: ${p => p.theme.fontSizes.i};
 
-    &:active {
+    &.active {
       text-decoration: underline;
     }
   }
