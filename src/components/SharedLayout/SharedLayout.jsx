@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react';
 import Header from 'components/Header/Header';
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
-const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
+const NewsPage = lazy(() => import('pages/NewsPage'));
 const OurFriendsPage = lazy(() =>
   import('pages/OurFriendsPage/OurFriendsPage')
 );
