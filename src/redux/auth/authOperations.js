@@ -10,6 +10,7 @@ const setAuthHeader = token => {
 };
 
 // Очищаем заголовок
+// eslint-disable-next-line
 const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };

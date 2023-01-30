@@ -13,6 +13,7 @@ export default function Header() {
   const [showBurgerMenu, setShowBurgetMenu] = useState(false);
 
   // сделано для теста, потом данные будут браться из Redux
+  // eslint-disable-next-line
   const [isLogined, setIsLogined] = useState(false);
 
   const isDesktop = useMediaQuery({ minWidth: 1300 });
