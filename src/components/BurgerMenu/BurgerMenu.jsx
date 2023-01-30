@@ -1,10 +1,35 @@
-import { StyledImg, StyledImgContainer } from './BurgerMenu.styled';
-import burger from '../../img/burger.png';
+import { useMediaQuery } from 'react-responsive';
 
-export default function BurgerMenu() {
+import {
+  StyledContainer,
+  StyledHeader,
+  StyledUserMenu,
+  StyledContainerUserMenu,
+} from './BurgerMenu.styled';
+import Logo from 'components/Logo/Logo';
+import Nav from 'components/Nav/Nav';
+
+import AuthNav from 'components/AuthNav/AuthNav';
+import UserNav from 'components/UserNav/UserNav';
+import CloseBurgerMenuBtn from 'components/CloseBurgerMenuBtn/CloseBurgerMenuBtn';
+
+export default function BurgerMenu({ isLogined, onClick }) {
+  const isTablet = useMediaQuery({ minWidth: 768 });
   return (
-    <StyledImgContainer>
-      <StyledImg src={burger} alt="burger menu" />
-    </StyledImgContainer>
+    <StyledContainer>
+      <StyledHeader>
+        <Logo /> <CloseBurgerMenuBtn onClick={onClick} />
+      </StyledHeader>
+
+      <StyledContainerUserMenu>
+        {!isTablet && (
+          <StyledUserMenu>
+            {isLogined ? <UserNav /> : <AuthNav />}
+          </StyledUserMenu>
+        )}
+
+        <Nav />
+      </StyledContainerUserMenu>
+    </StyledContainer>
   );
 }

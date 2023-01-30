@@ -4,7 +4,6 @@ export const StyledContainer = styled.div`
   width: 320px;
   margin: 0 auto;
   padding: 0 20px;
-  background-color: ${p => p.theme.colors.backgroundColor};
 
   @media (min-width: 768px) {
     width: 768px;
