@@ -1,53 +1,29 @@
-import { Section, Container, Title, Input } from './NewsPage.styled';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { Section, Container, Title, Input } from './NewsPage.styled';
 
 import NewsList from 'components/News/NewsList';
 
-import { getNews } from 'services/API/API';
+import { getAllNews, getLoading, getError } from 'redux/news/news-selectors';
+import { getNews } from 'redux/news/news-operations';
 
 function NewsPage() {
-  const [data, setData] = useState({
-    news: [],
-    loading: false,
-    error: null,
-  });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNews());
+  }, [dispatch]);
+
+  const news = useSelector(getAllNews);
+  const loading = useSelector(getLoading);
+  const error = useSelector(getError);
 
   const [q, setQ] = useState('');
-  //   console.log(()=> await getNews());
-  getNews();
-  useEffect(() => {
-    const func = () => {
-      setData(prev => ({
-        ...prev,
-        loading: true,
-      }));
-
-      axios
-        .get('https://petly-backend.onrender.com/api/news')
-        .then(response =>
-          setData(prev => ({
-            ...prev,
-            news: response.data,
-            loading: false,
-          }))
-        )
-        .catch(error =>
-          setData(prev => ({
-            ...prev,
-            loading: false,
-            error: error.message,
-          }))
-        );
-    };
-    func();
-  }, []);
 
   const handleChange = e => {
     setQ(e.target.value);
   };
-
-  const { news, loading, error } = data;
 
   const filteredNews = () => {
     const data = news.filter(el => el.title.includes(q));
