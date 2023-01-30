@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Line = styled.span`
-  padding-bottom: 4px;
+  margin-bottom: 13px;
   display: block;
 
   width: 200px;
