@@ -23,9 +23,9 @@ export default function SharedLayout() {
         <Route path="/friends" element={<OurFriendsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="*" element={<NotFoundPage />} />
         {/* private route to do */}
         <Route path="/user" element={<UserPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );
