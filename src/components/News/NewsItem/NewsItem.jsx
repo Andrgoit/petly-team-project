@@ -15,7 +15,7 @@ function NewsItem({ text, date, title, url }) {
       <Title>{title}</Title>
       <Description>{text}</Description>
       <Wrapper>
-        <Date>{date}</Date>
+        <Date>{date.split('-').reverse().join('/')}</Date>
         <Link href={url} target="_blank">
           Read more
         </Link>
