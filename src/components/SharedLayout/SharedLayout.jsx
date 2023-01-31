@@ -10,7 +10,7 @@ const OurFriendsPage = lazy(() =>
 const NoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const UserPage = lazy(() => import('pages/UserPage/UserPage'));
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
-
+const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 export default function SharedLayout() {
   return (
     <Suspense fallback={<p>Loading...</p>}>
@@ -23,6 +23,7 @@ export default function SharedLayout() {
         <Route path="/friends" element={<OurFriendsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<NotFoundPage />} />
         {/* private route to do */}
         <Route path="/user" element={<UserPage />} />
       </Routes>
