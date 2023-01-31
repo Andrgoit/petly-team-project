@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import paws from '../../img/paws.png';
 import { NavLink } from 'react-router-dom';
-export const Title = styled.h1`
+
+export const Title = styled.h2`
   color: ${p => p.theme.colors.home.black};
   font-weight: ${props => props.theme.fontWeights.bold};
   font-size: ${props => props.theme.fontSizes.h};
