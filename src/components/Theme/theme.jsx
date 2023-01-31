@@ -20,6 +20,8 @@ export const theme = {
       date: 'rgba(17, 17, 17, 0.6)',
       gradient: 'linear-gradient(90deg, #FF634E 0%, #FFDF48 105.44%)',
       readMore: 'rgba(245, 146, 86, 1)',
+      readMoreFocus: '#ff634e',
+      shadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     },
     // Login + Registration
     login: {
@@ -57,6 +59,7 @@ export const theme = {
     f: '24px',
     g: '28px',
     h: '32px',
+    j: '48px',
   },
   fontWeights: {
     normal: 400,
@@ -66,6 +69,11 @@ export const theme = {
   lineHeights: {
     a: 1.125,
     b: 1.5,
+    c: 1.36,
+    d: 1.375,
+  },
+  letterSpacing: {
+    a: '-0.01em',
   },
   borders: {
     none: 'none',

@@ -40,7 +40,7 @@ const ModalAddsPet = () => {
 	}
 
 /*перехід на наступну сторінку по кнопці next*/
-	const nextPage = () => { }
+	//const nextPage = () => { }
 	
 	//для змін в інпуті
 	//const handleChange = (e) => {
@@ -81,7 +81,7 @@ const ModalAddsPet = () => {
 						{/*перехід на наступну сторінку по кнопці next*/}
 						<ButtonNext type="submit" onClick={handleSubmitForm}>Next</ButtonNext>
 						{/*//вихід з форми та очищення полів*/}
-						<ButtonCancel>Cancel</ButtonCancel>
+						<ButtonCancel onClick={isCloseModal}>Cancel</ButtonCancel>
 					</Form>
 				)}
 			</Formik>
