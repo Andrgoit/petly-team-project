@@ -9,15 +9,15 @@ import { AddPet, MyPet} from "./PetsData.styled";
 const PetsData = () => {
 	const [isOpenModal, setIsOpenModal] = useState("false");
 	const [isPetList, setIsPetList] = useState("items");
-//что делать setIsPetList куда применить?
+//что делать setIsPetList куда применить? onChange={() => setIsPetList("items")
 	return (
 		<div>
 			<MyPet>My pets:</MyPet>
 			{/*//клік по кнопці відкриває модалку openModalAddsPet*/}
 			<AddPet type="button" onClick={() => setIsOpenModal("true")}>Add Pet</AddPet>
 			{isOpenModal && <ModalAddsPet />}
-			{/*якщо є дані в списку то показуємо, якщо ні то нічого не показуємо*/}
-			{isPetList && <PetsList />}
+			{/*{/* items={items} якщо є дані в списку то показуємо, якщо ні то нічого не показуємо*/}
+			{isPetList && <PetsList onChange={() => setIsPetList("items")} />}
 		</div>
 	)
 }

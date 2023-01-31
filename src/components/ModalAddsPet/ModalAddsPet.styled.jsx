@@ -14,7 +14,7 @@ font-size: 24px;
 line-height: 33px;
 color: #111111;
 `
-export const NameInput = styled.label`
+export const Label = styled.label`
 height: 27px;
 font-style: normal;
 font-weight: 500;
@@ -25,14 +25,14 @@ align-items: center;
 color: #111111;
 `
 
-export const Input = styled.input`
-	height: 40px;
-	width: 240px;
-	border-radius: 40px;
-	border: 1px solid rgba(245, 146, 86, 0.5);
-	background: linear-gradient(0deg, #FDF7F2),
-linear-gradient(0deg, rgba(245, 146, 86, 0.5), rgba(245, 146, 86, 0.5));
-`
+//export const Field Input = styled.input`
+//	height: 40px;
+//	width: 240px;
+//	border-radius: 40px;
+//	border: 1px solid rgba(245, 146, 86, 0.5);
+//	background: linear-gradient(0deg, #FDF7F2),
+//linear-gradient(0deg, rgba(245, 146, 86, 0.5), rgba(245, 146, 86, 0.5));
+//`
 export const ButtonNext = styled.button`
 box-sizing: border-box;
 height: 40px;
