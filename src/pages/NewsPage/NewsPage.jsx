@@ -1,23 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { MdSearch } from 'react-icons/md';
 
-import {
-  Section,
-  Container,
-  Title,
-  Input,
-  Form,
-  Button,
-} from './NewsPage.styled';
+import { Section, Container, Title } from './NewsPage.styled';
 
 import NewsList from 'components/News/NewsList';
+import NewsSearchForm from 'components/News/NewsSearchForm';
 
 import { getAllNews, getLoading, getError } from 'redux/news/news-selectors';
 import { getNews } from 'redux/news/news-operations';
 
 function NewsPage() {
+  const [q, setQ] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,14 +22,10 @@ function NewsPage() {
   const loading = useSelector(getLoading);
   const error = useSelector(getError);
 
-  const [q, setQ] = useState('');
-
-  const handleChange = e => {
-    setQ(e.target.value);
-  };
-
   const filteredNews = () => {
-    const data = news.filter(el => el.title.includes(q));
+    const data = news.filter(el =>
+      el.title.toLowerCase().includes(q.toLowerCase())
+    );
     return data;
   };
 
@@ -43,12 +33,7 @@ function NewsPage() {
     <Section>
       <Container>
         <Title>News</Title>
-        <Form>
-          <Input onChange={handleChange} placeholder="Search"></Input>
-          <Button>
-            <MdSearch style={{ width: '20', height: '20' }} />
-          </Button>
-        </Form>
+        <NewsSearchForm setQ={setQ} />
 
         {loading && (
           <AiOutlineLoading3Quarters
