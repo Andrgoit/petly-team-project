@@ -69,6 +69,7 @@ export const Link = styled.a`
   font-weight: ${p => p.theme.fontWeights.preBold};
   text-decoration-line: underline;
   color: ${p => p.theme.colors.news.readMore};
+  outline: transparent;
 
   &:hover,
   &:focus {

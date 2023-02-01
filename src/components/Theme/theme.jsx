@@ -22,6 +22,10 @@ export const theme = {
       readMore: 'rgba(245, 146, 86, 1)',
       readMoreFocus: '#ff634e',
       shadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      input: '#535353',
+      inputBgColor: '#ffffff',
+      inputShadow: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+      inputBorderHoverColor: 'rgba(245, 146, 86, 0.5)',
     },
     // Login + Registration
     login: {
@@ -49,6 +53,7 @@ export const theme = {
   },
   fonts: {
     body: 'Manrope',
+    input: 'Inter, sans-serif',
   },
   fontSizes: {
     a: '12px',
@@ -71,9 +76,12 @@ export const theme = {
     b: 1.5,
     c: 1.36,
     d: 1.375,
+    e: 1.35,
+    f: 1.2,
   },
   letterSpacing: {
     a: '-0.01em',
+    b: '0.04em',
   },
   borders: {
     none: 'none',
