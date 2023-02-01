@@ -113,8 +113,6 @@ export const FriendContentItemTime = styled.div`
     color: #f59256;
     > div {
       display: flex;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 4px;
     }
   }
 `;
@@ -136,7 +134,15 @@ export const FriendContentItemWorkTime = styled.div`
     font-size: ${p => p.theme.fontSizes.a};
     font-height: 1.33;
     display: grid;
-    grid-template-columns: 1fr;
     gap: 4px;
   }
+`;
+
+export const ListDropmenu = styled.li`
+  display: flex;
+  justify-content: space-around;
+  grid-template-columns: repeat(2fr);
+  gap: 6px;
+  color: ${props =>
+    props.isToday ? 'rgba(245, 146, 86, 1)' : 'rgba(0, 0, 0, 1)'};
 `;
