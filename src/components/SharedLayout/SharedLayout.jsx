@@ -3,14 +3,14 @@ import { lazy, Suspense } from 'react';
 import Header from 'components/Header/Header';
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
-const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
+const NewsPage = lazy(() => import('pages/NewsPage'));
 const OurFriendsPage = lazy(() =>
   import('pages/OurFriendsPage/OurFriendsPage')
 );
 const NoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const UserPage = lazy(() => import('pages/UserPage/UserPage'));
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
-
+const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 export default function SharedLayout() {
   return (
     <Suspense fallback={<p>Loading...</p>}>
@@ -25,6 +25,7 @@ export default function SharedLayout() {
         <Route path="/register" element={<RegisterPage />} />
         {/* private route to do */}
         <Route path="/user" element={<UserPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );
