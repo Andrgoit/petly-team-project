@@ -1,28 +1,30 @@
 import styled from 'styled-components';
 
 export const CardFriend = styled.article`
+  display: block;
   width: 280px;
   height: 192px;
-  background: #ffffff;
-  border-radius: ${p => p.theme.radii.lg};
+  background: ${p => p.theme.colors.white};
+  border-radius: ${p => p.theme.radii.md};
   box-shadow: 7px 4px 14px 0px rgba(49, 21, 4, 0.07);
-  border-radius: 20px;
   box-sizing: border-box;
   padding: 12px 4px;
   @media screen and (min-width: 768px) and (max-width: 1299.5px) {
     width: 336px;
     height: 246px;
     padding: 16px 4px;
+    border-radius: ${p => p.theme.radii.lg};
   }
   @media screen and (min-width: 1300px) {
     width: 395px;
     height: 287px;
     padding: 16px 4px;
+    border-radius: ${p => p.theme.radii.lg};
   }
 `;
 
-export const FriendName = styled.h3`
-  margin-bottom: 12px;
+export const FriendName = styled.a`
+  display: block;
   font-weight: ${p => p.theme.fontWeights.bold};
   font-size: ${p => p.theme.fontSizes.a};
   line-height: 1.33;
@@ -31,39 +33,42 @@ export const FriendName = styled.h3`
   text-decoration-line: underline;
   color: #f59256;
   @media screen and (min-width: 768px) and (max-width: 1299.5px) {
-    margin-bottom: 16px;
     font-size: ${p => p.theme.fontSizes.c};
-    line-height: 1.38;
+    line-height: ${p => p.theme.lineHeights.d};
   }
   @media screen and (min-width: 1300px) {
     font-size: ${p => p.theme.fontSizes.i};
-    line-height: 1.35;
-    margin-bottom: 16px;
+    line-height: ${p => p.theme.lineHeights.c};
   }
 `;
 
 export const FriendContent = styled.div`
   display: flex;
+  margin-top: 12px;
+  @media screen and (min-width: 768px) {
+    margin-top: 16px;
+  }
 `;
 
-export const FriendContentList = styled.div`
+export const FriendContentList = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
   gap: 4px;
   margin-left: 12px;
 
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: ${p => p.theme.fontWeights.preBold};
+  font-size: ${p => p.theme.fontSizes.a};
   line-height: 1.33;
+
   @media screen and (min-width: 768px) and (max-width: 1299.5px) {
-    font-size: 14px;
+    font-size: ${p => p.theme.fontSizes.b};
     line-height: 1.38;
     margin-left: 14px;
     gap: 8px;
   }
 
   @media screen and (min-width: 1300px) {
-    font-size: 16px;
+    font-size: ${p => p.theme.fontSizes.c};
     margin-left: 16px;
     gap: 12px;
   }
@@ -73,7 +78,6 @@ export const FriendLogo = styled.div`
   width: 110px;
   height: 78px;
   display: flex;
-  //   position: relative;
   @media screen and (min-width: 768px) and (max-width: 1299.5px) {
     width: 120px;
     height: 85px;
@@ -82,13 +86,20 @@ export const FriendLogo = styled.div`
     width: 158px;
     height: 112px;
   }
-  > img {
-    display: block;
-    margin: auto;
+`;
 
-    @media screen and (min-width: 1300px) {
-      width: auto;
-    }
+export const FriendLogoImg = styled.img`
+  object-fit: contain;
+  @media screen and (min-width: 1300px) {
+    margin: auto;
+    width: auto;
+  }
+`;
+
+export const AdressLink = styled.a`
+  color: ${p => p.theme.colors.home.text};
+  &:hover {
+    font-weight: ${p => p.theme.fontWeights.preBold};
   }
 `;
 
@@ -109,7 +120,7 @@ export const FriendContentItemWorkTime = styled.div`
 
   width: 120px;
   height: 160px;
-  background-color: rgba(255, 255, 255);
+  background-color: ${p => p.theme.colors.white};
   border: 1px solid #f59256;
   border-radius: ${p => p.theme.radii.sm};
   box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
@@ -117,8 +128,8 @@ export const FriendContentItemWorkTime = styled.div`
 
   color: ${p => p.theme.colors.text};
   > ul {
-    font-size: 12px;
-    font-weight: 500;
+    font-weight: ${p => p.theme.fontWeights.preBold};
+    font-size: ${p => p.theme.fontSizes.a};
     font-height: 1.33;
     display: grid;
     grid-template-columns: 1fr;
