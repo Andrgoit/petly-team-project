@@ -40,6 +40,9 @@ export const FriendName = styled.a`
     font-size: ${p => p.theme.fontSizes.i};
     line-height: ${p => p.theme.lineHeights.c};
   }
+  &:hover {
+    color: rgba(255, 97, 1, 1);
+  }
 `;
 
 export const FriendContent = styled.div`
@@ -99,7 +102,8 @@ export const FriendLogoImg = styled.img`
 export const AdressLink = styled.a`
   color: ${p => p.theme.colors.home.text};
   &:hover {
-    font-weight: ${p => p.theme.fontWeights.preBold};
+    font-weight: ${p => p.theme.fontWeights.Bold};
+    color: #f59256;
   }
 `;
 
