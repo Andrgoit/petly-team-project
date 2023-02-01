@@ -25,6 +25,7 @@ export const theme = {
       input: '#535353',
       inputBgColor: '#ffffff',
       inputShadow: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+      inputBorderHoverColor: 'rgba(245, 146, 86, 0.5)',
     },
     // Login + Registration
     login: {
@@ -52,6 +53,7 @@ export const theme = {
   },
   fonts: {
     body: 'Manrope',
+    input: 'Inter, sans-serif',
   },
   fontSizes: {
     a: '12px',

@@ -10,13 +10,14 @@ export const Input = styled.input`
   width: 280px;
   font-weight: ${p => p.theme.fontWeights.preBold};
   font-size: ${p => p.theme.fontSizes.c};
+  font-family: ${props => props.theme.fonts.input};
   line-height: ${p => p.theme.lineHeights.d};
   background: ${p => p.theme.colors.news.inputBgColor};
   color: ${p => p.theme.colors.news.input};
   letter-spacing: ${p => p.theme.letterSpacing.b};
   box-shadow: ${p => p.theme.colors.news.inputShadow};
   border-radius: ${p => p.theme.radii.md};
-  border: transparent;
+  border: 1px solid transparent;
   outline: none;
 
   @media screen and (min-width: 768px) {
@@ -34,6 +35,11 @@ export const Input = styled.input`
     line-height: ${p => p.theme.lineHeights.f};
     border-radius: ${p => p.theme.radii.md};
   }
+
+  &:hover,
+  &:focus {
+    border: 1px solid ${p => p.theme.colors.news.inputBorderHoverColor};
+  }
 `;
 
 export const Button = styled.button`
@@ -45,6 +51,7 @@ export const Button = styled.button`
 
   border: none;
   border-radius: 50%;
+  outline: transparent;
   background: transparent;
   cursor: pointer;
 
