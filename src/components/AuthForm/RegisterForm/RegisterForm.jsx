@@ -31,7 +31,8 @@ export const RegisterForm = () => {
 
     if (final) {
       try {
-        await dispatch(register(newData)).unwrap();
+        await dispatch(register(newData));
+
         navigate('/user');
       } catch (error) {
         toast.error(error);

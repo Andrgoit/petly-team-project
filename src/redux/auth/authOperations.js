@@ -29,7 +29,7 @@ export const register = createAsyncThunk(
         status: response.status,
         message: response.data.message,
       };
-
+      toast.error(error.message);
       return rejectWithValue(error.message);
     }
   }
