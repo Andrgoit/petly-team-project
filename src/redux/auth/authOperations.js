@@ -30,3 +30,16 @@ export const register = createAsyncThunk(
     }
   }
 );
+// Логінізація
+export const login = createAsyncThunk(
+  'auth/login',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('/auth/login', credentials);
+      setAuthHeader(data.token);
+      return data;
+    } catch (error) {
+      return rejectWithValue();
+    }
+  }
+);
