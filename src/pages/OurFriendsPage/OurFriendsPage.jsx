@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FriendList } from '../../components/OurFriends/OurFriendsList';
-import { PageTitle } from './OurFriendsPage.styled';
+import { FriendList } from '../../components/OurFriends/OurFriendList/OurFriendsList';
+import { PageTitle, Container, Section } from './OurFriendsPage.styled';
 
 import {
   getAllFriends,
@@ -23,13 +23,14 @@ function OurFriendsPage() {
   const error = useSelector(getError);
 
   return (
-    <div>
-      <PageTitle>Our friends</PageTitle>
-      {loading && <p>...Loading</p>}
-      {error && <p>Что-то пошло не так</p>}
-      {!loading && friends && <FriendList friends={friends} />}
-      {/* <FriendList friends={friends} /> */}
-    </div>
+    <Section>
+      <Container>
+        <PageTitle>Our friends</PageTitle>
+        {loading && <p>...Loading</p>}
+        {error && <p>Что-то пошло не так</p>}
+        {!loading && friends && <FriendList friends={friends} />}
+      </Container>
+    </Section>
   );
 }
 

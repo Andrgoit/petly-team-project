@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-import OurFriensItem from './OurfriensItem';
-import { FriendsList } from 'pages/OurFriendsPage/OurFriendsPage.styled';
+import OurFriensItem from '../OurFriendItem/OurfriensItem';
+import { FriendsList } from './OurFriendList.styled';
 
 export const FriendList = ({ friends }) => {
   const elements = friends.map(

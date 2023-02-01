@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getFriends } from './news-operations';
+import { getFriends } from './friends_operations';
 
 const initialState = {
   data: [],
@@ -7,7 +7,7 @@ const initialState = {
   error: null,
 };
 
-const newsSlice = createSlice({
+const friendsSlice = createSlice({
   name: 'friends',
   initialState,
   extraReducers: {
@@ -29,4 +29,4 @@ const newsSlice = createSlice({
   },
 });
 
-export default newsSlice.reducer;
+export default friendsSlice.reducer;

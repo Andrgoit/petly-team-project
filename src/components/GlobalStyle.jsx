@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
 body {
   margin: 0;
   font-family: 'Manrope';
+  background-color: ${props => props.theme.colors.backgroundColor};
 }
 
 * {

@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { fetchFriends } from 'services/APIFriens';
+import { fetchFriends } from 'services/API/API';
 
-export const fetchFriends = createAsyncThunk(
-  'friends/fetchFriends',
+export const getFriends = createAsyncThunk(
+  'friends/getAll',
   async (_, { rejectWithValue }) => {
     try {
-      const friends = await fetchFriends();
-      return friends;
+      const data = await fetchFriends();
+      return data;
     } catch (error) {
       throw rejectWithValue(error.message);
     }

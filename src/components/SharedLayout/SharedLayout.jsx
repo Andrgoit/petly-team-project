@@ -3,12 +3,13 @@ import { lazy, Suspense } from 'react';
 import Header from 'components/Header/Header';
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
-const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
+const NewsPage = lazy(() => import('pages/NewsPage'));
 const OurFriendsPage = lazy(() =>
   import('pages/OurFriendsPage/OurFriendsPage')
 );
 const NoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const UserPage = lazy(() => import('pages/UserPage/UserPage'));
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 
 export default function SharedLayout() {
   return (
@@ -16,6 +17,7 @@ export default function SharedLayout() {
       <Header />
       <Routes>
         {/* public route */}
+        <Route path="/" element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/notices/:categoryName" element={<NoticesPage />} />
         <Route path="/friends" element={<OurFriendsPage />} />
