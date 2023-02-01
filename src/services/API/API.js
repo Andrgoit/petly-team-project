@@ -8,3 +8,8 @@ export const fetchNews = async () => {
   const { data } = await instance.get('/news');
   return data;
 };
+
+export const fetchFriends = async () => {
+  const { data } = await instance.get('/friends');
+  return data;
+};
