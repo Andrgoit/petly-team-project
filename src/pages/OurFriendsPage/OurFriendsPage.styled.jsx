@@ -18,7 +18,7 @@ export const Section = styled.section`
 
   font-size: ${p => p.theme.fontSizes.c};
   line-height: ${p => p.theme.lineHeights.d};
-  color: ${p => p.theme.colors.news.text};
+  color: ${p => p.theme.colors.home.text};
   @media screen and (min-width: 768px) and (max-width: 1299.5px) {
     padding-top: 90px;
     padding-bottom: 100px;
@@ -30,9 +30,9 @@ export const Section = styled.section`
 `;
 export const PageTitle = styled.h2`
   margin-bottom: 28px;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 1.38;
+  font-weight: ${p => p.theme.fontWeights.bold};
+  font-size: ${p => p.theme.fontSizes.f};
+  line-height: ${p => p.theme.lineHeights.d};
 
   text-align: center;
 
@@ -40,10 +40,10 @@ export const PageTitle = styled.h2`
 
   @media screen and (min-width: 768px) and (max-width: 1299.5px) {
     margin-bottom: 40px;
-    font-size: 48px;
+    font-size: ${p => p.theme.fontSizes.j};
   }
   @media screen and (min-width: 1300px) {
     margin-bottom: 60px;
-    font-size: 48px;
+    font-size: ${p => p.theme.fontSizes.j};
   }
 `;
