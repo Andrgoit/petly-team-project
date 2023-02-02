@@ -5,7 +5,7 @@ const initialState = {
   user: {
     email: null,
     name: null,
-    city: null,
+    location: null,
     phone: null,
   },
   accessToken: null,
