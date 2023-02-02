@@ -9,10 +9,8 @@ import NavItems from './NavItems';
 export default function Nav() {
   const elements = NavItems.map(({ text, href }) => {
     return (
-      <StyledNavItem>
-        <StyledLink key={text} to={href}>
-          {text}
-        </StyledLink>
+      <StyledNavItem key={text}>
+        <StyledLink to={href}>{text}</StyledLink>
       </StyledNavItem>
     );
   });
