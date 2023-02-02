@@ -8,12 +8,9 @@ import {
   FriendContentItemWorkTime,
   FriendLogoImg,
   AdressLink,
+  ListDropmenu,
 } from '../OurFriendItem/OurFriensItem.styled';
 
-var days = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
-// var d = new Date();
-// var n = d.getDay();
-// var today = days[n];
 const fish = '----------------------------';
 
 function OurFriensItem({
@@ -27,25 +24,21 @@ function OurFriensItem({
   phone,
   worktime,
 }) {
+  const days = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+
+  const d = new Date();
+  const n = d.getDay();
+  const today = days[n - 1];
   let timeList = [];
   worktime.toString() === ''
     ? timeList.push('', '', '', '', '', '', '')
     : (timeList = [...worktime]);
 
-  const timeListDropmenu = timeList.map(time =>
-    time === '' ? (
-      <li>
-        <p>-------------</p>
-      </li>
-    ) : (
-      <li>{time}</li>
-    )
-  );
-
-  const dayListDropmenu = days.map(day => (
-    <li key={day.toString()} className="workDay">
-      {day}
-    </li>
+  const listDropmenu = timeList.map((time, i) => (
+    <ListDropmenu key={i} isToday={days[i] === today}>
+      <p>{days[i]}</p>
+      {time === '' ? <p>-------------</p> : <p>{time}</p>}
+    </ListDropmenu>
   ));
 
   return (
@@ -65,8 +58,7 @@ function OurFriensItem({
                 <br />
                 {timeList[0] ? timeList[0] : fish}
                 <FriendContentItemWorkTime>
-                  <ul>{dayListDropmenu}</ul>
-                  <ul>{timeListDropmenu}</ul>
+                  <ul>{listDropmenu}</ul>
                 </FriendContentItemWorkTime>
               </FriendContentItemTime>
             </li>
