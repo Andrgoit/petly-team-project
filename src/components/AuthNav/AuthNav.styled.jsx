@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const StyledContainer = styled.div`
   display: block;
@@ -19,7 +19,7 @@ export const StyledItem = styled.li`
   list-style: none;
 `;
 
-export const StyledButton = styled(Link)`
+export const StyledButton = styled(NavLink)`
   font-size: ${p => p.theme.fontSizes.b};
   font-weight: ${p => p.theme.fontWeights.preBold};
   line-height: ${p => p.theme.lineHeights.c};
@@ -31,6 +31,7 @@ export const StyledButton = styled(Link)`
   text-decoration: none;
   max-width: 144px;
 
+  &.active,
   &:hover,
   &:focus {
     color: ${p => p.theme.colors.home.secButtonText};
