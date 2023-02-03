@@ -24,11 +24,15 @@ export default function BurgerMenu({ isLogined, onClick }) {
       <StyledContainerUserMenu>
         {!isTablet && (
           <StyledUserMenu>
-            {isLogined ? <UserNav /> : <AuthNav />}
+            {isLogined ? (
+              <UserNav onClick={onClick} />
+            ) : (
+              <AuthNav onClick={onClick} />
+            )}
           </StyledUserMenu>
         )}
 
-        <Nav />
+        <Nav onClick={onClick} />
       </StyledContainerUserMenu>
     </StyledContainer>
   );
