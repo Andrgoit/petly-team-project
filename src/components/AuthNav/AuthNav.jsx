@@ -6,10 +6,10 @@ import {
   StyledButton,
 } from './AuthNav.styled';
 
-export default function AuthNav() {
+export default function AuthNav({ onClick }) {
   const elements = items.map(({ text, href }) => {
     return (
-      <StyledItem key={text}>
+      <StyledItem key={text} onClick={onClick}>
         <StyledButton to={href}>{text}</StyledButton>
       </StyledItem>
     );

@@ -1,13 +1,13 @@
 import { RegisterForm } from 'components/AuthForm/RegisterForm/RegisterForm';
-import { Section, Container } from './RegisterPage.styled';
+import { Section } from './RegisterPage.styled';
+import { MainContainer } from '../../components/App.styled';
 
 export default function RegisterPage() {
   return (
     <Section>
-      <Container>
+      <MainContainer>
         <RegisterForm />
-      </Container>
+      </MainContainer>
     </Section>
   );
 }
-
