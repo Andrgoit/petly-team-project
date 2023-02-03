@@ -6,7 +6,7 @@ const NoticesPage = () => {
 
   return (
     <>
-      <AddNoticeButton onClick={() => setIsOpenAddNoticeModal(true)} />
+      <AddNoticeButton onClickOpen={() => setIsOpenAddNoticeModal(true)} />
       <ModalAddNotice
         isModalOpen={isOpenAddNoticeModal}
         setIsModalOpen={setIsOpenAddNoticeModal}

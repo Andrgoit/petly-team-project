@@ -8,20 +8,22 @@ import { Title } from './ModalAddNotice.styled';
 import FirstStep from './FirstStep';
 import SecondStep from './SecondStep';
 
+const initialValues = {
+  category: '',
+  title: '',
+  name: '',
+  birthdate: '',
+  breed: '',
+  sex: '',
+  location: '',
+  price: '',
+  avatar: null,
+  comments: '',
+};
+
 const ModalAddNotice = ({ isModalOpen, setIsModalOpen }) => {
   const [isFirstStep, setIsFirstStep] = useState(true);
-  const [formValues, setFormValues] = useState({
-    category: '',
-    titleOfAd: '',
-    namePet: '',
-    birthDate: '',
-    breed: '',
-    sex: '',
-    location: '',
-    price: '',
-    image: null,
-    comment: '',
-  });
+  const [formValues, setFormValues] = useState(initialValues);
 
   const isTablet = useMediaQuery({ minWidth: 768 });
 
@@ -58,6 +60,8 @@ const ModalAddNotice = ({ isModalOpen, setIsModalOpen }) => {
           setFormValues={setFormValues}
           formValues={formValues}
           closeModal={() => setIsModalOpen(false)}
+          setIsFirstStep={setIsFirstStep}
+          initialValues={initialValues}
         ></SecondStep>
       )}
     </Modal>

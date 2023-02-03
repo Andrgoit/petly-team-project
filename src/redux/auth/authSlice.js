@@ -10,7 +10,7 @@ const initialState = {
   },
   accessToken: null,
   refreshToken: null,
-  IsLoggedIn: false,
+  isLoggedIn: false,
   isLoading: false,
   error: null,
 };
@@ -27,7 +27,7 @@ const authSlice = createSlice({
     builder.addCase(register.fulfilled, (state, { payload }) => {
       state.user = payload.user;
       state.accessToken = payload.user.accessToken;
-      state.IsLoggedIn = true;
+      state.isLoggedIn = true;
       state.isLoading = false;
     });
     builder.addCase(register.rejected, (state, { payload }) => {

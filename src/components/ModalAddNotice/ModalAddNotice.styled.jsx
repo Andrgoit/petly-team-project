@@ -5,9 +5,11 @@ import maleIcon from '../../img/male-icon.png';
 
 export const StyledErrMsg = styled.div`
   color: red;
-  font-size: 16px;
-  margin-top: 2px;
+  font-size: 14px;
+  margin-top: 3px;
+  margin-left: auto;
   align-self: center;
+  text-transform: uppercase;
 `;
 export const Title = styled.h3`
   font-weight: 500;

@@ -19,14 +19,14 @@ import {
 const today = new Date();
 
 const validationSchema = yup.object({
-  titleOfAd: yup
+  title: yup
     .string()
     .min(2)
     .max(48)
     .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
   category: yup.string().required('Category is required!'),
-  namePet: yup
+  name: yup
     .string()
     .min(2)
     .max(16)
@@ -35,10 +35,10 @@ const validationSchema = yup.object({
   breed: yup
     .string()
     .min(2)
-    .max(36)
+    .max(24)
     .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
-  birthDate: yup
+  birthdate: yup
     .date()
     .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
       if (originalValue) {
@@ -80,13 +80,13 @@ const FirstStep = ({
             consectetur{' '}
           </StyledText>
           <BtnsWrapper>
-            <RadioBtnWrapper htmlFor="lost/found">
+            <RadioBtnWrapper htmlFor="lostfound">
               <RadioBtn
                 type="radio"
                 name="category"
-                value="lost/found"
-                id="lost/found"
-                checked={values.category === 'lost/found'}
+                value="lostfound"
+                id="lostfound"
+                checked={values.category === 'lostfound'}
               />
               <RadioBtnText>lost/found</RadioBtnText>
             </RadioBtnWrapper>
@@ -112,54 +112,55 @@ const FirstStep = ({
             </RadioBtnWrapper>
             <ErrorMessage
               name="category"
+              category
               render={msg => <StyledErrMsg>{msg}</StyledErrMsg>}
             />
           </BtnsWrapper>
 
           <InputWrapper>
-            <InputLabel type="text" htmlFor="titleOfAd">
+            <InputLabel type="text" htmlFor="title">
               Tittle of ad*
             </InputLabel>
             <StyledInput
-              id="titleOfAd"
-              name="titleOfAd"
+              id="title"
+              name="title"
               placeholder="Type name pet"
               autoComplete="off"
             />
             <ErrorMessage
-              name="titleOfAd"
+              name="title"
               render={msg => <StyledErrMsg>{msg}</StyledErrMsg>}
             />
           </InputWrapper>
 
           <InputWrapper>
-            <InputLabel type="text" htmlFor="namePet">
+            <InputLabel type="text" htmlFor="name">
               Name pet
             </InputLabel>
             <StyledInput
-              id="namePet"
-              name="namePet"
+              id="name"
+              name="name"
               placeholder="Type name pet"
               autoComplete="off"
             />
             <ErrorMessage
-              name="namePet"
+              name="name"
               render={msg => <StyledErrMsg>{msg}</StyledErrMsg>}
             />
           </InputWrapper>
 
           <InputWrapper>
-            <InputLabel type="text" htmlFor="birthDate">
+            <InputLabel type="text" htmlFor="birthdate">
               Date of birth
             </InputLabel>
             <StyledInput
-              id="birthDate"
-              name="birthDate"
+              id="birthdate"
+              name="birthdate"
               placeholder="Type date of birth"
               autoComplete="off"
             />
             <ErrorMessage
-              name="birthDate"
+              name="birthdate"
               render={msg => <StyledErrMsg>{msg}</StyledErrMsg>}
             />
           </InputWrapper>

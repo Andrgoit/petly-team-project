@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import {
@@ -28,15 +27,23 @@ const validationSchema = yup.object({
     .string()
     .min(2)
     .max(36)
-    .matches(/\D/g, 'Only alphabetic characters are allowed')
+    .matches(
+      /(\b[a-zA-Z]+(,\s*)\s*[a-zA-Z]+\b)/g,
+      'Only in format "City, Region"'
+    )
     .required('Field is required!'),
-  price: yup
-    .string()
-    .min(2)
-    .max(6)
-    .matches(/^[1-9]+[0-9]*\$$/g, 'Only number characters and $ are allowed')
-    .notRequired(),
-  image: yup
+  sellCategory: yup.boolean(),
+  price: yup.string().when('sellCategory', {
+    is: true,
+    then: yup
+      .string()
+      .min(1)
+      .max(6)
+      .matches(/^[1-9]+[0-9]*/g, 'Only number characters are allowed')
+      .required('Price is required'),
+    otherwise: yup.string().notRequired(),
+  }),
+  avatar: yup
     .mixed()
     .required('Image is Required!(jpg,jpeg,png)')
     .test(
@@ -46,31 +53,58 @@ const validationSchema = yup.object({
         value === null ||
         (value && ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type))
     ),
-  comment: yup
+  comments: yup
     .string()
-    .min(4)
+    .min(8)
     .max(120)
     .matches(/^\D*$/g, 'Only alphabetic characters and symbols are allowed')
     .required('Field is required!'),
 });
 
-const SecondStep = ({ goBack, setFormValues, formValues, closeModal }) => {
-  const [file, setFile] = useState();
-
+const SecondStep = ({
+  goBack,
+  setFormValues,
+  formValues,
+  closeModal,
+  initialValues,
+  setIsFirstStep,
+}) => {
   const handleFileChange = (e, setFieldValue) => {
     const imgFile = e.target.files[0];
     if (imgFile) {
-      setFile(imgFile);
+      setFieldValue('avatar', imgFile);
+      setFormValues(values => ({ ...values, avatar: imgFile }));
     }
-    setFieldValue('image', imgFile);
-    setFormValues(values => ({ ...values, image: imgFile }));
   };
+
+  const handleInputChange = (e, setFieldValue) => {
+    const inputName = e.target.name;
+    let value = e.target.value;
+    if (inputName === 'location') {
+      value = makeFirstUpperCaseAndAfterCommas(value);
+    }
+    setFieldValue(inputName, value);
+    setFormValues(values => ({ ...values, [inputName]: value }));
+  };
+
   return (
     <Formik
       validationSchema={validationSchema}
-      initialValues={formValues}
+      initialValues={{
+        ...formValues,
+        sellCategory: formValues.category === 'sell' ? true : false,
+        price: formValues.sellCategory ? formValues.price : '',
+      }}
       onSubmit={values => {
-        console.log(values);
+        const formData = (({ sellCategory, ...o }) => o)(values);
+
+        console.log({
+          ...formData,
+          price: values.category !== 'sell' ? null : values.price,
+          // birthdate: parseDateToISO(formData.birthDate),
+        });
+        setFormValues(initialValues);
+        setIsFirstStep(true);
         closeModal();
       }}
     >
@@ -85,6 +119,7 @@ const SecondStep = ({ goBack, setFormValues, formValues, closeModal }) => {
                 name="sex"
                 alt="male"
                 value="male"
+                onChange={e => handleInputChange(e, setFieldValue)}
               />
               <SexIcon></SexIcon>
               <SexText>Male</SexText>
@@ -97,6 +132,7 @@ const SecondStep = ({ goBack, setFormValues, formValues, closeModal }) => {
                 name="sex"
                 alt="female"
                 value="female"
+                onChange={e => handleInputChange(e, setFieldValue)}
               />
               <SexIcon isFemale></SexIcon>
               <SexText>Female</SexText>
@@ -116,6 +152,7 @@ const SecondStep = ({ goBack, setFormValues, formValues, closeModal }) => {
               name="location"
               placeholder="Type location"
               autoComplete="off"
+              onChange={e => handleInputChange(e, setFieldValue)}
             />
             <ErrorMessage
               name="location"
@@ -133,6 +170,7 @@ const SecondStep = ({ goBack, setFormValues, formValues, closeModal }) => {
                 name="price"
                 placeholder="Type price"
                 autoComplete="off"
+                onChange={e => handleInputChange(e, setFieldValue)}
               />
               <ErrorMessage
                 name="price"
@@ -142,23 +180,26 @@ const SecondStep = ({ goBack, setFormValues, formValues, closeModal }) => {
           )}
 
           <InputWrapper imgWrap>
-            <InputLabel htmlFor="image">Load the pet’s image</InputLabel>
+            <InputLabel htmlFor="avatar">Load the pet’s image</InputLabel>
             <ImgWrapper>
-              {file ? (
-                <PetImage alt="pet-image" src={URL.createObjectURL(file)} />
+              {formValues.avatar ? (
+                <PetImage
+                  alt="pet-image"
+                  src={URL.createObjectURL(formValues.avatar)}
+                />
               ) : (
                 <PlusImg />
               )}
 
               <FileInput
-                id="image"
-                name="image"
+                id="avatar"
+                name="avatar"
                 type="file"
                 onChange={e => handleFileChange(e, setFieldValue)}
               />
             </ImgWrapper>
             <ErrorMessage
-              name="image"
+              name="avatar"
               render={msg => <StyledErrMsg>{msg}</StyledErrMsg>}
             />
           </InputWrapper>
@@ -169,14 +210,15 @@ const SecondStep = ({ goBack, setFormValues, formValues, closeModal }) => {
             </InputLabel>
             <TextArea
               component="textarea"
-              id="comment"
-              name="comment"
+              id="comments"
+              name="comments"
               rows="3"
               placeholder="Type comments"
               autoComplete="off"
+              onChange={e => handleInputChange(e, setFieldValue)}
             />
             <ErrorMessage
-              name="comment"
+              name="comments"
               render={msg => <StyledErrMsg>{msg}</StyledErrMsg>}
             />
           </InputWrapper>
@@ -195,3 +237,21 @@ const SecondStep = ({ goBack, setFormValues, formValues, closeModal }) => {
 };
 
 export default SecondStep;
+
+function makeFirstUpperCaseAndAfterCommas(str) {
+  const string = str.charAt(0).toUpperCase() + str.slice(1);
+  return string.replace(/[,\s]\s*([a-z])/g, function (_, e) {
+    return ', ' + e.toUpperCase();
+  });
+}
+
+// function parseDateToISO(str) {
+//   const dateParts = str.split('.');
+//   const formattedDate = new Date(
+//     +dateParts[2],
+//     dateParts[1] - 1,
+//     +dateParts[0]
+//   );
+
+//   return new Date(str).toISOString();
+// }
