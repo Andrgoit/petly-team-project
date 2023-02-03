@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 0 20px;
   display: grid;
   justify-items: center;
 
   @media screen and (min-width: 768px) {
-    padding: 0 32px;
+    margin-left: -32px;
+    margin-right: -32px;
   }
   @media screen and (min-width: 1280px) {
-    padding: 0 16px;
+    margin-left: -16px;
+    margin-right: -16px;
   }
 `;
 export const Section = styled.section`

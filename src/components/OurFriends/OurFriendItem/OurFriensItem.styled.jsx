@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CardFriend = styled.article`
   display: block;
-  width: 280px;
+  width: 100%;
   height: 192px;
   background: ${p => p.theme.colors.white};
   border-radius: ${p => p.theme.radii.md};
@@ -10,13 +10,13 @@ export const CardFriend = styled.article`
   box-sizing: border-box;
   padding: 12px 4px;
   @media screen and (min-width: 768px) and (max-width: 1299.5px) {
-    width: 336px;
+    width: 341px;
     height: 246px;
     padding: 16px 4px;
     border-radius: ${p => p.theme.radii.lg};
   }
   @media screen and (min-width: 1300px) {
-    width: 395px;
+    width: 400px;
     height: 287px;
     padding: 16px 4px;
     border-radius: ${p => p.theme.radii.lg};
@@ -132,7 +132,7 @@ export const FriendContentItemWorkTime = styled.div`
   > ul {
     font-weight: ${p => p.theme.fontWeights.preBold};
     font-size: ${p => p.theme.fontSizes.a};
-    font-height: 1.33;
+    line-height: 1.33;
     display: grid;
     gap: 4px;
   }

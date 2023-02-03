@@ -19,4 +19,8 @@ export const StyledHeader = styled.header`
 export const StyledMenuContainer = styled.div`
   margin-left: auto;
   margin-right: 25px;
+
+  @media (min-width: 1300px) {
+    margin-right: 0;
+  }
 `;
