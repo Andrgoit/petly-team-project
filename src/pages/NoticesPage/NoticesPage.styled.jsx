@@ -27,18 +27,21 @@ export const Section = styled.section`
   }
 `;
 export const PageTitle = styled.h2`
-  margin-bottom: 28px;
+  padding: 10px 0 28px 0;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.38;
   font-weight: ${p => p.theme.fontWeights.bold};
   font-size: ${p => p.theme.fontSizes.f};
   line-height: ${p => p.theme.lineHeights.d};
   text-align: center;
   color: #000000;
   @media screen and (min-width: 768px) and (max-width: 1299.5px) {
-    margin-bottom: 40px;
+    padding: 40px 0;
     font-size: ${p => p.theme.fontSizes.j};
   }
   @media screen and (min-width: 1300px) {
-    margin-bottom: 60px;
+    padding: 23px 0 60px 0;
     font-size: ${p => p.theme.fontSizes.j};
   }
 `;

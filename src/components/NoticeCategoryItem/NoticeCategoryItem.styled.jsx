@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 
-
-
 export const Item = styled.li`
   display: flex;
   flex-direction: column;

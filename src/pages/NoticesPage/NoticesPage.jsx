@@ -10,6 +10,10 @@ import {
   getError,
 } from 'redux/notices/notices-selectors';
 import { getNotices } from 'redux/notices/notices-operation';
+import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
+import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
+
+
 
 
 function NoticesPage() {
@@ -26,8 +30,10 @@ function NoticesPage() {
   return (
     <Section>
       <MainContainer>
+        <PageTitle>Find your favorite pet</PageTitle>
+        <NoticesSearch></NoticesSearch>
+        <NoticesCategoriesNav></NoticesCategoriesNav>
         <Container>
-          <PageTitle>Notices</PageTitle>
           {loading && <p>...Loading</p>}
           {error && <p>Что-то пошло не так</p>}
           {!loading && notices && <NoticesCategoriesList notices={notices} />}
