@@ -6,87 +6,42 @@ import {
   Text,
   Container,
   Sticker,
-  AddToFavoriteBtn,
-  Span,
-  AddIcon,
-  Image,
+   Span,
+    Image,
 } from './NoticeCategoryItem.styled';
-// import { RiDeleteBin5Fill } from 'react-icons/ri';
-import {
-  selectFilteredNotices,
-  selectNotices,
-} from 'redux/notices/notices-selectors';
-import { selectFilteredPets } from 'redux/notices/notices-selectors';
-import { useSelector, useDispatch } from 'react-redux';
 
-import { addToFavorite } from 'redux/auth/auth-operation';
-import { selectUser } from 'redux/auth/auth-selectors';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { getAge } from 'shared/getAge';
-import { numberToWord } from 'shared/numberToWords';
-const NoticeCategoryItem = () => {
-  const filteredNotices = useSelector(selectFilteredNotices);
-  const dispatch = useDispatch();
-  const isUser = useSelector(selectUser);
-
-  return (
-    <>
-      {filteredNotices.map(
-        ({
-          _id,
-          petImage,
-          title,
-          breed,
-          location,
-          birthdate,
-          price,
-        }) => {
-        //   const born = getAge(dateOfBirth);
-        //   const age = numberToWord(born);
-
-          return (
-            <Item key={_id}>
-              <Image src={petImage} alt="pet" minwidth={288} height={288} />
-              <Sticker>selllll</Sticker>
-              <AddToFavoriteBtn
-                onClick={() => {
-                  isUser
-                    ? dispatch(addToFavorite(_id))
-                    : Notify.warning('Sorry, you should to sing in');
-                }}
-              >
-                <AddIcon />
-              </AddToFavoriteBtn>
-              <Container>
-                <Wrapper>
-                  <Title>{title}</Title>
-                  <Text>
-                    <Span>Breed:</Span>
-                    {breed}
-                  </Text>
-                  <Text>
-                    <Span>Place:</Span>
-                    {location}
-                  </Text>
-                  <Text>
-                    <Span>Age:</Span>
-                    {birthdate}
-                  </Text>
-                  {category === 'sell' && (
-                    <Text>
-                      <Span>Price:</Span>
-                      {price ? `${price} $` : '--------'}
-                    </Text>
-                  )}
-                </Wrapper>
-                <LearnMoreBtn>Learn more</LearnMoreBtn>
-              </Container>
-            </Item>
-          );
-        }
-      )}
-    </>
+function NoticeCategoryItem({
+  _id,
+  title,
+  birthdate,
+  breed,
+  location,
+  avatar: {url},
+}) {
+    return (
+    <Item key={_id}>
+      <Image src= {ulr} alt="pet" minwidth={288} height={288} />
+      <Sticker>selll</Sticker>
+      <Container>
+        <Wrapper>
+          <Title>{title}</Title>
+          <Text>
+            <Span>Breed:</Span>
+            {breed}
+          </Text>
+          <Text>
+            <Span>Place:</Span>
+            {location}
+          </Text>
+          <Text>
+            <Span>Age:</Span>
+            {birthdate}
+          </Text>
+        </Wrapper>
+        <LearnMoreBtn>Learn more</LearnMoreBtn>
+      </Container>
+    </Item>
   );
-};
+}
 
 export default NoticeCategoryItem;

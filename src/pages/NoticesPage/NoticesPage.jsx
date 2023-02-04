@@ -1,42 +1,40 @@
-import NoticesCategoriesList from 'components/NoticesCategoriesList/NoticesCategoriesList';
-import { Container } from './NoticiesPage.styled';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchNotices } from 'redux/notices/notices-operation';
-import { useParams } from 'react-router-dom';
+import { NoticesCategoriesList } from '../../components/NoticesCategoriesList/NoticesCategoriesList';
+import { PageTitle, Container, Section } from './NoticesPage.styled';
+import { MainContainer } from '../../components/App.styled';
+
 import {
-  selectNotices,
-  selectIsLoading,
-  selectError,
+  getAllNotices,
+  getLoading,
+  getError,
 } from 'redux/notices/notices-selectors';
+import { getNotices } from 'redux/notices/notices-operation';
 
-const NoticesPage = () => {
-  const { categoryName } = useParams();
 
-  const notices = useSelector(selectNotices);
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const [matches, setMatches] = useState(
-    window.matchMedia('(min-width: 768px)').matches
-  );
+function NoticesPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNotices(categoryName));
-    window
-      .matchMedia('(min-width: 768px)')
-      .addEventListener('change', e => setMatches(e.matches));
-  }, [dispatch, categoryName]);
+    dispatch(getNotices());
+  }, [dispatch]);
+
+  const notices = useSelector(getAllNotices);
+  const loading = useSelector(getLoading);
+  const error = useSelector(getError);
 
   return (
-    <Container>
-       {notices?.length === 0 && !isLoading && (
-        <p>List is empty! Try to add pet :)</p>
-      )}
-      {notices?.length > 0 && <NoticesCategoriesList />}
-      {error && <p>Ooops... Something went wrong</p>}
-    </Container>
+    <Section>
+      <MainContainer>
+        <Container>
+          <PageTitle>Notices</PageTitle>
+          {loading && <p>...Loading</p>}
+          {error && <p>Что-то пошло не так</p>}
+          {!loading && notices && <NoticesCategoriesList notices={notices} />}
+        </Container>
+      </MainContainer>
+    </Section>
   );
-};
+}
 
 export default NoticesPage;

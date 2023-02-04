@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 import { FaBeer } from 'react-icons/fa';
 
+export const Image = styled.img`
+  height: 288px;
+`;
+
 export const Item = styled.li`
   position: relative;
   display: flex;
