@@ -1,29 +1,56 @@
-import { Form, Input, IconSearch } from './NoticesSearch.styled';
+import { useState } from 'react';
+import { Form, Input, Button } from './NoticesSearch.styled';
+import { MdSearch, MdHighlightOff } from 'react-icons/md';
+import { useMediaQuery } from 'react-responsive';
 
+function NoticesSearch ({ setQ })  {
+  const [inputText, setInputText] = useState('');
 
-export const NoticesSearch = () => {
-  // const search = useSelector(selectSearch);
-  // const dispatch = useDispatch();
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 1224px)',
+  });
 
+  const handleChange = e => {
+    setInputText(e.target.value.trim());
+  };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (!inputText.length) {
+      return;
+    }
+    setQ(inputText);
+  };
 
-  // const handleChangeSearch = e => {
-  //   const { value } = e.target;
-  //   dispatch(setSearch(value));
-  //};
+  const handleClick = () => {
+    setInputText('');
+    setQ('');
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Input
-        type="text"
-        name="search"
-        autoComplete="off"
-        autoFocus
+        onChange={handleChange}
         placeholder="Search"
-        // id={searchPetId}
-        // onChange={handleChangeSearch}
-        // value={search}
-      />
-      <IconSearch size={20} />
+        value={inputText}
+      ></Input>
+      {inputText.length ? (
+        <Button type="button" onClick={handleClick}>
+          {!isDesktop ? (
+            <MdHighlightOff style={{ width: '20', height: '20' }} />
+          ) : (
+            <MdHighlightOff style={{ width: '25', height: '25' }} />
+          )}
+        </Button>
+      ) : (
+        <Button type="submit">
+          {!isDesktop ? (
+            <MdSearch style={{ width: '20', height: '20' }} />
+          ) : (
+            <MdSearch style={{ width: '25', height: '25' }} />
+          )}
+        </Button>
+      )}
     </Form>
   );
 };
