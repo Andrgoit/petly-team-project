@@ -1,27 +1,24 @@
 import styled from 'styled-components';
+import { theme } from 'styles/theme';
 
-import { FaBeer } from 'react-icons/fa';
-
-export const Image = styled.img`
-  height: 288px;
-`;
+import { AiOutlineHeart } from 'react-icons/ai';
 
 export const Item = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
-  background: white;
+  background: ${theme.colors.white};
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: 0px 0px 40px 40px;
 `;
 
 export const LearnMoreBtn = styled.button`
-  color: #ff6101;
-  background: white;
-  border: 2px solid #ff6101;
+  color: ${theme.colors.accent};
+  background: ${theme.colors.white};
+  border: 2px solid ${theme.colors.accent};
   border-radius: 40px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: ${theme.fontSizes.medium};
   line-height: 1.3;
   letter-spacing: 0.04em;
   text-align: center;
@@ -30,18 +27,18 @@ export const LearnMoreBtn = styled.button`
   width: 100%;
   margin-bottom: 12px;
   &:hover {
-    background: #ff6101;
-    color: white;
+    background: ${theme.colors.accent};
+    color: ${theme.colors.white};
   }
 `;
 
 export const DeleteBtn = styled.button`
   border: 2px solid #ff6101;
   color: #ff6101;
-  background: white;
+  background: ${theme.colors.white};
   border-radius: 40px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: ${theme.fontSizes.medium};
   line-height: 1.3;
   letter-spacing: 0.04em;
   text-align: center;
@@ -52,7 +49,7 @@ export const DeleteBtn = styled.button`
   width: 100%;
   &:hover {
     background: #ff6101;
-    color: white;
+    color: ${theme.colors.white};
   }
 `;
 export const Container = styled.div`
@@ -79,7 +76,7 @@ export const Text = styled.p`
   }
 `;
 
-export const Sticker = styled.span`
+export const CategoryTitle = styled.span`
   position: absolute;
   left: 0;
   top: 20px;
@@ -87,7 +84,7 @@ export const Sticker = styled.span`
   backdrop-filter: blur(2px);
   width: 150px;
   font-weight: 500;
-  font-size: 12px;
+  font-size: ${theme.fontSizes.small};
   line-height: 1.3;
   letter-spacing: 0.04em;
   display: block;
@@ -104,19 +101,19 @@ export const AddToFavoriteBtn = styled.button`
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(2px);
+  ackdrop-filter: blur(2px);
+  background-color: hsla(0, 0%, 100%, 0.6);
   position: absolute;
   top: 12px;
   right: 12px;
   border-radius: 50%;
-  &:hover,
-  :active {
-    background: #ff6101;
+  &.active,
+  :hover {
+    background: ${theme.colors.accent};
   }
   &:hover > svg {
-    background: #ff6101;
-    fill: white;
+    background: ${theme.colors.accent};
+    fill: ${theme.colors.white};
   }
 `;
 export const Span = styled.span`
@@ -124,8 +121,12 @@ export const Span = styled.span`
   margin-right: 37px;
   width: 50px;
 `;
-export const AddIcon = styled(FaBeer)`
+export const AddIcon = styled(AiOutlineHeart)`
   width: 28px;
   height: 28px;
-  color: #ff6101;
+  color: ${theme.colors.accent};
+`;
+
+export const Image = styled.img`
+  height: 288px;
 `;

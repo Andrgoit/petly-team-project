@@ -3,7 +3,7 @@ import { NoticesList } from './NoticesCategoriesList.styled';
 
 export  const NoticesCategoriesList = ({notices}) => {
   const elements = notices.map(
-    ({ _id, title, birthdate, breed, location, price }) => (
+    ({ _id, title, birthdate, breed, location, price, avatar }) => (
       <NoticeCategoryItem
         key={_id}
         title={title}
@@ -11,6 +11,8 @@ export  const NoticesCategoriesList = ({notices}) => {
         breed={breed}
         location={location}
         price={price}
+        avatar={avatar}
+        
       />
     )
   );
