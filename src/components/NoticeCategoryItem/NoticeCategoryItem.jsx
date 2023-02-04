@@ -6,8 +6,12 @@ import {
   Text,
   Container,
   CategoryTitle,
+  AddToFavoriteBtn,
   Span,
+  AddIcon,
   Image,
+  DeleteBtn,
+  DelIcon,
 } from './NoticeCategoryItem.styled';
 
 import numWords from 'num-words';
@@ -47,6 +51,10 @@ function OurFriensItem(notices) {
       >
         <AddIcon />
       </AddToFavoriteBtn> */}
+
+      <AddToFavoriteBtn>
+        <AddIcon />
+      </AddToFavoriteBtn>
       <Container>
         <Wrapper>
           <Title>{title}</Title>
@@ -74,9 +82,10 @@ function OurFriensItem(notices) {
           </Text>
         </Wrapper>
         <LearnMoreBtn>Learn more</LearnMoreBtn>
-        {/* <DeleteBtn>Delete
-                        <RiDeleteBin5Fill style={{ marginLeft: "15px" }}/>
-                    </DeleteBtn> */}
+        <DeleteBtn>
+          Delete
+          <DelIcon />
+        </DeleteBtn>
       </Container>
     </Item>
   );

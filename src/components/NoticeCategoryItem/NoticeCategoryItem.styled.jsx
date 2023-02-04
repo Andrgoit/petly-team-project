@@ -1,24 +1,35 @@
 import styled from 'styled-components';
-import { theme } from 'styles/theme';
-
 import { AiOutlineHeart } from 'react-icons/ai';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
+
+
 
 export const Item = styled.li`
-  position: relative;
   display: flex;
   flex-direction: column;
-  background: ${theme.colors.white};
-  box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-  border-radius: 0px 0px 40px 40px;
+  width: 280px;
+  position: relative;
+  background: ${props => props.theme.colors.white};
+
+  border-radius: 0px 0px 20px 20px;
+
+  @media screen and (min-width: 768px) {
+    width: 336px;
+
+    border-radius: 0px 0px 40px 40px;
+  }
+  @media screen and (min-width: 1300px) {
+    width: 288px;
+  }
 `;
 
 export const LearnMoreBtn = styled.button`
-  color: ${theme.colors.accent};
-  background: ${theme.colors.white};
-  border: 2px solid ${theme.colors.accent};
+  color: rgba(245, 146, 86, 1);
+  background: ${props => props.theme.colors.white};
+  border: 2px solid rgba(245, 146, 86, 1);
   border-radius: 40px;
   font-weight: 500;
-  font-size: ${theme.fontSizes.medium};
+  font-size: 16px;
   line-height: 1.3;
   letter-spacing: 0.04em;
   text-align: center;
@@ -26,19 +37,20 @@ export const LearnMoreBtn = styled.button`
   padding: 8px;
   width: 100%;
   margin-bottom: 12px;
+  cursor: pointer;
   &:hover {
-    background: ${theme.colors.accent};
-    color: ${theme.colors.white};
+    background: rgba(255, 97, 1, 1);
+    color: ${props => props.theme.colors.white};
   }
 `;
 
 export const DeleteBtn = styled.button`
-  border: 2px solid #ff6101;
-  color: #ff6101;
-  background: ${theme.colors.white};
+  border: 2px solid rgba(245, 146, 86, 1);
+  color: rgba(245, 146, 86, 1);
+  background: ${props => props.theme.colors.white};
   border-radius: 40px;
   font-weight: 500;
-  font-size: ${theme.fontSizes.medium};
+  font-size: 16px;
   line-height: 1.3;
   letter-spacing: 0.04em;
   text-align: center;
@@ -47,9 +59,10 @@ export const DeleteBtn = styled.button`
   align-items: center;
   padding: 8px;
   width: 100%;
+  cursor: pointer;
   &:hover {
-    background: #ff6101;
-    color: ${theme.colors.white};
+    background: rgba(255, 97, 1, 1);
+    color: ${props => props.theme.colors.white};
   }
 `;
 export const Container = styled.div`
@@ -84,7 +97,7 @@ export const CategoryTitle = styled.span`
   backdrop-filter: blur(2px);
   width: 150px;
   font-weight: 500;
-  font-size: ${theme.fontSizes.small};
+  font-size: 12px;
   line-height: 1.3;
   letter-spacing: 0.04em;
   display: block;
@@ -101,19 +114,22 @@ export const AddToFavoriteBtn = styled.button`
   justify-content: center;
   width: 44px;
   height: 44px;
-  ackdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
   background-color: hsla(0, 0%, 100%, 0.6);
+  border: none;
+  cursor: pointer;
   position: absolute;
   top: 12px;
   right: 12px;
   border-radius: 50%;
+  color: white;
   &.active,
   :hover {
-    background: ${theme.colors.accent};
+    background: rgba(245, 146, 86, 1);
   }
   &:hover > svg {
-    background: ${theme.colors.accent};
-    fill: ${theme.colors.white};
+    background: rgba(245, 146, 86, 1);
+    fill: ${props => props.theme.colors.white};;
   }
 `;
 export const Span = styled.span`
@@ -124,9 +140,16 @@ export const Span = styled.span`
 export const AddIcon = styled(AiOutlineHeart)`
   width: 28px;
   height: 28px;
-  color: ${theme.colors.accent};
+  color: rgba(245, 146, 86, 1);
 `;
 
 export const Image = styled.img`
   height: 288px;
 `;
+
+export const DelIcon = styled(RiDeleteBin5Fill)`
+  color: rgba(245, 146, 86, 1);
+  width: 24px;
+`;
+
+
