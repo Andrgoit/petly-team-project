@@ -6,6 +6,15 @@ export const Wrapper = styled.div`
   position: absolute;
   top: 455px;
   right: 20px;
+  cursor: pointer;
+  &:hover span,
+  :focus span {
+    color: #f59256;
+  }
+  &:hover button > img,
+  :focus button > img {
+    transform: scale(1.4);
+  }
   @media (min-width: 768px) {
     position: relative;
     right: 0;
@@ -35,6 +44,7 @@ export const StyledText = styled.span`
   font-size: 12px;
   line-height: 16px;
   color: #111111;
+  transition: color 200ms linear;
   @media (min-width: 768px) {
     font-size: 20px;
     line-height: 27px;
@@ -47,6 +57,7 @@ export const StyledImg = styled.img`
   height: 22px;
   margin-top: 21px;
   margin-bottom: 5px;
+  transition: transform 250ms linear;
   @media (min-width: 768px) {
     width: 16px;
     height: 16px;

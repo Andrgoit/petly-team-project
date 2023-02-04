@@ -1,6 +1,6 @@
 import { Form, Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import parse from 'date-fns/parse';
+import { parse, isDate } from 'date-fns';
 import '../ModalNotice/modal.css';
 import {
   MainNoticeBtn,
@@ -17,6 +17,14 @@ import {
 } from './ModalAddNotice.styled';
 
 const today = new Date();
+
+function parseDateString(value, originalValue) {
+  const parsedDate = isDate(originalValue)
+    ? originalValue
+    : parse(originalValue, 'dd.MM.yyyy', new Date());
+
+  return parsedDate;
+}
 
 const validationSchema = yup.object({
   title: yup
@@ -45,16 +53,16 @@ const validationSchema = yup.object({
         return originalValue.length === 10;
       }
     })
-    .transform(function (value, originalValue) {
-      if (this.isType(value)) {
-        return value;
-      }
-      const result = parse(originalValue, 'dd.MM.yyyy', new Date());
-      return result;
+    .transform(function (_, originalValue) {
+      const parsedDate = isDate(originalValue)
+        ? originalValue
+        : parse(originalValue, 'dd.MM.yyyy', new Date());
+
+      return parsedDate;
     })
     .typeError('Please enter a valid date')
     .required()
-    .min('1950-11-13', 'Date is too early')
+    .min('01.01.1950', 'Date is too early')
     .max(today),
 });
 

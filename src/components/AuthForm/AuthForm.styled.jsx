@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const AuthContainer = styled.div`
-  width: 100%;
-  margin-top: 45px;
-  margin-bottom: 45px;
   text-align: center;
 
   @media (min-width: 768px) {

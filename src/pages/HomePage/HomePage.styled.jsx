@@ -48,21 +48,17 @@ export const HomeContainer = styled.div`
   background-image: url('${vector}');
   background-repeat: no-repeat;
   background-position: bottom;
-  max-width: 1300px;
   padding-top: 60px;
 
   @media screen and (min-width: 768px) {
     background-image: url('${vectorTablet}');
     background-size: inherit;
-    max-width: 1270px;
     padding-top: 90px;
   }
 
   @media screen and (min-width: 1300px) {
     background-image: url('${frame}');
-    background-size: 1300px 440px;
-    width: 100%;
-    display: flex;
+    background-size: 1320px 440px;
     padding-top: 60px;
 
     @media (min-device-pixel-ratio: 2),
@@ -73,6 +69,12 @@ export const HomeContainer = styled.div`
     }
   }
 `;
+export const HomeWrapp = styled.div`
+  @media screen and (min-width: 1300px) {
+    display: flex;
+  }
+`;
+
 export const ImagesWrapper = styled.div`
   @media screen and (min-width: 1300px) {
     background-image: url('${heart}');

@@ -29,6 +29,7 @@ const ModalAddNotice = ({ isModalOpen, setIsModalOpen }) => {
 
   return (
     <Modal
+      closeTimeoutMS={250}
       shouldCloseOnEsc
       ariaHideApp={false}
       isOpen={isModalOpen}

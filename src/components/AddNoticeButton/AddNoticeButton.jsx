@@ -21,9 +21,9 @@ const AddNoticeButton = ({ onClickOpen }) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper onClick={onClickOpenModal}>
       {!isMobile && <StyledText>Add pet</StyledText>}
-      <StyledAddNoticeBtn onClick={onClickOpenModal}>
+      <StyledAddNoticeBtn>
         <StyledImg src={plusIcon} alt="plus icon" />
         {isMobile && <StyledText>Add pet</StyledText>}
       </StyledAddNoticeBtn>

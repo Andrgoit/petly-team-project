@@ -45,14 +45,12 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   background-position: bottom 100px left 30px;
   background-size: 60px 130px;
-  max-width: 1300px;
   padding-top: 60px;
 
   @media screen and (min-width: 768px) {
     background-image: url('${paws}');
     background-position: bottom 150px left 90px;
     background-size: 150px 280px;
-    max-width: 1270px;
     padding-top: 90px;
   }
 
@@ -60,7 +58,6 @@ export const Container = styled.div`
     background-image: url('${paws}');
     background-position: bottom 150px right 400px;
     background-size: 230px 450px;
-    width: 100%;
     display: flex;
     padding-top: 60px;
   }

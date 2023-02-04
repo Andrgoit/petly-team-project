@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FriendList } from '../../components/OurFriends/OurFriendList/OurFriendsList';
 import { PageTitle, Container, Section } from './OurFriendsPage.styled';
+import { MainContainer } from '../../components/App.styled';
 
 import {
   getAllFriends,
@@ -24,12 +25,14 @@ function OurFriendsPage() {
 
   return (
     <Section>
-      <Container>
-        <PageTitle>Our friends</PageTitle>
-        {loading && <p>...Loading</p>}
-        {error && <p>Что-то пошло не так</p>}
-        {!loading && friends && <FriendList friends={friends} />}
-      </Container>
+      <MainContainer>
+        <Container>
+          <PageTitle>Our friends</PageTitle>
+          {loading && <p>...Loading</p>}
+          {error && <p>Что-то пошло не так</p>}
+          {!loading && friends && <FriendList friends={friends} />}
+        </Container>
+      </MainContainer>
     </Section>
   );
 }
