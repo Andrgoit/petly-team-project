@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NoticesCategoriesList } from '../../components/NoticesCategoriesList/NoticesCategoriesList';
 import { PageTitle, Container, Section } from './NoticesPage.styled';
 import { MainContainer } from '../../components/App.styled';
+// import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
 
 import {
   getAllNotices,
@@ -33,6 +34,7 @@ function NoticesPage() {
         <PageTitle>Find your favorite pet</PageTitle>
         <NoticesSearch></NoticesSearch>
         <NoticesCategoriesNav></NoticesCategoriesNav>
+        
         <Container>
           {loading && <p>...Loading</p>}
           {error && <p>Что-то пошло не так</p>}

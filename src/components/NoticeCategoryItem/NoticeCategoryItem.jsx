@@ -15,13 +15,14 @@ import {
 } from './NoticeCategoryItem.styled';
 
 import numWords from 'num-words';
+import noimage from '../../img/no-image.png';
 
 
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function OurFriensItem(notices) {
   const { _id, title, birthdate, breed, location, avatar, price } = notices;
-    const {url} = avatar;
+    const { url: noimage } = avatar;
 
     function getAge() {
       const today = new Date();
