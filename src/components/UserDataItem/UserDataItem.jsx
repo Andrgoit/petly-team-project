@@ -4,14 +4,13 @@ import './UserDataItem.styled.css';
 import cameraLogo from '../../img/Camera_2.svg';
 import { ReactComponent as Pencil } from '../../img/ci_edit.svg';
 import { ReactComponent as DoneButton } from '../../img/done-button.svg';
-// import avatar from '../../img/anonym-avatar.png';
 import logoutBtn from '../../img/logoutBtn.png';
 
 export const UserData = (name, email, location, birthdate, phone) => {
   const [userName, setUserName] = useState(name);
   const [userEmail, setUserEmail] = useState(email);
   const [userBirthday, setUserBirthday] = useState(birthdate);
-  const [userPhone, setUserPhone] = useState('phone');
+  const [userPhone, setUserPhone] = useState(phone);
   const [userCity, setUserCity] = useState(location);
   const [iconStyle, setIconStyle] = useState('edit-btn');
   const [editBtnIsDisabled, setEditBtnIsDisabled] = useState(false);
@@ -40,6 +39,7 @@ export const UserData = (name, email, location, birthdate, phone) => {
   };
 
   const onEditInfo = e => {
+    console.log(e.currentTarget);
     const activeInput = e.currentTarget.children[1];
     activeInput.disabled = false;
     activeInput.className = 'data-input-active';
@@ -51,6 +51,7 @@ export const UserData = (name, email, location, birthdate, phone) => {
 
   const onChangedInput = e => {
     e.preventDefault();
+
     const input = e.currentTarget.children[0].children[1];
     input.disabled = true;
     input.className = 'data-input';
@@ -66,7 +67,7 @@ export const UserData = (name, email, location, birthdate, phone) => {
       <h3 className="user-data-title">My information:</h3>
       <div className="user-data">
         <div className="photo-container">
-          <img className="avatar"></img>
+          <img className="avatar" alt="avatar"></img>
           <label className="edit-photo-btn-container">
             <input type="file" name="input-avatar" />
             <button className="data-edit-photo">

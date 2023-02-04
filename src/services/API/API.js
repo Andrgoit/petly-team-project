@@ -13,3 +13,9 @@ export const fetchFriends = async () => {
   const { data } = await instance.get('/friends');
   return data;
 };
+
+export const fetchUsers = async () => {
+  const { data } = await instance.get('/users/current/Myroslava');
+
+  return data;
+};

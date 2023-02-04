@@ -4,8 +4,8 @@ import {
   getAllUserData,
   getLoading,
   getError,
-} from '../../redux/users-selectors';
-import { getUser } from '../../redux/users-operations';
+} from '../../redux/users/users-selectors';
+import { getUser } from '../../redux/users/users-operations';
 import { useEffect } from 'react';
 
 const UserPage = () => {
