@@ -15,14 +15,15 @@ import {
 } from './NoticeCategoryItem.styled';
 
 import numWords from 'num-words';
-import noimage from '../../img/no-image.png';
+import noImage from '../../img/noImage.png';
+
 
 
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function OurFriensItem(notices) {
   const { _id, title, birthdate, breed, location, avatar, price } = notices;
-    const { url: noimage } = avatar;
+    const {url} = avatar;
 
     function getAge() {
       const today = new Date();
@@ -37,11 +38,16 @@ function OurFriensItem(notices) {
       return ageWords;
     }
 
-  console.log(avatar);
-
+// url === null ? url === undefined : noImage;
+     
   return (
     <Item key={_id}>
-      <Image src={url} alt="pet" minwidth={288} height={288} />
+      <Image
+        src={url ?? noImage}
+        alt="pet"
+        minwidth={288}
+        height={288}
+      />
       <CategoryTitle>selll</CategoryTitle>
       {/* <AddToFavoriteBtn
         onClick={() => {
