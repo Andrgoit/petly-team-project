@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Header from 'components/Header/Header';
 // import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
-// import PublicRoute from 'components/PublicRoute/PublicRoute';
+import PublicRoute from 'components/PublicRoute/PublicRoute';
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const NewsPage = lazy(() => import('pages/NewsPage'));
@@ -24,10 +24,10 @@ export default function SharedLayout() {
         <Route path="/notices" element={<NoticesPage />} />
         {/* <Route path="/notices/:categoryName" element={<NoticesPage />} /> */}
         <Route path="/friends" element={<OurFriendsPage />} />
-        {/* <Route element={<PublicRoute />}> */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        {/* </Route> */}
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
         {/* private route to do */}
         {/* <Route element={<PrivateRoute />}> */}
         <Route path="/user" element={<UserPage />} />
