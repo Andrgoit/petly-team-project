@@ -12,19 +12,19 @@ import { App } from 'components/App';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      {/*  */}
-      {/* для гита */}
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter basename="/petly-team-project/">
-            {/*  */}
-            {/* <BrowserRouter> */}
-            <App />
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
-    </ThemeProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ThemeProvider theme={theme}>
+    {/*  */}
+    {/* для гита */}
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter basename="/petly-team-project">
+          {/*  */}
+          {/* <BrowserRouter> */}
+          <App />
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
+  </ThemeProvider>
+  // </React.StrictMode>
 );

@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+// const clearAuthHeader = () => {
+//   axios.defaults.headers.common.Authorization = '';
+// };
 export const instance = axios.create({
   baseURL: 'https://petly-backend.onrender.com/api',
 });
@@ -17,5 +23,16 @@ export const fetchFriends = async () => {
 export const fetchUsers = async () => {
   const { data } = await instance.get('/users/current/Myroslava');
 
+  return data;
+};
+
+export const loginUser = async credentials => {
+  const { data } = await instance.get('/auth/login', credentials);
+  setAuthHeader(data.token);
+  return data;
+};
+
+export const fetchNotices = async () => {
+  const { data } = await instance.get('/notices/category/sell');
   return data;
 };

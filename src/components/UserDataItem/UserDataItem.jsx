@@ -13,6 +13,7 @@ export const UserData = ({ user }) => {
   const [userBirthday, setUserBirthday] = useState(birthdate || '-');
   const [userPhone, setUserPhone] = useState(phone || '-');
   const [userCity, setUserCity] = useState(location || '-');
+
   const [iconStyle, setIconStyle] = useState('edit-btn');
   const [editBtnIsDisabled, setEditBtnIsDisabled] = useState(false);
 

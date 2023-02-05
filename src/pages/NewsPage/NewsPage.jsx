@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PuffLoader from 'react-spinners/PuffLoader';
 
 import { Section, Container, Title } from './NewsPage.styled';
+import { MainContainer } from '../../components/App.styled';
 
 import NewsList from 'components/News/NewsList';
 import NewsSearchForm from 'components/News/NewsSearchForm';
@@ -39,25 +40,27 @@ function NewsPage() {
 
   return (
     <Section>
-      <Container>
-        <Title>News</Title>
-        <NewsSearchForm setQ={setQ} />
+      <MainContainer>
+        <Container>
+          <Title>News</Title>
+          <NewsSearchForm setQ={setQ} />
 
-        {loading && (
-          <PuffLoader
-            size={100}
-            color={'rgb(245, 146, 86)'}
-            cssOverride={spinnerStyles}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        )}
-        {error && <p>Что-то пошло не так</p>}
-        {!loading && news && <NewsList data={newsToLayout} />}
-        {!loading && ref.current && !Boolean(newsToLayout.length) && (
-          <p>Новостей по данному запросу нет</p>
-        )}
-      </Container>
+          {loading && (
+            <PuffLoader
+              size={100}
+              color={'rgb(245, 146, 86)'}
+              cssOverride={spinnerStyles}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          )}
+          {error && <p>Что-то пошло не так</p>}
+          {!loading && news && <NewsList data={newsToLayout} />}
+          {!loading && ref.current && !Boolean(newsToLayout.length) && (
+            <p>Новостей по данному запросу нет</p>
+          )}
+        </Container>
+      </MainContainer>
     </Section>
   );
 }
