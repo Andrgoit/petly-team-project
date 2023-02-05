@@ -8,12 +8,11 @@ import logoutBtn from '../../img/logoutBtn.png';
 
 export const UserData = ({ user }) => {
   const { name, email, birthdate, location, phone } = user;
-  console.log(name);
-  const [userName, setUserName] = useState(name);
-  const [userEmail, setUserEmail] = useState(email);
-  const [userBirthday, setUserBirthday] = useState(birthdate);
-  const [userPhone, setUserPhone] = useState(phone);
-  const [userCity, setUserCity] = useState(location);
+  const [userName, setUserName] = useState(name || '-');
+  const [userEmail, setUserEmail] = useState(email || '-');
+  const [userBirthday, setUserBirthday] = useState(birthdate || '-');
+  const [userPhone, setUserPhone] = useState(phone || '-');
+  const [userCity, setUserCity] = useState(location || '-');
   const [iconStyle, setIconStyle] = useState('edit-btn');
   const [editBtnIsDisabled, setEditBtnIsDisabled] = useState(false);
 
@@ -114,31 +113,49 @@ export const UserData = ({ user }) => {
   };
 
   return (
-    <div className="user-data-container">
-      <h3 className="user-data-title">My information:</h3>
-      <div className="user-data">
-        <div className="photo-container">
-          <img className="avatar" alt="avatar"></img>
-          <label className="edit-photo-btn-container">
-            <input type="file" name="input-avatar" />
-            <button className="data-edit-photo">
+    <div className="user-data-container" key="user-data-container">
+      <h3 className="user-data-title" key="title">
+        My information:
+      </h3>
+      <div className="user-data" key="user-data">
+        <div className="photo-container" key="photo-container">
+          <img className="avatar" alt="avatar" key="photo-container"></img>
+          <label
+            className="edit-photo-btn-container"
+            key="edit-photo-btn-container"
+          >
+            <input type="file" name="input-avatar" key="input-avatar" />
+            <button className="data-edit-photo" key="data-edit-photo">
               <img
                 src={cameraLogo}
                 alt="camera logo"
                 className="camera-logo"
+                key="camera-logo"
               ></img>
               Edit photo
             </button>
           </label>
         </div>
-        <form className="data-container" onSubmit={onChangedInput}>
-          <label className="input-title" htmlFor="name" onClick={onEditInfo}>
-            <span className="field">Name:</span>
+        <form
+          className="data-container"
+          onSubmit={onChangedInput}
+          key="data-container"
+        >
+          <label
+            className="input-title"
+            htmlFor="name"
+            key="input-title1"
+            onClick={onEditInfo}
+          >
+            <span className="field" key="field1">
+              Name:
+            </span>
             <input
               type="text"
               name="name"
               value={userName}
               className="data-input"
+              key="data-input1"
               disabled
               onChange={onInputChange}
             />
@@ -148,15 +165,23 @@ export const UserData = ({ user }) => {
               className="data-edit-info"
               onClick={onEditButtonStyle}
               disabled={editBtnIsDisabled}
+              key="edit-button1"
             >
-              <Pencil className={iconStyle} name="edit-icon" />
+              <Pencil className={iconStyle} name="edit-icon" key="edit-icon1" />
             </button>
-            <button type="submit" className="done-button">
-              <DoneButton className="done-icon" />
+            <button type="submit" className="done-button" key="done-button1">
+              <DoneButton className="done-icon" key="done-icon1" />
             </button>
           </label>
-          <label className="input-title" htmlFor="email" onClick={onEditInfo}>
-            <span className="field">Email:</span>
+          <label
+            className="input-title"
+            htmlFor="email"
+            key="input-title2"
+            onClick={onEditInfo}
+          >
+            <span className="field" key="field2">
+              Email:
+            </span>
             <input
               type="email"
               name="email"
@@ -164,25 +189,30 @@ export const UserData = ({ user }) => {
               className="data-input"
               disabled
               onChange={onInputChange}
+              key="data-input2"
             />
             <button
               type="button"
               className="data-edit-info"
               onClick={onEditButtonStyle}
               disabled={editBtnIsDisabled}
+              key="edit-button2"
             >
-              <Pencil className={iconStyle} />
+              <Pencil className={iconStyle} key="edit-icon2" />
             </button>
-            <button type="submit" className="done-button">
-              <DoneButton className="done-icon" />
+            <button type="submit" className="done-button" key="done-button2">
+              <DoneButton className="done-icon" key="done-icon2" />
             </button>
           </label>
           <label
             className="input-title"
             htmlFor="birthday"
             onClick={onEditInfo}
+            key="input-title3"
           >
-            <span className="field">Birthday:</span>
+            <span className="field" key="field3">
+              Birthday:
+            </span>
             <input
               type="text"
               name="birthday"
@@ -190,21 +220,30 @@ export const UserData = ({ user }) => {
               className="data-input"
               disabled
               onChange={onInputChange}
+              key="data-input3"
             />
             <button
               type="button"
               className="data-edit-info"
               onClick={onEditButtonStyle}
               disabled={editBtnIsDisabled}
+              key="edit-button3"
             >
-              <Pencil className={iconStyle} />
+              <Pencil className={iconStyle} key="edit-icon3" />
             </button>
-            <button type="submit" className="done-button">
-              <DoneButton className="done-icon" />
+            <button type="submit" className="done-button" key="done-button3">
+              <DoneButton className="done-icon" key="done-icon3" />
             </button>
           </label>
-          <label className="input-title" htmlFor="phone" onClick={onEditInfo}>
-            <span className="field">Phone:</span>
+          <label
+            className="input-title"
+            htmlFor="phone"
+            key="input-title4"
+            onClick={onEditInfo}
+          >
+            <span className="field" key="field4">
+              Phone:
+            </span>
             <input
               type="text"
               name="phone"
@@ -212,21 +251,30 @@ export const UserData = ({ user }) => {
               className="data-input"
               disabled
               onChange={onInputChange}
+              key="data-input4"
             />
             <button
               type="button"
               className="data-edit-info"
               onClick={onEditButtonStyle}
               disabled={editBtnIsDisabled}
+              key="edit-button4"
             >
-              <Pencil className={iconStyle} />
+              <Pencil className={iconStyle} key="edit-icon4" />
             </button>
-            <button type="submit" className="done-button">
-              <DoneButton className="done-icon" />
+            <button type="submit" className="done-button" key="done-button4">
+              <DoneButton className="done-icon" key="done-icon4" />
             </button>
           </label>
-          <label className="input-title" htmlFor="city" onClick={onEditInfo}>
-            <span className="field">City:</span>
+          <label
+            className="input-title"
+            htmlFor="city"
+            key="input-title5"
+            onClick={onEditInfo}
+          >
+            <span className="field" key="field5">
+              City:
+            </span>
             <input
               type="text"
               name="city"
@@ -234,24 +282,27 @@ export const UserData = ({ user }) => {
               className="data-input"
               disabled
               onChange={onInputChange}
+              key="data-input5"
             />
             <button
               type="button"
               className="data-edit-info"
               onClick={onEditButtonStyle}
               disabled={editBtnIsDisabled}
+              key="edit-button5"
             >
-              <Pencil className={iconStyle} />
+              <Pencil className={iconStyle} key="edit-icon5" />
             </button>
-            <button type="submit" className="done-button">
-              <DoneButton className="done-icon" />
+            <button type="submit" className="done-button" key="done-button5">
+              <DoneButton className="done-icon" key="done-button5" />
             </button>
           </label>
-          <button className="log-out-btn">
+          <button className="log-out-btn" key="log-out-btn">
             <img
               src={logoutBtn}
               alt="logout-button"
               className="logout-button"
+              key="logout-button"
             ></img>
             Log out
           </button>

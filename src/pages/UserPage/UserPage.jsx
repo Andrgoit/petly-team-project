@@ -26,7 +26,7 @@ const UserPage = () => {
       {error && <p>Oops!</p>}
       {!loading && data && (
         <>
-          <UserData user={user} />
+          <UserData user={user} key="UserData" />
         </>
       )}
     </section>

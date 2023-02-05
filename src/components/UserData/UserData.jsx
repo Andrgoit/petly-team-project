@@ -3,7 +3,7 @@ import UserDataItem from '../UserDataItem/UserDataItem';
 
 export const UserData = ({ user }) => {
   if (user) {
-    return <UserDataItem user={user} />;
+    return <UserDataItem user={user} key="UserDataItem" />;
   }
   return 'Oops...';
 };

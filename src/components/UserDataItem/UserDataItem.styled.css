@@ -103,9 +103,6 @@ input[type=file] {
     border-radius: 25px;
     margin-left: 24px;
 }
-/* .edit-icon {
-    padding: 22px;
-} */
 .data-input-active {
     width: 216px;
     height: 32px;
@@ -168,7 +165,7 @@ input[type=file] {
     color: rgba(17, 17, 17, 0.6);
     background: transparent;
     border: none;
-    margin-left: 49px;
+    margin-left: 37px;
     margin-bottom: 23px;
 }
 
