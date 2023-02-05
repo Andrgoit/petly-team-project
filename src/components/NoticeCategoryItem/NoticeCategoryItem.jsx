@@ -15,6 +15,8 @@ import {
 } from './NoticeCategoryItem.styled';
 
 import numWords from 'num-words';
+import noImage from '../../img/noImage.png';
+
 
 
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -36,11 +38,16 @@ function OurFriensItem(notices) {
       return ageWords;
     }
 
-  console.log(avatar);
-
+// url === null ? url === undefined : noImage;
+     
   return (
     <Item key={_id}>
-      <Image src={url} alt="pet" minwidth={288} height={288} />
+      <Image
+        src={url ?? noImage}
+        alt="pet"
+        minwidth={288}
+        height={288}
+      />
       <CategoryTitle>selll</CategoryTitle>
       {/* <AddToFavoriteBtn
         onClick={() => {
