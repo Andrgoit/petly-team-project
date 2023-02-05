@@ -32,7 +32,7 @@ export const loginUser = async credentials => {
   return data;
 };
 
-export const fetchNotices = async () => {
-  const { data } = await instance.get('/notices/category/sell');
-  return data;
-};
+// export const fetchNotices = async () => {
+//   const { data } = await instance.get('/notices/category/sell');
+//   return data;
+// };
