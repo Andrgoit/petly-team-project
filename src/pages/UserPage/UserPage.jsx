@@ -7,6 +7,7 @@ import {
 } from '../../redux/users/users-selectors';
 import { getUser } from '../../redux/users/users-operations';
 import { useEffect } from 'react';
+import PetsList from 'components/PetsList/PetsList';
 
 const UserPage = () => {
   const dispatch = useDispatch();
@@ -19,12 +20,18 @@ const UserPage = () => {
   const error = useSelector(getError);
 
   const { user } = data;
+  const { pets } = data;
 
   return (
     <section>
       {loading && <p>...Loading</p>}
-      {error && <p>Что-то пошло не так</p>}
-      {!loading && data && <UserData user={user} />}
+      {error && <p>Oops!</p>}
+      {!loading && data && (
+        <>
+          <UserData user={user} />
+          <PetsList pets={pets} />
+        </>
+      )}
     </section>
   );
 };

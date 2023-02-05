@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import { loginUser } from 'services/API/API';
 
 // !!!! Возможно потом его перенесем в .env
-axios.defaults.baseURL = 'https://petly-backend.onrender.com';
+// axios.defaults.baseURL = 'https://petly-backend.onrender.com/api';
 
 // Записываем токен в заголовок
 const setAuthHeader = token => {
@@ -10,22 +12,38 @@ const setAuthHeader = token => {
 };
 
 // Очищаем заголовок
-// eslint-disable-next-line
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
+
+// const clearAuthHeader = () => {
+//   axios.defaults.headers.common.Authorization = '';
+// };
 
 // Регистрация
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/users/signup', credentials);
-      setAuthHeader(data.token);
-      alert('Congratulations, your account has been successfully created.');
+      const { data } = await axios.post('/auth/register', credentials);
+      setAuthHeader(data.accessToken);
+      toast.success('Congratulations! Your account is created.');
+      return data;
+    } catch ({ response }) {
+      const error = {
+        status: response.status,
+        message: response.data.message,
+      };
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+// Логінізація
+export const login = createAsyncThunk(
+  'auth/login',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const data = await loginUser(credentials);
       return data;
     } catch (error) {
-      alert(error.message);
       return rejectWithValue();
     }
   }

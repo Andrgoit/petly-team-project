@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
 
 import { StyledHeader, StyledMenuContainer } from './Header.styled';
+import { MainContainer } from '../App.styled';
 
 import Logo from 'components/Logo/Logo';
 import BurgerButton from 'components/BurgerButton/BurgerButton';
@@ -24,7 +25,7 @@ export default function Header() {
   };
 
   return (
-    <>
+    <MainContainer>
       <StyledHeader>
         <Logo />
         {isDesktop && <Nav />}
@@ -41,6 +42,6 @@ export default function Header() {
       {!isDesktop && showBurgerMenu && (
         <BurgerMenu onClick={toggleBurgerMenu} isLogined={isLogined} />
       )}
-    </>
+    </MainContainer>
   );
 }

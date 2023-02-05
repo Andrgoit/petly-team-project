@@ -6,7 +6,7 @@ import { ReactComponent as Pencil } from '../../img/ci_edit.svg';
 import { ReactComponent as DoneButton } from '../../img/done-button.svg';
 import logoutBtn from '../../img/logoutBtn.png';
 
-export const UserData = (name, email, location, birthdate, phone) => {
+export const UserData = ({ name, email, location, birthdate, phone }) => {
   const [userName, setUserName] = useState(name);
   const [userEmail, setUserEmail] = useState(email);
   const [userBirthday, setUserBirthday] = useState(birthdate);
