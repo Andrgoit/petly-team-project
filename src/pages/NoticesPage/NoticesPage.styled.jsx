@@ -49,5 +49,5 @@ export const PageTitle = styled.h2`
 export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  position: relative;
+  width: 100%;
 `;

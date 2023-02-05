@@ -17,6 +17,7 @@ import {
 
 import numWords from 'num-words';
 import ModalNotice from 'components/ModalNotice/ModalNotice';
+import noImage from '../../img/noImage.png';
 
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -35,14 +36,13 @@ function OurFriensItem(notices) {
     }
     const ageWords = numWords(age);
 
-    return ageWords;
-  }
+    // url === null ? url === undefined : noImage;
 
-  return (
-    <Item key={_id}>
-      <Image src={url} alt="pet" minwidth={288} height={288} />
-      <CategoryTitle>selll</CategoryTitle>
-      {/* <AddToFavoriteBtn
+    return (
+      <Item key={_id}>
+        <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
+        <CategoryTitle>selll</CategoryTitle>
+        {/* <AddToFavoriteBtn
         onClick={() => {
           isLogined
             ? dispatch(addToFavorite(_id))
@@ -52,52 +52,53 @@ function OurFriensItem(notices) {
         <AddIcon />
       </AddToFavoriteBtn> */}
 
-      <AddToFavoriteBtn>
-        <AddIcon />
-      </AddToFavoriteBtn>
-      <Container>
-        <Wrapper>
-          <Title>{title}</Title>
-          <Text>
-            <Span>Breed:</Span>
-            {breed}
-          </Text>
-          <Text>
-            <Span>Place:</Span>
-            {location}
-          </Text>
-          <Text>
-            <Span>Age:</Span>
-            {getAge()} {getAge() === 'one' ? 'year' : 'years'}
-          </Text>
-          {/* {category === 'sell' && (
+        <AddToFavoriteBtn>
+          <AddIcon />
+        </AddToFavoriteBtn>
+        <Container>
+          <Wrapper>
+            <Title>{title}</Title>
+            <Text>
+              <Span>Breed:</Span>
+              {breed}
+            </Text>
+            <Text>
+              <Span>Place:</Span>
+              {location}
+            </Text>
+            <Text>
+              <Span>Age:</Span>
+              {getAge()} {getAge() === 'one' ? 'year' : 'years'}
+            </Text>
+            {/* {category === 'sell' && (
             <Text>
               <Span>Price:</Span>
               {price ? `${price} $` : '--------'}
             </Text>
           )} */}
-          <Text>
-            <Span>Price:</Span>
-            {price ? `${price} $` : '--------'}
-          </Text>
-        </Wrapper>
-        <LearnMoreBtn onClick={() => setIsModalOpen(true)}>
-          Learn more
-        </LearnMoreBtn>
-        <DeleteBtn>
-          Delete
-          <DelIcon />
-        </DeleteBtn>
-      </Container>
-      {isModalOpen && (
-        <ModalNotice
-          id={id}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-        />
-      )}
-    </Item>
-  );
+            <Text>
+              <Span>Price:</Span>
+              {price ? `${price} $` : '--------'}
+            </Text>
+          </Wrapper>
+          <LearnMoreBtn onClick={() => setIsModalOpen(true)}>
+            Learn more
+          </LearnMoreBtn>
+          <DeleteBtn>
+            Delete
+            <DelIcon />
+          </DeleteBtn>
+        </Container>
+        {isModalOpen && (
+          <ModalNotice
+            id={id}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
+      </Item>
+    );
+  }
 }
 
 export default OurFriensItem;
