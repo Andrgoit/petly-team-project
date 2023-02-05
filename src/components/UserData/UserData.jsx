@@ -3,17 +3,7 @@ import UserDataItem from '../UserDataItem/UserDataItem';
 
 export const UserData = ({ user }) => {
   if (user) {
-    const { name, avatar, email, location, birthdate, phone } = user;
-    return (
-      <UserDataItem
-        name={name}
-        avatar={avatar}
-        email={email}
-        location={location}
-        birthdate={birthdate}
-        phone={phone}
-      />
-    );
+    return <UserDataItem user={user} key="UserDataItem" />;
   }
   return 'Oops...';
 };
