@@ -6,7 +6,9 @@ import { ReactComponent as Pencil } from '../../img/ci_edit.svg';
 import { ReactComponent as DoneButton } from '../../img/done-button.svg';
 import logoutBtn from '../../img/logoutBtn.png';
 
-export const UserData = (name, email, location, birthdate, phone) => {
+export const UserData = ({ user }) => {
+  const { name, email, birthdate, location, phone } = user;
+  console.log(name);
   const [userName, setUserName] = useState(name);
   const [userEmail, setUserEmail] = useState(email);
   const [userBirthday, setUserBirthday] = useState(birthdate);
@@ -39,27 +41,76 @@ export const UserData = (name, email, location, birthdate, phone) => {
   };
 
   const onEditInfo = e => {
-    console.log(e.currentTarget);
-    const activeInput = e.currentTarget.children[1];
-    activeInput.disabled = false;
-    activeInput.className = 'data-input-active';
-    const disactiveButton = e.currentTarget.children[2];
-    disactiveButton.className = 'button-none';
-    const activeButton = e.currentTarget.children[3];
-    activeButton.style.display = 'block';
+    console.log(e.currentTarget.children[2].children[0].children[0].fill);
+    if (
+      e.target.className.baseVal === 'edit-btn' ||
+      e.target.className === 'data-edit-info'
+    ) {
+      const activeInput = e.currentTarget.children[1];
+      activeInput.disabled = false;
+      activeInput.className = 'data-input-active';
+      const disactiveButton = e.currentTarget.children[2];
+      disactiveButton.className = 'button-none';
+      const activeButton = e.currentTarget.children[3];
+      activeButton.style.display = 'block';
+      setEditBtnIsDisabled(true);
+      setIconStyle('edit-btn-react');
+    }
+    return;
   };
 
   const onChangedInput = e => {
     e.preventDefault();
-
-    const input = e.currentTarget.children[0].children[1];
-    input.disabled = true;
-    input.className = 'data-input';
-    const activeButton = e.currentTarget.children[0].children[3];
-    activeButton.style.display = 'none';
-    const disabledButton = e.currentTarget.children[0].children[2];
-    disabledButton.className = 'data-edit-info';
-    setIconStyle('edit-btn');
+    if ((e.currentTarget.children[0].htmlFor = 'name')) {
+      const input = e.currentTarget.children[0].children[1];
+      input.disabled = true;
+      input.className = 'data-input';
+      const activeButton = e.currentTarget.children[0].children[3];
+      activeButton.style.display = 'none';
+      const disabledButton = e.currentTarget.children[0].children[2];
+      disabledButton.className = 'data-edit-info';
+      setIconStyle('edit-btn');
+    }
+    if ((e.currentTarget.children[1].htmlFor = 'email')) {
+      const input = e.currentTarget.children[1].children[1];
+      input.disabled = true;
+      input.className = 'data-input';
+      const activeButton = e.currentTarget.children[1].children[3];
+      activeButton.style.display = 'none';
+      const disabledButton = e.currentTarget.children[1].children[2];
+      disabledButton.className = 'data-edit-info';
+      setIconStyle('edit-btn');
+    }
+    if ((e.currentTarget.children[2].htmlFor = 'birthday')) {
+      const input = e.currentTarget.children[2].children[1];
+      input.disabled = true;
+      input.className = 'data-input';
+      const activeButton = e.currentTarget.children[2].children[3];
+      activeButton.style.display = 'none';
+      const disabledButton = e.currentTarget.children[2].children[2];
+      disabledButton.className = 'data-edit-info';
+      setIconStyle('edit-btn');
+    }
+    if ((e.currentTarget.children[3].htmlFor = 'phone')) {
+      const input = e.currentTarget.children[3].children[1];
+      input.disabled = true;
+      input.className = 'data-input';
+      const activeButton = e.currentTarget.children[3].children[3];
+      activeButton.style.display = 'none';
+      const disabledButton = e.currentTarget.children[3].children[2];
+      disabledButton.className = 'data-edit-info';
+      setIconStyle('edit-btn');
+    }
+    if ((e.currentTarget.children[3].htmlFor = 'city')) {
+      const input = e.currentTarget.children[4].children[1];
+      input.disabled = true;
+      input.className = 'data-input';
+      const activeButton = e.currentTarget.children[4].children[3];
+      activeButton.style.display = 'none';
+      const disabledButton = e.currentTarget.children[4].children[2];
+      disabledButton.className = 'data-edit-info';
+      setIconStyle('edit-btn');
+    }
   };
 
   return (
@@ -81,7 +132,7 @@ export const UserData = (name, email, location, birthdate, phone) => {
           </label>
         </div>
         <form className="data-container" onSubmit={onChangedInput}>
-          <label className="input-title" onClick={onEditInfo}>
+          <label className="input-title" htmlFor="name" onClick={onEditInfo}>
             <span className="field">Name:</span>
             <input
               type="text"
@@ -93,17 +144,18 @@ export const UserData = (name, email, location, birthdate, phone) => {
             />
             <button
               type="button"
+              name="edit-button"
               className="data-edit-info"
               onClick={onEditButtonStyle}
               disabled={editBtnIsDisabled}
             >
-              <Pencil className={iconStyle} />
+              <Pencil className={iconStyle} name="edit-icon" />
             </button>
             <button type="submit" className="done-button">
               <DoneButton className="done-icon" />
             </button>
           </label>
-          <label className="input-title" onClick={onEditInfo}>
+          <label className="input-title" htmlFor="email" onClick={onEditInfo}>
             <span className="field">Email:</span>
             <input
               type="email"
@@ -125,7 +177,11 @@ export const UserData = (name, email, location, birthdate, phone) => {
               <DoneButton className="done-icon" />
             </button>
           </label>
-          <label className="input-title" onClick={onEditInfo}>
+          <label
+            className="input-title"
+            htmlFor="birthday"
+            onClick={onEditInfo}
+          >
             <span className="field">Birthday:</span>
             <input
               type="text"
@@ -147,7 +203,7 @@ export const UserData = (name, email, location, birthdate, phone) => {
               <DoneButton className="done-icon" />
             </button>
           </label>
-          <label className="input-title" onClick={onEditInfo}>
+          <label className="input-title" htmlFor="phone" onClick={onEditInfo}>
             <span className="field">Phone:</span>
             <input
               type="text"
@@ -169,7 +225,7 @@ export const UserData = (name, email, location, birthdate, phone) => {
               <DoneButton className="done-icon" />
             </button>
           </label>
-          <label className="input-title" onClick={onEditInfo}>
+          <label className="input-title" htmlFor="city" onClick={onEditInfo}>
             <span className="field">City:</span>
             <input
               type="text"

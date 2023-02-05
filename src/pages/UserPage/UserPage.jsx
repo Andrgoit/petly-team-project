@@ -23,8 +23,12 @@ const UserPage = () => {
   return (
     <section>
       {loading && <p>...Loading</p>}
-      {error && <p>Что-то пошло не так</p>}
-      {!loading && data && <UserData user={user} />}
+      {error && <p>Oops!</p>}
+      {!loading && data && (
+        <>
+          <UserData user={user} />
+        </>
+      )}
     </section>
   );
 };

@@ -103,6 +103,9 @@ input[type=file] {
     border-radius: 25px;
     margin-left: 24px;
 }
+/* .edit-icon {
+    padding: 22px;
+} */
 .data-input-active {
     width: 216px;
     height: 32px;
@@ -121,6 +124,9 @@ input[type=file] {
 }
 
 .edit-btn {
+    position: absolute;
+    top: 6px;
+    left: 6px;
     fill: #F59256;
 
 }
@@ -207,6 +213,10 @@ input[type=file] {
         color: #111111;
     }
 
+    .input-title:nth-last-child() {
+        margin-bottom: 0;
+    }
+
     .field {
         display: block;
         margin-left: 0;
@@ -278,6 +288,9 @@ input[type=file] {
         margin-left: 1px;
     }
 
+
+
+
     .log-out-btn {
         position: relative;
         width: 75px;
@@ -302,6 +315,9 @@ input[type=file] {
         left: -15px;
         opacity: 0.6;
     }
+
+
+
 
     .photo-container {
         display: block;
@@ -423,16 +439,6 @@ input[type=file] {
         height: 24px;
     }
 
-    .data-edit-info {
-        position: relative;
-        width: 20px;
-        height: 20px;
-        background-color: #FDF7F2;
-        border: none;
-        border-radius: 25px;
-        margin-left: 0;
-        margin-right: 12px;
-    }
 
     .data-input-active {
         width: 159px;
@@ -452,16 +458,39 @@ input[type=file] {
         outline: none;
     }
 
+    .data-edit-info {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        background-color: #FDF7F2;
+        border: none;
+        border-radius: 25px;
+        margin-left: 0;
+        margin-right: 12px;
+    }
+
     .edit-btn {
         position: absolute;
         top: 0;
         left: 4px;
-        width: 10px;
+        width: 12px;
         fill: #F59256;
 
     }
 
     .edit-btn-react * {
+        position: absolute;
+        top: 0;
+        left: 4px;
+        width: 12px;
+        fill: #111111;
+        opacity: 0.6;
+    }
+    .edit-btn-react{
+        position: absolute;
+        top: 0;
+        left: 4px;
+        width: 12px;
         fill: #111111;
         opacity: 0.6;
     }
@@ -473,22 +502,25 @@ input[type=file] {
     .done-button {
         display: none;
         position: relative;
-        width: 32px;
-        height: 32px;
+        width: 20px;
+        height: 20px;
         background-color: #FDF7F2;
         border: none;
         border-radius: 25px;
-        margin-left: 24px;
+        margin-left: 13px;
+        margin-right: 12px;
     }
 
     .done-icon {
+        width: 12px;
+        height: 12px;
         margin-top: 3px;
-        margin-left: 1px;
+        margin-left: -1px;
     }
 
     .log-out-btn {
         position: relative;
-        width: 75px;
+        width: 89px;
         font-family: 'Manrope';
         font-style: normal;
         font-weight: 500;
@@ -498,7 +530,8 @@ input[type=file] {
         color: rgba(17, 17, 17, 0.6);
         background: transparent;
         border: none;
-        margin-left: 49px;
+        margin-top: 44px;
+        margin-left: 191px;
         margin-bottom: 23px;
     }
 
@@ -508,5 +541,8 @@ input[type=file] {
         top: 3px;
         left: -15px;
         opacity: 0.6;
+    }
+    .input-title:nth-last-child(){
+        margin-bottom: 0;
     }
 }
