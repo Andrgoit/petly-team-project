@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Form = styled.form`
   position: relative;
+  margin-bottom: 20px;
 `;
 
 export const Input = styled.input`
@@ -52,44 +53,3 @@ export const Button = styled.button`
   }
 `;
 
-
-
-// export const Form = styled.form`
-//   margin-bottom: 28px;
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   border: transparent;
-//   background: ${p => p.theme.colors.white};
-//   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-//   border-radius: 40px;
-//   @media screen and (min-width: 768px) {
-//     margin-bottom: 40px;
-//     width: 608px;
-//     margin-right: auto;
-//     margin-left: auto;
-//   }
-// `;
-
-// export const Input = styled.input`
-//   width: 100%;
-//   border: transparent;
-//   background: ${p => p.theme.colors.white};
-//   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-//   border-radius: 40px;
-//   padding-top: 11px;
-//   padding-bottom: 11px;
-//   padding-left: 20px;
-//   padding-right: 40px;
-//   position: relative;
-//   &:hover,
-//   :active {
-//     border: 1px solid ${p => p.theme.colors.activeSearchInput};
-//   }
-// `;
-
-// export const IconSearch = styled(AiOutlineSearch)`
-//   position: absolute;
-//   top: 10px;
-//   right: 12px;
-// `;

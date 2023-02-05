@@ -36,21 +36,21 @@ const filteredNotices = () => {
   return (
     <Section>
       <MainContainer>
-        <PageTitle>Find your favorite pet</PageTitle>
-        <NoticesSearch setQ={setQ} />
-        <NoticesCategoriesNav></NoticesCategoriesNav>
-
         <Container>
-          {error && <p>Что-то пошло не так</p>}
-          {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
-          {!loading && notices && (
-            <NoticesCategoriesList notices={noticesToLayout} />
-          )}
-
-          {!loading && ref.current && !Boolean(noticesToLayout.length) && (
-            <p>Собак по данному запиту немає</p>
-          )}
+          <PageTitle>Find your favorite pet</PageTitle>
+          <NoticesSearch setQ={setQ} />
+          <NoticesCategoriesNav></NoticesCategoriesNav>
         </Container>
+
+        {error && <p>Что-то пошло не так</p>}
+        {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
+        {!loading && notices && (
+          <NoticesCategoriesList notices={noticesToLayout} />
+        )}
+
+        {!loading && ref.current && !Boolean(noticesToLayout.length) && (
+          <p>Собак по данному запиту немає</p>
+        )}
       </MainContainer>
     </Section>
   );
