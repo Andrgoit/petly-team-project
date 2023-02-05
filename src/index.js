@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* для гита */}
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
+        <BrowserRouter basename="/petly-team-project">
           {/*  */}
           {/* <BrowserRouter> */}
           <App />
