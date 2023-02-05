@@ -29,9 +29,9 @@ export default function SharedLayout() {
           <Route path="/register" element={<RegisterPage />} />
         </Route>
         {/* private route to do */}
-        {/* <Route element={<PrivateRoute />}> */}
+        <Route element={<PrivateRoute />}>
         <Route path="/user" element={<UserPage />} />
-        {/* </Route> */}
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
