@@ -20,6 +20,9 @@ import {
   StyledErrMsg,
 } from './ModalAddNotice.styled';
 import { ReactComponent as PlusImg } from '../../img/add-file.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { createNotice } from 'redux/notices/notices-operation';
+import { selectAccessToken } from 'redux/auth/authSelectors';
 
 const validationSchema = yup.object({
   sex: yup.string().required('Field is required!'),
@@ -69,6 +72,9 @@ const SecondStep = ({
   initialValues,
   setIsFirstStep,
 }) => {
+  const dispatch = useDispatch();
+  const token = useSelector(selectAccessToken);
+
   const handleFileChange = (e, setFieldValue) => {
     const imgFile = e.target.files[0];
     if (imgFile) {
@@ -95,17 +101,21 @@ const SecondStep = ({
         sellCategory: formValues.category === 'sell' ? true : false,
         price: formValues.sellCategory ? formValues.price : '',
       }}
-      onSubmit={values => {
+      onSubmit={async values => {
         const formData = (({ sellCategory, ...o }) => o)(values);
-
-        console.log({
+        const valuesToSend = {
           ...formData,
-          price: values.category !== 'sell' ? null : values.price,
-          // birthdate: parseDateToISO(formData.birthDate),
-        });
-        setFormValues(initialValues);
-        setIsFirstStep(true);
-        closeModal();
+          price: formValues.sellCategory ? formValues.price : null,
+        };
+
+        try {
+          await dispatch(createNotice({ valuesToSend, token }));
+          setFormValues(initialValues);
+          setIsFirstStep(true);
+          closeModal();
+        } catch (error) {
+          console.log(error.message);
+        }
       }}
     >
       {({ setFieldValue }) => (

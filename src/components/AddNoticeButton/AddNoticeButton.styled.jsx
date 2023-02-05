@@ -3,13 +3,15 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 455px;
   right: 20px;
   cursor: pointer;
+  z-index: 1;
+  height: 44px;
   &:hover span,
   :focus span {
-    color: #f59256;
+    color: #ffffff;
   }
   &:hover button > img,
   :focus button > img {
@@ -17,8 +19,17 @@ export const Wrapper = styled.div`
   }
   @media (min-width: 768px) {
     position: relative;
+    margin-left: auto;
+    width: 175px;
     right: 0;
     top: 0;
+    &:hover span,
+    :focus span {
+      color: #f59256;
+    }
+  }
+  @media (min-width: 1300px) {
+    width: auto;
   }
 `;
 

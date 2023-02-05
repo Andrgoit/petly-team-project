@@ -25,3 +25,18 @@ export const loginUser = async credentials => {
   setAuthHeader(data.token);
   return data;
 };
+
+export const fetchNotices = async () => {
+  const { data } = await instance.get('/notices/category/sell');
+  return data;
+};
+
+export const fetchNoticeById = async id => {
+  const { data } = await instance.get(`/notices/notice/${id}`);
+  return data;
+};
+
+export const addNotice = async (values, config) => {
+  const { data } = await instance.post('/notices/notice', values, config);
+  return data;
+};

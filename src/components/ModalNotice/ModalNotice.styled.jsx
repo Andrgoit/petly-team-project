@@ -140,6 +140,7 @@ export const customStyles = {
     bottom: 0,
     backgroundColor: 'rgba(17, 17, 17, 0.6)',
     overflow: 'hidden',
+    zIndex: '2',
   },
   content: {
     padding: '0 20px',
