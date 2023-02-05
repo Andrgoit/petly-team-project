@@ -20,13 +20,17 @@ export const fetchFriends = async () => {
   return data;
 };
 
+export const fetchUsers = async () => {
+  const { data } = await instance.get('/users/current/Myroslava');
+
+  return data;
+};
 
 export const loginUser = async credentials => {
   const { data } = await instance.get('/auth/login', credentials);
   setAuthHeader(data.token);
   return data;
 };
-
 
 export const fetchNotices = async () => {
   const { data } = await instance.get('/notices/category/sell');
