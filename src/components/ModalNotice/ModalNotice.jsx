@@ -27,7 +27,7 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
   const isTablet = useMediaQuery({ minWidth: 768 });
 
   useEffect(() => {
-    const fetchNotice = async id => {
+    const fetchNotice = async () => {
       try {
         const data = await fetchNoticeById(id);
         setNoticeInfo(data);
@@ -38,8 +38,8 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
       }
     };
     setIsLoading(true);
-    fetchNotice(id);
-  }, [id]);
+    fetchNotice();
+  }, []);
 
   return (
     <Modal

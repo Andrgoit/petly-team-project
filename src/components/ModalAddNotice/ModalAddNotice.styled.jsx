@@ -126,6 +126,7 @@ export const StyledInput = styled(Field)`
   &:focus,
   :hover,
   :active {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
     border: 1px solid #f59256;
     outline: 1px solid #f59256;
   }

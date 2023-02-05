@@ -13,6 +13,7 @@ import plusIcon from '../../img/plus-icon.png';
 
 const AddNoticeButton = ({ onClickOpen }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
+
   // const isLoggedIn = useSelector(selectIsLoggedIn);
   const isLoggedIn = true;
 
