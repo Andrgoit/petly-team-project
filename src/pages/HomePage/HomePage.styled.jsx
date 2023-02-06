@@ -1,11 +1,51 @@
 import styled from 'styled-components';
 import vector from '../../img/Vector.png';
+import vector2x from '../../img/vector2x.png';
 import vectorTablet from '../../img/Vector-tablet.png';
+import vectorTablet2x from '../../img/vectorTablet2x.png';
 import frame from '../../img/Frame.png';
 import frame2x from '../../img/Frame@2x.png';
 import heart from '../../img/Heart.png';
 import heart2x from '../../img/Heart@2x.png';
 
+export const HomeSection = styled.section`
+  background-image: url('${vector}');
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-size: cover;
+  padding-top: 60px;
+
+  @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url('${vector2x}');
+  }
+
+  @media screen and (min-width: 768px) {
+    background-image: url('${vectorTablet}');
+    padding-top: 90px;
+
+    @media (min-device-pixel-ratio: 2),
+      (-webkit-min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('${vectorTablet2x}');
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    background-image: url('${frame}');
+    padding-top: 60px;
+
+    @media (min-device-pixel-ratio: 2),
+      (-webkit-min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('${frame2x}');
+    }
+  }
+`;
 export const HomeTitle = styled.h1`
   color: ${props => props.theme.colors.black};
   font-weight: ${props => props.theme.fontWeights.bold};
@@ -44,31 +84,7 @@ export const Image = styled.img`
     max-height: 640px;
   }
 `;
-export const HomeContainer = styled.div`
-  background-image: url('${vector}');
-  background-repeat: no-repeat;
-  background-position: bottom;
-  padding-top: 60px;
 
-  @media screen and (min-width: 768px) {
-    background-image: url('${vectorTablet}');
-    background-size: inherit;
-    padding-top: 90px;
-  }
-
-  @media screen and (min-width: 1300px) {
-    background-image: url('${frame}');
-    background-size: 1320px 440px;
-    padding-top: 60px;
-
-    @media (min-device-pixel-ratio: 2),
-      (-webkit-min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: url('${frame2x}');
-    }
-  }
-`;
 export const HomeWrapp = styled.div`
   @media screen and (min-width: 1300px) {
     display: flex;

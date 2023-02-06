@@ -1,15 +1,24 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
+import { useState } from 'react';
+
 import {
-  Input,
+  InputForm,
   ErrorInput,
   InputBox,
   ButtonForm,
-} from '../RegisterForm.styled';
+  ShowBtn,
+  IconEye,
+  IconEyeSlash,
+} from '../../AuthForm.styled';
 
 export const RegisterStepOne = ({ next, data }) => {
-  const passwordRexExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+  // const passwordRexExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+  const passwordRexExp = /^\S{7,32}$/;
+
+  const [showPassword, setShowPassword] = useState(true);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -34,6 +43,14 @@ export const RegisterStepOne = ({ next, data }) => {
       }),
   });
 
+  const handleTogglePassword = ({ currentTarget: { id } }) => {
+    if (id === 'pass') {
+      setShowPassword(prev => !prev);
+    } else if (id === 'confPass') {
+      setShowConfirmPassword(prev => !prev);
+    }
+  };
+
   const formik = useFormik({
     initialValues: data,
     validationSchema: validationSchema,
@@ -45,7 +62,7 @@ export const RegisterStepOne = ({ next, data }) => {
   return (
     <form onSubmit={formik.handleSubmit} autoComplete="off">
       <InputBox>
-        <Input
+        <InputForm
           type="email"
           name="email"
           placeholder="Email"
@@ -57,8 +74,9 @@ export const RegisterStepOne = ({ next, data }) => {
         )}
       </InputBox>
       <InputBox>
-        <Input
+        <InputForm
           name="password"
+          type={showPassword ? 'password' : 'text'}
           placeholder="Password"
           onChange={formik.handleChange}
           value={formik.values.password}
@@ -66,9 +84,13 @@ export const RegisterStepOne = ({ next, data }) => {
         {formik.touched.password && formik.errors.password && (
           <ErrorInput>{formik.errors.password}</ErrorInput>
         )}
+        <ShowBtn type="button" id="pass" onClick={e => handleTogglePassword(e)}>
+          {showPassword ? <IconEyeSlash /> : <IconEye />}
+        </ShowBtn>
       </InputBox>
       <InputBox lastMargin>
-        <Input
+        <InputForm
+          type={showConfirmPassword ? 'password' : 'text'}
           name="confirmPassword"
           placeholder="Confirm Password"
           onChange={formik.handleChange}
@@ -77,6 +99,13 @@ export const RegisterStepOne = ({ next, data }) => {
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
           <ErrorInput>{formik.errors.confirmPassword}</ErrorInput>
         )}
+        <ShowBtn
+          type="button"
+          id="confPass"
+          onClick={e => handleTogglePassword(e)}
+        >
+          {showConfirmPassword ? <IconEyeSlash /> : <IconEye />}
+        </ShowBtn>
       </InputBox>
       <ButtonForm type="submit">Next</ButtonForm>
     </form>
