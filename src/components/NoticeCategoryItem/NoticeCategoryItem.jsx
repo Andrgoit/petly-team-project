@@ -22,33 +22,42 @@ import noImage from '../../img/noImage.png';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function OurFriensItem(notices) {
-  const { _id, title, birthdate, breed, location, avatar, price } = notices;
-    const {url} = avatar;
+  const { _id, title, birthdate, breed, location, avatar, price, category } =
+    notices;
+  const { url } = avatar;
+  
+  function getAge() {
+    const today = new Date();
+    const birthDate = new Date(birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    const ageWords = numWords(age);
 
-    function getAge() {
-      const today = new Date();
-      const birthDate = new Date(birthdate);
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      const ageWords = numWords(age);
+    return ageWords;
+  }
 
-      return ageWords;
+  function changeCategory() {
+
+
+
+    if (category === 'ingoodhands') {
+      return 'in good hands';
     }
 
-// url === null ? url === undefined : noImage;
-     
+    if (category === 'lostfound') {
+      return 'lost/found';
+    } else {
+      return category;
+    }
+  }
+   
   return (
     <Item key={_id}>
-      <Image
-        src={url ?? noImage}
-        alt="pet"
-        minwidth={288}
-        height={288}
-      />
-      <CategoryTitle>selll</CategoryTitle>
+      <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
+      <CategoryTitle>{changeCategory()}</CategoryTitle>
       {/* <AddToFavoriteBtn
         onClick={() => {
           isLogined
@@ -77,17 +86,13 @@ function OurFriensItem(notices) {
             <Span>Age:</Span>
             {getAge()} {getAge() === 'one' ? 'year' : 'years'}
           </Text>
-          {/* {category === 'sell' && (
+          {category === 'sell' && (
             <Text>
               <Span>Price:</Span>
               {price ? `${price} $` : '--------'}
             </Text>
-          )} */}
-          <Text>
-            <Span>Price:</Span>
-            {price ? `${price} $` : '--------'}
-          </Text>
-        </Wrapper>
+          )}
+         </Wrapper>
         <LearnMoreBtn>Learn more</LearnMoreBtn>
         <DeleteBtn>
           Delete
