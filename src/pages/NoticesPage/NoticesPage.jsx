@@ -13,9 +13,6 @@ import { getNotices } from 'redux/notices/notices-operation';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
 
-
-
-
 function NoticesPage() {
   const dispatch = useDispatch();
 

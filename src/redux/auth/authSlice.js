@@ -9,7 +9,6 @@ const initialState = {
     phone: null,
   },
   accessToken: null,
-  refreshToken: null,
   isLoggedIn: false,
   isLoading: false,
   error: null,
@@ -24,9 +23,7 @@ const authSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(register.fulfilled, (state, { payload }) => {
-      state.user = payload.user;
-      // state.accessToken = payload.user.accessToken;
+    builder.addCase(register.fulfilled, state => {
       state.isLoggedIn = true;
       state.isLoading = false;
     });

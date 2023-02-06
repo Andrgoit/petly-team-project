@@ -20,15 +20,22 @@ export const fetchFriends = async () => {
   return data;
 };
 
-
 export const loginUser = async credentials => {
   const { data } = await instance.get('/auth/login', credentials);
   setAuthHeader(data.token);
   return data;
 };
-
+export const fetchRegister = async credentials => {
+  const { data } = await instance.post('/auth/register', credentials);
+  // setAuthHeader(data.token);
+  return data;
+};
 
 export const fetchNotices = async () => {
   const { data } = await instance.get('/notices/category/sell');
+  return data;
+};
+export const fetchPets = async credentials => {
+  const { data } = await instance.post('/pets', credentials);
   return data;
 };
