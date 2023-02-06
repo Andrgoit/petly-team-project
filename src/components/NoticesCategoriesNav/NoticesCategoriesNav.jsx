@@ -8,8 +8,8 @@ export const NoticesCategoriesNav = () => {
 
   return (
     <Nav>
-      <NavLink to="/notices/lostfound">lost/found</NavLink>
-      <NavLink to="/notices/ingoodhands">in good hands</NavLink>
+      <NavLink to="/notices/lost-found">lost/found</NavLink>
+      <NavLink to="/notices/for-free">in good hands</NavLink>
       <NavLink to="/notices/sell">sell</NavLink>
 
       <AuthWrapper>

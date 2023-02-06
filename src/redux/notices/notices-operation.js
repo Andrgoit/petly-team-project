@@ -8,8 +8,44 @@ axios.defaults.baseURL =
 export const getNotices = createAsyncThunk(
   'notices/categoryName',
   async ({ categoryName }, thunkApi) => {
+        function changeFetch() {
+          const fetchFree = '/category/ingoodhands';
+          const routFree = 'for-free';
+
+          const fetchLost = '/category/lostfound';
+          const routLost = 'lost-found';
+
+          const fetchSell = '/category/sell';
+          const routSell = 'sell';
+
+          const fetchFavorite = '/favorite';
+          const routFavorite = 'favorite';
+
+          const fetchOwn = '/current';
+          const routOwn = 'own';
+
+
+                    if (categoryName === routFree) {
+                      return fetchFree;
+                    } if (categoryName === routLost) {
+                      return fetchLost;
+                    } if (categoryName === routSell) {
+                      return fetchSell;
+                    } if (categoryName === routFavorite) {
+                      return fetchFavorite;
+                    }
+                    if (categoryName === routOwn) {
+                      return fetchOwn;
+                    } else {
+                      return categoryName;
+                    }
+          };
+
+        
     try {
-      const { data } = await axios.get(`/notices/category/${categoryName}`);
+      const { data } = await axios.get(
+        `/notices${changeFetch(categoryName)}`
+      );
       console.log(data);
       return data;
     } catch (error) {
