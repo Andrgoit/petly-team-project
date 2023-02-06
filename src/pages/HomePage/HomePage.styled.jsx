@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import vector from '../../img/vector.png';
+import vector from '../../img/Vector.png';
 import vector2x from '../../img/vector2x.png';
 import vectorTablet from '../../img/Vector-tablet.png';
 import vectorTablet2x from '../../img/vectorTablet2x.png';
@@ -9,7 +9,7 @@ import heart from '../../img/Heart.png';
 import heart2x from '../../img/Heart@2x.png';
 
 export const HomeSection = styled.section`
-  background-image: url('${vector2x}');
+  background-image: url('${vector}');
   background-repeat: no-repeat;
   background-position: center 0;
   background-size: cover;
@@ -23,7 +23,7 @@ export const HomeSection = styled.section`
   }
 
   @media screen and (min-width: 768px) {
-    background-image: url('${vectorTablet2x}');
+    background-image: url('${vectorTablet}');
     padding-top: 90px;
 
     @media (min-device-pixel-ratio: 2),

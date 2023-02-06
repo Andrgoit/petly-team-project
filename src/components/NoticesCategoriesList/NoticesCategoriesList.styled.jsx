@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NoticesList = styled.ul`
   list-style: none;
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 32px;
   margin-left: auto;
