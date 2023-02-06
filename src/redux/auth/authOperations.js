@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { loginUser, registerUser } from 'services/API/API';
+import { loginUser, registerUser, logoutUser } from 'services/API/API';
 
 // !!!! Возможно потом его перенесем в .env
 // axios.defaults.baseURL = 'https://petly-backend.onrender.com/api';
@@ -41,6 +41,18 @@ export const login = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue();
+    }
+  }
+);
+
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      const result = await logoutUser();
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
     }
   }
 );
