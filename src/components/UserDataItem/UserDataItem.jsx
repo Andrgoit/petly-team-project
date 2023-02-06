@@ -5,17 +5,39 @@ import cameraLogo from '../../img/Camera_2.svg';
 import { ReactComponent as Pencil } from '../../img/ci_edit.svg';
 import { ReactComponent as DoneButton } from '../../img/done-button.svg';
 import logoutBtn from '../../img/logoutBtn.png';
+import { useDispatch } from 'react-redux';
+import { logOut } from 'redux/auth/authOperations';
+import { deleteUser } from 'redux/users/users-slice';
+
+const isoDateToLocal = isoDate => {
+  const date = new Date(`${isoDate}`);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  const newDate = `${day}.${month}.${year}`;
+  return newDate;
+};
 
 export const UserData = ({ user }) => {
-  const { name, email, birthdate, location, phone } = user;
+  const { avatar, name, email, birthdate, location, phone } = user;
   const [userName, setUserName] = useState(name || '-');
   const [userEmail, setUserEmail] = useState(email || '-');
-  const [userBirthday, setUserBirthday] = useState(birthdate || '-');
+  const [userBirthday, setUserBirthday] = useState(
+    isoDateToLocal(birthdate) || '-'
+  );
   const [userPhone, setUserPhone] = useState(phone || '-');
   const [userCity, setUserCity] = useState(location || '-');
 
   const [iconStyle, setIconStyle] = useState('edit-btn');
   const [editBtnIsDisabled, setEditBtnIsDisabled] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    console.log('перевірка чи клік на логаут є');
+    dispatch(logOut());
+    dispatch(deleteUser());
+  };
 
   const onEditButtonStyle = e => {
     setIconStyle('edit-btn-react');
@@ -120,7 +142,12 @@ export const UserData = ({ user }) => {
       </h3>
       <div className="user-data" key="user-data">
         <div className="photo-container" key="photo-container">
-          <img className="avatar" alt="avatar" key="photo-container"></img>
+          <img
+            className="avatar"
+            src={avatar}
+            alt="avatar"
+            key="photo-container"
+          ></img>
           <label
             className="edit-photo-btn-container"
             key="edit-photo-btn-container"
@@ -298,7 +325,11 @@ export const UserData = ({ user }) => {
               <DoneButton className="done-icon" key="done-button5" />
             </button>
           </label>
-          <button className="log-out-btn" key="log-out-btn">
+          <button
+            className="log-out-btn"
+            key="log-out-btn"
+            onClick={handleClick}
+          >
             <img
               src={logoutBtn}
               alt="logout-button"
