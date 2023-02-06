@@ -34,7 +34,7 @@ export const PetsTitle = styled.h2`
     line-height: ${props => props.theme.lineHeights.d};
     width: 113px;
     margin-bottom: 32px;
-    margin-left: 33px;
+    margin-left: 0px;
   }
   @media screen and (min-width: 1300px) {
     font-size: ${props => props.theme.fontSizes.g};
@@ -60,11 +60,13 @@ export const UserWrapper = styled.div`
   }
 `;
 export const Wrapper = styled.div`
-  width: inherit;
+  width: 280px;
   @media screen and (min-width: 768px) {
     display: flex;
+    width: 704px;
   }
   @media screen and (min-width: 1300px) {
+    width: 821px;
   }
 `;
 export const PetsWrapper = styled.div`
@@ -89,6 +91,7 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   margin-bottom: 31px;
   margin-top: -6px;
+
   @media screen and (min-width: 768px) {
     position: absolute;
     top: 0px;
