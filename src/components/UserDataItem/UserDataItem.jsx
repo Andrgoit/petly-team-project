@@ -5,6 +5,9 @@ import cameraLogo from '../../img/Camera_2.svg';
 import { ReactComponent as Pencil } from '../../img/ci_edit.svg';
 import { ReactComponent as DoneButton } from '../../img/done-button.svg';
 import logoutBtn from '../../img/logoutBtn.png';
+// import { OnLogout } from 'components/Logout/Logout';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/auth/authOperations';
 
 export const UserData = ({ user }) => {
   const { name, email, birthdate, location, phone } = user;
@@ -16,6 +19,12 @@ export const UserData = ({ user }) => {
 
   const [iconStyle, setIconStyle] = useState('edit-btn');
   const [editBtnIsDisabled, setEditBtnIsDisabled] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logout());
+  };
 
   const onEditButtonStyle = e => {
     setIconStyle('edit-btn-react');
@@ -298,7 +307,11 @@ export const UserData = ({ user }) => {
               <DoneButton className="done-icon" key="done-button5" />
             </button>
           </label>
-          <button className="log-out-btn" key="log-out-btn">
+          <button
+            className="log-out-btn"
+            key="log-out-btn"
+            onClick={() => onLogout()}
+          >
             <img
               src={logoutBtn}
               alt="logout-button"

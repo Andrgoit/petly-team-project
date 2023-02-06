@@ -20,6 +20,8 @@ import {
   Wrapper,
 } from './UserPage.styled';
 import { MainContainer } from '../../components/App.styled';
+import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
+
 const UserPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -30,14 +32,19 @@ const UserPage = () => {
   const loading = useSelector(getLoading);
   const error = useSelector(getError);
 
+  const useAuth = () => {
+    const result = useSelector(selectIsLoggedIn);
+    return result;
+  };
+
   const { user } = data;
   const { pets } = data;
-
+  const isLogin = useAuth();
   return (
     <section>
       {loading && <p>...Loading</p>}
       {error && <p>Oops!</p>}
-      {!loading && data && (
+      {!loading && data && isLogin && (
         <MainContainer>
           <UserContainer>
             <UserWrapper>
