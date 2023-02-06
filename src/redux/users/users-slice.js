@@ -10,11 +10,6 @@ const initialState = {
 const UsersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {
-    deleteUser(state, action) {
-      state.data = null;
-    },
-  },
   extraReducers: {
     [getUser.pending]: (store, _) => ({
       ...store,
@@ -35,5 +30,3 @@ const UsersSlice = createSlice({
 });
 
 export default UsersSlice.reducer;
-
-export const { deleteUser } = UsersSlice.actions;
