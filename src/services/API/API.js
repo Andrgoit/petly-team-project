@@ -40,6 +40,7 @@ export const loginUser = async credentials => {
   return data;
 };
 
+
 export const logoutUser = async credentials => {
   const { data } = await instance.post('/auth/logout', credentials);
   clearAuthHeader(selectAccessToken);
