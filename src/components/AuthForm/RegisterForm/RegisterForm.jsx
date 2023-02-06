@@ -2,17 +2,15 @@ import AuthForm from '../AuthForm';
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { register } from 'redux/auth/authOperations';
 
 import { RegisterStepOne } from './RegisterStepOne/RegisterStepOne';
 import { RegisterStepTwo } from './RegisterStepTwo/RegisterStepTwo';
 
-import { TitleForm, BoxLink, LinkLogin } from './RegisterForm.styled';
+import { TitleForm, BoxLink, LinkAuth } from '../AuthForm.styled';
 
 export const RegisterForm = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [data, setData] = useState({
@@ -31,9 +29,8 @@ export const RegisterForm = () => {
 
     if (final) {
       try {
+        console.log(newData);
         await dispatch(register(newData));
-
-        navigate('/user');
       } catch (error) {
         toast.error(error);
       }
@@ -58,7 +55,7 @@ export const RegisterForm = () => {
       {steps[currentStep]}
       <BoxLink>
         Already have an account?
-        <LinkLogin to="/login">Login</LinkLogin>
+        <LinkAuth to="/login">Login</LinkAuth>
       </BoxLink>
     </AuthForm>
   );

@@ -1,13 +1,15 @@
 import axios from 'axios';
+import { selectAccessToken } from 'redux/auth/authSelectors';
 
 const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
-// const clearAuthHeader = () => {
-//   axios.defaults.headers.common.Authorization = '';
-// };
+const clearAuthHeader = () => {
+  instance.defaults.headers.common.Authorization = '';
+};
 export const instance = axios.create({
   baseURL: 'https://petly-backend.onrender.com/api',
+  // baseURL: 'http://localhost:4000/api',
 });
 
 export const fetchNews = async () => {
@@ -20,19 +22,37 @@ export const fetchFriends = async () => {
   return data;
 };
 
-export const fetchUsers = async () => {
-  const { data } = await instance.get('/users/current/Myroslava');
-
+export const fetchUserData = async () => {
+  const { data } = await instance.get('/users/current');
+  console.log(data);
   return data;
 };
 
-export const loginUser = async credentials => {
-  const { data } = await instance.get('/auth/login', credentials);
+export const registerUser = async credentials => {
+  const { data } = await instance.post('/auth/register', credentials);
   setAuthHeader(data.token);
   return data;
 };
 
-// export const fetchNotices = async () => {
-//   const { data } = await instance.get('/notices/category/sell');
-//   return data;
-// };
+export const loginUser = async credentials => {
+  const { data } = await instance.post('/auth/login', credentials);
+  setAuthHeader(data.token);
+  return data;
+};
+
+
+export const logoutUser = async credentials => {
+  const { data } = await instance.post('/auth/logout', credentials);
+  clearAuthHeader(selectAccessToken);
+  console.log(data);
+  return data;
+};
+
+export const fetchNotices = async () => {
+  const { data } = await instance.get('/notices/category/sell');
+  return data;
+};
+export const fetchPets = async credentials => {
+  const { data } = await instance.post('/pets', credentials);
+  return data;
+};
