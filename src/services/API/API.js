@@ -8,8 +8,8 @@ export const clearAuthHeader = () => {
   instance.defaults.headers.common.Authorization = '';
 };
 export const instance = axios.create({
-  baseURL: 'https://petly-backend.onrender.com/api',
-  // baseURL: 'http://localhost:4000/api',
+  // baseURL: 'https://petly-backend.onrender.com/api',
+  baseURL: 'http://localhost:4000/api',
 });
 
 export const fetchNews = async () => {
@@ -51,7 +51,33 @@ export const fetchNotices = async () => {
   const { data } = await instance.get('/notices/category/sell');
   return data;
 };
+// під питанням
 export const fetchPets = async credentials => {
   const { data } = await instance.post('/pets', credentials);
+  return data;
+};
+
+export const fetchRemoveNotice = async id => {
+  const { data } = await instance.delete(`/notices/notice/${id}`, id);
+  return data;
+};
+
+export const fetchAddToFavorite = async id => {
+  const { data } = await instance.post(`/notices/favorite/${id}`, id);
+  return data;
+};
+
+export const fetchRemoveWithFavorite = async id => {
+  const { data } = await instance.delete(`/notices/favorite/${id}`, id);
+  return data;
+};
+
+export const fetchGetUserFavorite = async () => {
+  const { data } = await instance.get('/notices/favorite');
+  return data;
+};
+
+export const fetchGetUserNotices = async () => {
+  const { data } = await instance.get('/notices/current');
   return data;
 };

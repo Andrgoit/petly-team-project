@@ -5,6 +5,8 @@ import {
   logout,
   refreshUser,
   getUser,
+  addNoticeToFavorite,
+  removeNoticeWithFavorite,
 } from './authOperations';
 
 const initialState = {
@@ -75,7 +77,6 @@ const authSlice = createSlice({
     });
 
     builder.addCase(refreshUser.fulfilled, (state, { payload }) => {
-      console.log('refresh=', payload);
       state.user = payload.user;
       state.isLoggedIn = true;
       state.isLoading = false;
@@ -93,12 +94,31 @@ const authSlice = createSlice({
 
     builder.addCase(getUser.fulfilled, (state, { payload }) => {
       state.user = payload.user;
-      // data: payload,
       state.isLoading = false;
     });
 
     builder.addCase(getUser.rejected, (state, { payload }) => {
-      state.isloading = false;
+      state.isLoading = false;
+      state.error = payload;
+    });
+
+    builder.addCase(addNoticeToFavorite.fulfilled, (state, { payload }) => {
+      state.user.favorite.push(payload);
+    });
+
+    builder.addCase(addNoticeToFavorite.rejected, (state, { payload }) => {
+      state.error = payload;
+    });
+
+    builder.addCase(
+      removeNoticeWithFavorite.fulfilled,
+      (state, { payload }) => {
+        const newList = state.user.favorite.filter(id => id !== payload);
+
+        state.user.favorite = newList;
+      }
+    );
+    builder.addCase(removeNoticeWithFavorite.rejected, (state, { payload }) => {
       state.error = payload;
     });
   },

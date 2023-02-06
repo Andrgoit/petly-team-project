@@ -10,6 +10,6 @@ export const selectUserData = state => state.auth.user;
 
 export const selectAccessToken = state => state.auth.accessToken;
 
-export const getAllUserData = state => state.user.data;
+export const getAllUserData = state => state.user.data; // ?
 
 // export const selectRefreshToken = state => state.auth.refreshToken;
