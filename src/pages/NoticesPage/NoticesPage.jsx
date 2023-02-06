@@ -7,8 +7,13 @@ import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 // import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
 
 import { getNotices } from 'redux/notices/notices-operation';
-import { getAllNotices, getLoading, getError } from 'redux/notices/notices-selectors';
+import {
+  getAllNotices,
+  getLoading,
+  getError,
+} from 'redux/notices/notices-selectors';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
+import { selectUserData } from 'redux/auth/authSelectors';
 
 function NoticesPage() {
   const [q, setQ] = useState('');
@@ -21,17 +26,17 @@ function NoticesPage() {
   }, [dispatch]);
 
   const notices = useSelector(getAllNotices);
+  const { favorite } = useSelector(selectUserData) || [];
   const loading = useSelector(getLoading);
   const error = useSelector(getError);
 
-const filteredNotices = () => {
-  const data = notices.filter(el =>
-    el.title.toLowerCase().includes(q.toLowerCase())
-  );
-  return data;
-};
-    const noticesToLayout = filteredNotices();
-
+  const filteredNotices = () => {
+    const data = notices.filter(el =>
+      el.title.toLowerCase().includes(q.toLowerCase())
+    );
+    return data;
+  };
+  const noticesToLayout = filteredNotices();
 
   return (
     <Section>
@@ -45,7 +50,10 @@ const filteredNotices = () => {
         {error && <p>Что-то пошло не так</p>}
         {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
         {!loading && notices && (
-          <NoticesCategoriesList notices={noticesToLayout} />
+          <NoticesCategoriesList
+            notices={noticesToLayout}
+            favorite={favorite}
+          />
         )}
 
         {!loading && ref.current && !Boolean(noticesToLayout.length) && (
@@ -54,6 +62,6 @@ const filteredNotices = () => {
       </MainContainer>
     </Section>
   );
-};
+}
 
 export default NoticesPage;

@@ -7,6 +7,8 @@ import {
   setAuthHeader,
   fetchUserData,
   clearAuthHeader,
+  fetchRemoveWithFavorite,
+  fetchAddToFavorite,
 } from 'services/API/API';
 
 // Регистрация
@@ -92,6 +94,35 @@ export const getUser = createAsyncThunk(
       const data = await fetchUserData();
 
       return data;
+    } catch (error) {
+      console.log(error);
+      throw rejectWithValue(error);
+    }
+  }
+);
+
+export const addNoticeToFavorite = createAsyncThunk(
+  'auth/addToFavorite',
+  async (id, { rejectWithValue }) => {
+    try {
+      await fetchAddToFavorite(id);
+
+      return id;
+    } catch (error) {
+      throw rejectWithValue(error.message);
+    }
+  }
+);
+
+export const removeNoticeWithFavorite = createAsyncThunk(
+  'auth/removeWithFavorite',
+  async (id, { rejectWithValue }) => {
+    // const state = getState();
+    // console.log(state.auth.user);
+    try {
+      await fetchRemoveWithFavorite(id);
+
+      return id;
     } catch (error) {
       throw rejectWithValue(error.message);
     }
