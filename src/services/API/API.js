@@ -51,3 +51,7 @@ export const fetchNotices = async () => {
   const { data } = await instance.get('/notices/category/sell');
   return data;
 };
+export const fetchPets = async credentials => {
+  const { data } = await instance.post('/pets', credentials);
+  return data;
+};

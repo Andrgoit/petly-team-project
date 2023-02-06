@@ -9,7 +9,6 @@ const initialState = {
     phone: null,
   },
   accessToken: null,
-  refreshToken: null,
   isLoggedIn: false,
   isLoading: false,
   error: null,
