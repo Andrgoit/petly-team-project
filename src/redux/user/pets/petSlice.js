@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addPet, deletePet } from './petOperations';
+// import { addPet, deletePet } from './petOperations';
+import { addPet } from './petOperations';
 
 const initialState = {
   pets: [],

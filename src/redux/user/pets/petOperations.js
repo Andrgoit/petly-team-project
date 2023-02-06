@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPets, fetchPetsDelete } from 'services/API/API';
-
+// import { fetchPets, fetchPetsDelete } from 'services/API/API';
+import { fetchPets } from 'services/API/API';
 //добавления питомца
 export const addPet = createAsyncThunk(
   'pets/addPet',

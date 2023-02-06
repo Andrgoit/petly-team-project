@@ -13,7 +13,7 @@ import {
   ModalContent,
   TitleModal,
   IconClose,
-  Icon,
+  // Icon,
 } from './ModalAddsPet.styled';
 
 const modalRoot = document.getElementById('modal-root');
