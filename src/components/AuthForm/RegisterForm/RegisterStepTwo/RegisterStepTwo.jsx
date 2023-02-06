@@ -1,18 +1,19 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
+import { ButtonPrev, InputMaskPhone } from '../RegisterForm.styled';
 import {
-  Input,
+  InputForm,
   ErrorInput,
   InputBox,
   ButtonForm,
-  ButtonPrev,
-} from '../RegisterForm.styled';
+} from '../../AuthForm.styled';
 
 export const RegisterStepTwo = ({ next, data, prev }) => {
-  const nameRegex = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/;
-  const locationRegex = /^[A-Z\-’ ]{1,}[a-z\-’ ]+, [a-zA-Z\-’ ]+$/;
-  const phoneRegex = /^\+380........./;
+  const nameRegex = /^[a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/;
+  const locationRegex =
+    /^[A-ZА-ЯЁАЩЬЮЯҐЄІЇ][a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії]+,\s?[A-ZА-ЯЁАЩЬЮЯҐЄІЇ][a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/;
+  const phoneRegex = /^\+\d{11,12}$/;
 
   const validationSchema = yup.object().shape({
     name: yup
@@ -26,9 +27,12 @@ export const RegisterStepTwo = ({ next, data, prev }) => {
     phone: yup
       .string()
       .required('Phone is required')
-      .max(13)
-      .matches(phoneRegex, 'Phone is not valid. Example: +380XXXXXXXXX'),
+      .matches(phoneRegex, 'Phone is not valid'),
   });
+
+  const upperLet = letter => {
+    return letter.toUpperCase();
+  };
 
   const formik = useFormik({
     initialValues: data,
@@ -43,35 +47,42 @@ export const RegisterStepTwo = ({ next, data, prev }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <InputBox>
-        <Input
+        <InputForm
           name="name"
           placeholder="Name"
           onChange={formik.handleChange}
-          value={formik.values.name}
+          value={formik.values.name.replace(/(^|\s)\S/g, upperLet)}
         />
         {formik.touched.name && formik.errors.name && (
           <ErrorInput>{formik.errors.name}</ErrorInput>
         )}
       </InputBox>
       <InputBox>
-        <Input
+        <InputForm
           name="location"
           placeholder="City, region"
           onChange={formik.handleChange}
-          value={formik.values.location.replace(/(^|\s)\S/g, function (letter) {
-            return letter.toUpperCase();
-          })}
+          value={formik.values.location.replace(/(^|,|\s)\S/g, upperLet)}
         />
         {formik.touched.location && formik.errors.location && (
           <ErrorInput>{formik.errors.location}</ErrorInput>
         )}
       </InputBox>
       <InputBox lastMargin>
-        <Input
+        {/* <Input
           name="phone"
           placeholder="Mobile phone"
           onChange={formik.handleChange}
           value={formik.values.phone}
+        /> */}
+        <InputMaskPhone
+          defaultCountry="UA"
+          international
+          // countryCallingCodeEditable={false}
+          placeholder="Mobile phone"
+          name="phone"
+          value={formik.values.phone}
+          onChange={e => formik.setFieldValue('phone', e)}
         />
         {formik.touched.phone && formik.errors.phone && (
           <ErrorInput>{formik.errors.phone}</ErrorInput>

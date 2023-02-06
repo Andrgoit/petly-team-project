@@ -3,9 +3,9 @@ import UserDataItem from '../UserDataItem/UserDataItem';
 
 export const UserData = ({ user }) => {
   if (user) {
-    return <UserDataItem user={user} key="UserDataItem" />;
+    return <UserDataItem user={user} key="UserDataItem"></UserDataItem>;
   }
-  return 'Oops...';
+  return 'You are not authorised...';
 };
 
 UserData.propTypes = {

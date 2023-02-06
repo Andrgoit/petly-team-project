@@ -43,7 +43,6 @@ function NoticesPage() {
     return data;
   };
   const noticesToLayout = filteredNotices();
-
   return (
     <Section>
       <MainContainer>
@@ -55,10 +54,6 @@ function NoticesPage() {
             <AddNoticeButton onClickOpen={() => setIsAddModalOpen(true)} />
           </ButtonsWrapper>
         </Container>
-        <ModalAddNotice
-          isModalOpen={isAddModalOpen}
-          setIsModalOpen={setIsAddModalOpen}
-        ></ModalAddNotice>
 
         {error && <p>Что-то пошло не так</p>}
         {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
@@ -70,6 +65,10 @@ function NoticesPage() {
           <p>Собак по данному запиту немає</p>
         )}
       </MainContainer>
+      <ModalAddNotice
+        isModalOpen={isAddModalOpen}
+        setIsModalOpen={setIsAddModalOpen}
+      ></ModalAddNotice>
     </Section>
   );
 }

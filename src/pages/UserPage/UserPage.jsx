@@ -6,7 +6,7 @@ import {
   getError,
 } from '../../redux/users/users-selectors';
 import { getUser } from '../../redux/users/users-operations';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PetsList from 'components/PetsList/PetsList';
 import { TfiPlus } from 'react-icons/tfi';
 import {
@@ -19,25 +19,39 @@ import {
   AddButton,
   Wrapper,
 } from './UserPage.styled';
+import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
+import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
+
 const UserPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
 
+  const [showModal, setShowModal] = useState(false);
+
   const data = useSelector(getAllUserData);
   const loading = useSelector(getLoading);
   const error = useSelector(getError);
 
+  const useAuth = () => {
+    const result = useSelector(selectIsLoggedIn);
+    return result;
+  };
+
+  const onClose = () => {
+    setShowModal(true);
+  };
+
   const { user } = data;
   const { pets } = data;
-
+  const isLogin = useAuth();
   return (
     <section>
       {loading && <p>...Loading</p>}
       {error && <p>Oops!</p>}
-      {!loading && data && (
+      {!loading && data && isLogin && (
         <MainContainer>
           <UserContainer>
             <UserWrapper>
@@ -48,10 +62,11 @@ const UserPage = () => {
                 <PetsTitle>My pets:</PetsTitle>
                 <ButtonWrapper>
                   <ButtonTitle>Add pet</ButtonTitle>
-                  <AddButton>
+                  <AddButton onClick={onClose}>
                     <TfiPlus color="white" />
                   </AddButton>
                 </ButtonWrapper>
+                {showModal && <ModalAddsPet setShowModal={setShowModal} />}
               </Wrapper>
               <PetsList pets={pets} />
             </PetsWrapper>

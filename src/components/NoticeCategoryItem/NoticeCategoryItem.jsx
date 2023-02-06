@@ -22,7 +22,7 @@ import noImage from '../../img/noImage.png';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function OurFriensItem(notices) {
-  const { _id, title, birthdate, breed, location, avatar, price, id } = notices;
+  const { title, birthdate, breed, location, avatar, price, id } = notices;
   const { url } = avatar;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -39,7 +39,7 @@ function OurFriensItem(notices) {
     // url === null ? url === undefined : noImage;
 
     return (
-      <Item key={_id}>
+      <Item key={id}>
         <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
         <CategoryTitle>selll</CategoryTitle>
         {/* <AddToFavoriteBtn
