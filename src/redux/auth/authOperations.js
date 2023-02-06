@@ -1,15 +1,9 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { loginUser, registerUser, logoutUser } from 'services/API/API';
 
 // !!!! Возможно потом его перенесем в .env
 // axios.defaults.baseURL = 'https://petly-backend.onrender.com/api';
-
-// Записываем токен в заголовок
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
 
 // Очищаем заголовок
 
