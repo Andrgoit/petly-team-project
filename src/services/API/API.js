@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { selectAccessToken } from 'redux/auth/authSelectors';
+// import { selectAccessToken } from 'redux/auth/authSelectors';
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   instance.defaults.headers.common.Authorization = '';
 };
 export const instance = axios.create({
-  baseURL: 'https://petly-backend.onrender.com/api',
-  // baseURL: 'http://localhost:4000/api',
+  // baseURL: 'https://petly-backend.onrender.com/api',
+  baseURL: 'http://localhost:4000/api',
 });
 
 export const fetchNews = async () => {
@@ -24,26 +24,26 @@ export const fetchFriends = async () => {
 
 export const fetchUserData = async () => {
   const { data } = await instance.get('/users/current');
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
 export const registerUser = async credentials => {
   const { data } = await instance.post('/auth/register', credentials);
-  setAuthHeader(data.token);
+  // setAuthHeader(data.token);
   return data;
 };
 
 export const loginUser = async credentials => {
   const { data } = await instance.post('/auth/login', credentials);
-  setAuthHeader(data.token);
+  // setAuthHeader(data.token);
   return data;
 };
 
 export const logoutUser = async credentials => {
   const { data } = await instance.post('/auth/logout', credentials);
-  clearAuthHeader(selectAccessToken);
-  console.log(data);
+  // clearAuthHeader(selectAccessToken);
+  // console.log(data);
   return data;
 };
 

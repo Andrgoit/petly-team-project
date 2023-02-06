@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/authOperations';
 
 export const LoginForm = () => {
-  const passwordRexExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+  // const passwordRexExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
   const dispatch = useDispatch();
   const validationSchema = yup.object().shape({
     email: yup
@@ -29,7 +29,7 @@ export const LoginForm = () => {
       .min(7, 'Password must be at least 7 characters')
       .max(32)
       .matches(/^[^ ]{7,32}$/, 'The password should not contain a space')
-      .matches(passwordRexExp, 'Password is not valid')
+      // .matches(passwordRexExp, 'Password is not valid')
       .required('Password is required'),
   });
 

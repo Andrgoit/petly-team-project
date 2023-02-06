@@ -1,11 +1,7 @@
 import { UserData } from '../../components/UserData/UserData';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  getAllUserData,
-  getLoading,
-  getError,
-} from '../../redux/users/users-selectors';
-import { getUser } from '../../redux/users/users-operations';
+
+// import { getUser } from '../../redux/users/users-operations';
 import { useState, useEffect } from 'react';
 import PetsList from 'components/PetsList/PetsList';
 import { TfiPlus } from 'react-icons/tfi';
@@ -21,19 +17,28 @@ import {
 } from './UserPage.styled';
 import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
-import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
+import {
+  selectError,
+  selectIsLoading,
+  selectIsLoggedIn,
+  selectUserData,
+} from '../../redux/auth/authSelectors';
+import { getUser } from 'redux/auth/authOperations';
 
 const UserPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+    if (!user) {
+      dispatch(getUser());
+    }
+  }, []);
+
+  const user = useSelector(selectUserData);
+  // console.log(data);
+  const loading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   const [showModal, setShowModal] = useState(false);
-
-  const data = useSelector(getAllUserData);
-  const loading = useSelector(getLoading);
-  const error = useSelector(getError);
 
   const useAuth = () => {
     const result = useSelector(selectIsLoggedIn);
@@ -44,14 +49,13 @@ const UserPage = () => {
     setShowModal(true);
   };
 
-  const { user } = data;
-  const { pets } = data;
+  // const { pets } = user;
   const isLogin = useAuth();
   return (
     <section>
       {loading && <p>...Loading</p>}
       {error && <p>Oops!</p>}
-      {!loading && data && isLogin && (
+      {!loading && user && isLogin && (
         <MainContainer>
           <UserContainer>
             <UserWrapper>
@@ -68,7 +72,7 @@ const UserPage = () => {
                 </ButtonWrapper>
                 {showModal && <ModalAddsPet setShowModal={setShowModal} />}
               </Wrapper>
-              <PetsList pets={pets} />
+              <PetsList pets={user.pets} />
             </PetsWrapper>
           </UserContainer>
         </MainContainer>
