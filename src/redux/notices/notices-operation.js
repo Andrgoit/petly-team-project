@@ -3,7 +3,6 @@ import axios from 'axios';
 axios.defaults.baseURL =
   'https://petly-backend.onrender.com/api/';
 
-// import { fetchNotices } from 'services/API/API';
 
 export const getNotices = createAsyncThunk(
   'notices/categoryName',
