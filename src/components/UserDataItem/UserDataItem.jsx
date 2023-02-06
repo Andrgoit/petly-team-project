@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/auth/authOperations';
 
 export const UserData = ({ user }) => {
-  const { name, email, birthdate, location, phone } = user;
+  const { avatar, name, email, birthdate, location, phone } = user;
   const [userName, setUserName] = useState(name || '-');
   const [userEmail, setUserEmail] = useState(email || '-');
   const [userBirthday, setUserBirthday] = useState(birthdate || '-');
@@ -129,7 +129,12 @@ export const UserData = ({ user }) => {
       </h3>
       <div className="user-data" key="user-data">
         <div className="photo-container" key="photo-container">
-          <img className="avatar" alt="avatar" key="photo-container"></img>
+          <img
+            src={avatar}
+            className="avatar"
+            alt="avatar"
+            key="photo-container"
+          ></img>
           <label
             className="edit-photo-btn-container"
             key="edit-photo-btn-container"
