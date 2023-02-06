@@ -8,8 +8,8 @@ export const clearAuthHeader = () => {
   instance.defaults.headers.common.Authorization = '';
 };
 export const instance = axios.create({
-  // baseURL: 'https://petly-backend.onrender.com/api',
-  baseURL: 'http://localhost:4000/api',
+  baseURL: 'https://petly-backend.onrender.com/api',
+  // baseURL: 'http://localhost:4000/api',
 });
 
 export const fetchNews = async () => {
