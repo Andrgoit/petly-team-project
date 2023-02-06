@@ -88,8 +88,12 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Pictures = styled.li`
-  position: relative;
+export const StyledButtonSection = styled.div``;
+
+export const Pictures = styled.div`
+  margin-top: 100px;
+  /* position: relative; */
+  align-self: center;
   display: flex;
   flex-direction: column;
   width: 280px;
