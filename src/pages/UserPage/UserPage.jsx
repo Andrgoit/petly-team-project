@@ -1,4 +1,4 @@
-import { UserData } from '../../components/UserData/UserData';
+import { UserData } from '../../components/UserData/UserDataNew';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getAllUserData,

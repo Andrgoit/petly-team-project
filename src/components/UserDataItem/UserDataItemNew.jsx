@@ -2,8 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 // import './UserDataItem.styled.css';
-import { ReactComponent as Pencil } from '../../img/ci_edit.svg';
-import { ReactComponent as DoneButton } from '../../img/done-button.svg';
+
 // import { OnLogout } from 'components/Logout/Logout';
 import { logout } from '../../redux/auth/authOperations';
 import logoutBtn from '../../img/logoutBtn.png';
@@ -15,6 +14,9 @@ import {
   InputData,
   EditInfoButton,
   ButtonLogout,
+  EditInfoBtnIcn,
+  InputItem,
+  DoneBtnIcn,
 } from './UserDataItem.styled';
 
 export const UserDataItem = ({ user }) => {
@@ -86,7 +88,7 @@ export const UserDataItem = ({ user }) => {
 
   const elements = userArray.map(element => {
     return (
-      <li key={user[element]}>
+      <InputItem key={user[element]}>
         <InputTitle htmlFor={element} key={element}>
           <InputField key="field1">
             {ucFirst(changeElement(element))}
@@ -111,26 +113,25 @@ export const UserDataItem = ({ user }) => {
             disabled={!active && isBtnDisabled}
           >
             {!active ? (
-              <Pencil className={iconStyle} name="edit-icon" key="edit-icon1" />
+              <EditInfoBtnIcn
+                className={iconStyle}
+                name="edit-icon"
+                key="edit-icon1"
+              />
             ) : (
-              <DoneButton key="done-icon1" />
+              <DoneBtnIcn key="done-icon1" />
             )}
           </EditInfoButton>
         </InputTitle>
-      </li>
+      </InputItem>
     );
   });
   return (
     <DataForm key="data-container">
       <DataFormList>{elements}</DataFormList>
       <ButtonLogout key="log-out-btn" onClick={() => onLogout()}>
-        <img
-          src={logoutBtn}
-          alt="logout-button"
-          className="logout-button"
-          key="logout-button"
-        ></img>
-        Log out
+        <img src={logoutBtn} alt="logout-button" key="logout-button"></img>
+        <p>Log out</p>
       </ButtonLogout>
     </DataForm>
   );
