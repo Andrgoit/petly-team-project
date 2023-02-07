@@ -11,7 +11,7 @@ import {
 	Pictures
 } from './PetsData.styled';
 
-function PetsData({ pets, element}) {
+function PetsData({ pets, element }) {
 	const [showModal, setShowModal] = useState(false);
 	
 	const onClose = () => {
@@ -27,9 +27,8 @@ function PetsData({ pets, element}) {
 					<TfiPlus color="white" />
 				</AddButton>
 			</ButtonWrapper>
-			<PetsList pets={pets} />
 			{showModal && <ModalAddsPet setShowModal={setShowModal} />}
-			{ !element ? <Pictures>You don't have any pets added.</Pictures> : <PetsList pets={pets} /> }
+			{!element ? <Pictures>You don't have any pets added.</Pictures> : <PetsList pets={pets} />}
 		</Wrapper>
 	)
 }

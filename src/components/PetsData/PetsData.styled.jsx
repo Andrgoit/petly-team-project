@@ -88,16 +88,17 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Pictures = styled.li`
+export const Pictures = styled.p`
   position: relative;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   width: 280px;
   height: min-content;
   background: ${props => props.theme.colors.white};
   box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
   border-radius: 40px;
-  padding: 16px 20px 40px 20px;
+  padding: 16px, 20px, 40px, 20px;
   margin-bottom: 22px;
   color: ${props => props.theme.colors.black};
   font-size: ${props => props.theme.fontSizes.h};
@@ -105,10 +106,10 @@ export const Pictures = styled.li`
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
-    width: 704px;
+    width: 708px;
     padding: 20px;
-    text-align: center;
   }
+
   @media screen and (min-width: 1300px) {
     flex-direction: row;
     width: 821px;
