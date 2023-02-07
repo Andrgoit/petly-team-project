@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   getAllUserData,
   getLoading,
-  getError,
+  //getError,
 } from '../../redux/users/users-selectors';
 import { getUser } from '../../redux/users/users-operations';
 import { useEffect } from 'react';
