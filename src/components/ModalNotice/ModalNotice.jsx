@@ -1,5 +1,11 @@
 import Modal from 'react-modal/lib/components/Modal';
+import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { fetchNoticeById } from 'services/API/API';
+import { selectUserData } from 'redux/auth/authSelectors';
+import { useSelector } from 'react-redux';
+
+import { toast } from 'react-toastify';
 import {
   customStyles,
   StyledImg,
@@ -13,22 +19,34 @@ import {
   BtnWrapper,
   FavoriteBtnImg,
   DesktopWrapper,
+  RightContent,
+  StyledTelLink,
 } from './ModalNotice.styled';
-import './modal.css';
-import heartIcon from '../../img/heart-icon.png';
 import ModalCloseBtn from 'components/ModalCloseBtn/ModalCloseBtn';
-import { useEffect, useState } from 'react';
-import { fetchNoticeById } from 'services/API/API';
-import { toast } from 'react-toastify';
+import heartIcon from '../../img/heart-icon.png';
+import { DelIcon } from 'components/NoticeCategoryItem/NoticeCategoryItem.styled';
+import './modal.css';
+
+const convertISOToString = dateISO => {
+  const string = new Date(dateISO);
+  const day = string.getDate();
+  const month = string.getMonth() + 1;
+  return `${day < 10 ? `0${day}` : day}.${
+    month < 10 ? `0${month}` : month
+  }.${string.getFullYear()}`;
+};
 
 const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
   const [noticeInfo, setNoticeInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const isTablet = useMediaQuery({ minWidth: 768 });
 
+  const user = useSelector(selectUserData);
+
   useEffect(() => {
     const fetchNotice = async () => {
       try {
+        setIsLoading(true);
         const data = await fetchNoticeById(id);
         setNoticeInfo(data);
       } catch (error) {
@@ -37,84 +55,95 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
         setIsLoading(false);
       }
     };
-    setIsLoading(true);
     fetchNotice();
-  }, []);
+  }, [id]);
 
-  return (
-    <Modal
-      style={{
-        ...customStyles,
-        content: isTablet
-          ? { ...customStyles.content, width: '704px', height: '540px' }
-          : { ...customStyles.content },
-      }}
-      isOpen={isModalOpen}
-      onRequestClose={() => setIsModalOpen(false)}
-      ariaHideApp={false}
-    >
-      <ModalCloseBtn closeModal={() => setIsModalOpen(false)} />
-      {!isLoading && (
-        <>
-          <DesktopWrapper>
-            <ImageWrapper>
-              <StyledImg src={noticeInfo.notice.avatar.url} />
-              <StyledSticker>{noticeInfo.notice.category}</StyledSticker>
-            </ImageWrapper>
-            <div>
-              <Title>{noticeInfo.notice.title}</Title>
-              <ContentWrapper>
-                <div>
-                  <ContentText isBold>Name:</ContentText>
-                  <ContentText isBold>Birthday:</ContentText>
-                  <ContentText isBold>Breed:</ContentText>
-                  <ContentText isBold>Location:</ContentText>
-                  <ContentText isBold>The sex:</ContentText>
-                  <ContentText isBold>Email:</ContentText>
-                  <ContentText isBold>Phone:</ContentText>
-                  {
-                    (noticeInfo.notice.category = 'sell' && (
-                      <ContentText isBold>Price:</ContentText>
-                    ))
-                  }
-                </div>
-                <div>
-                  <ContentText>{noticeInfo.notice.name}</ContentText>
-                  <ContentText>{noticeInfo.notice.birthdate}</ContentText>
-                  <ContentText>{noticeInfo.notice.breed}</ContentText>
-                  <ContentText>{noticeInfo.notice.location}</ContentText>
-                  <ContentText>{noticeInfo.notice.sex}</ContentText>
-                  <ContentText>{noticeInfo.user.email}</ContentText>
-                  <ContentText>{noticeInfo.user.phone}</ContentText>
-                  {
-                    (noticeInfo.notice.category = 'sell' && (
-                      <ContentText>{noticeInfo.notice.price}</ContentText>
-                    ))
-                  }
-                </div>
-              </ContentWrapper>
-            </div>
-          </DesktopWrapper>
-          <CommentsText>
-            <span style={{ fontWeight: 600 }}> Comments:</span>{' '}
-            {noticeInfo.notice.comments}
-          </CommentsText>
-          <BtnWrapper>
-            <NoticeModalBtn isBgOrange>Contact</NoticeModalBtn>
-            <NoticeModalBtn>
-              <span>Add to</span>
-              <FavoriteBtnImg
-                width="13px"
-                height="12px"
-                src={heartIcon}
-                alt="heart icon"
-              />{' '}
-            </NoticeModalBtn>
-          </BtnWrapper>
-        </>
-      )}
-    </Modal>
-  );
+  if (!isLoading)
+    return (
+      <Modal
+        shouldCloseOnEsc
+        style={{
+          ...customStyles,
+          content: isTablet
+            ? { ...customStyles.content, width: '704px' }
+            : { ...customStyles.content },
+        }}
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        ariaHideApp={false}
+      >
+        <ModalCloseBtn closeModal={() => setIsModalOpen(false)} />
+        {Object.keys(noticeInfo).length && (
+          <>
+            <DesktopWrapper>
+              <ImageWrapper>
+                <StyledImg src={noticeInfo.notice.avatar.url} />
+                <StyledSticker>{noticeInfo.notice.category}</StyledSticker>
+              </ImageWrapper>
+              <div>
+                <Title>{noticeInfo.notice.title}</Title>
+                <ContentWrapper>
+                  <div>
+                    <ContentText isBold>Name:</ContentText>
+                    <ContentText isBold>Birthday:</ContentText>
+                    <ContentText isBold>Breed:</ContentText>
+                    <ContentText isBold>Location:</ContentText>
+                    <ContentText isBold>The sex:</ContentText>
+                    <ContentText isBold>Email:</ContentText>
+                    <ContentText isBold>Phone:</ContentText>
+                    {
+                      (noticeInfo.notice.category = 'sell' && (
+                        <ContentText isBold>Price:</ContentText>
+                      ))
+                    }
+                  </div>
+                  <RightContent>
+                    <ContentText>{noticeInfo.notice.name}</ContentText>
+                    <ContentText>
+                      {convertISOToString(noticeInfo.notice.birthdate)}
+                    </ContentText>
+                    <ContentText>{noticeInfo.notice.breed}</ContentText>
+                    <ContentText>{noticeInfo.notice.location}</ContentText>
+                    <ContentText>{noticeInfo.notice.sex}</ContentText>
+                    <ContentText>{noticeInfo.user.email}</ContentText>
+                    <ContentText>{noticeInfo.user.phone}</ContentText>
+                    {
+                      (noticeInfo.notice.category = 'sell' && (
+                        <ContentText>{noticeInfo.notice.price}$</ContentText>
+                      ))
+                    }
+                  </RightContent>
+                </ContentWrapper>
+              </div>
+            </DesktopWrapper>
+            <CommentsText>
+              <span style={{ fontWeight: 600 }}> Comments:</span>{' '}
+              {noticeInfo.notice.comments}
+            </CommentsText>
+            <BtnWrapper>
+              <StyledTelLink href={`tel:${noticeInfo.user.phone}`}>
+                <span>Contact</span>
+              </StyledTelLink>
+              <NoticeModalBtn>
+                <span>Add to</span>
+                <FavoriteBtnImg
+                  width="13px"
+                  height="12px"
+                  src={heartIcon}
+                  alt="heart icon"
+                />{' '}
+              </NoticeModalBtn>
+              {user.email === noticeInfo.user.email && (
+                <NoticeModalBtn>
+                  <span>Delete</span>
+                  <DelIcon />
+                </NoticeModalBtn>
+              )}
+            </BtnWrapper>
+          </>
+        )}
+      </Modal>
+    );
 };
 
 export default ModalNotice;

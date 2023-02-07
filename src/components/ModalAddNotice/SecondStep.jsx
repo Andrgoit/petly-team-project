@@ -106,8 +106,9 @@ const SecondStep = ({
         const valuesToSend = {
           ...formData,
           price: formValues.sellCategory ? formValues.price : null,
+          birthdate: parseDateToISO(formValues.birthdate),
         };
-
+        console.log(valuesToSend);
         try {
           await dispatch(createNotice({ valuesToSend, token }));
           setFormValues(initialValues);
@@ -255,13 +256,13 @@ function makeFirstUpperCaseAndAfterCommas(str) {
   });
 }
 
-// function parseDateToISO(str) {
-//   const dateParts = str.split('.');
-//   const formattedDate = new Date(
-//     +dateParts[2],
-//     dateParts[1] - 1,
-//     +dateParts[0]
-//   );
+function parseDateToISO(str) {
+  const dateParts = str.split('.');
+  const formattedDate = new Date(
+    +dateParts[2],
+    dateParts[1] - 1,
+    +dateParts[0]
+  );
 
-//   return new Date(str).toISOString();
-// }
+  return formattedDate.toISOString();
+}

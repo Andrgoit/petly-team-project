@@ -36,13 +36,14 @@ export const Title = styled.h3`
 `;
 
 export const ImageWrapper = styled.div`
-width: 240px;
+  width: 240px;
   height: 240px;
   position: relative;
-   @media (min-width: 768px) {
+  @media (min-width: 768px) {
     width: 288px;
-  height: 328px;
-  margin-right: 20px;
+    height: 328px;
+    margin-right: 20px;
+  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -50,8 +51,9 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 16px;
-   @media (min-width: 768px) {
+  @media (min-width: 768px) {
     margin-top: 20px;
+  }
 `;
 
 export const ContentText = styled.p`
@@ -84,27 +86,22 @@ export const NoticeModalBtn = styled.button`
   border: 2px solid #f59256;
   cursor: pointer;
   transition: all 200ms linear;
-  &:first-child {
-    margin-bottom: 12px;
-    @media (min-width: 768px) {
-      margin-bottom: 0px;
-      margin-right: 12px;
-    }
+  &:nth-child(3) {
+    margin-top: 12px;
+    color: #f59256;
   }
+
   &:hover,
   :focus {
     background-color: #fdf7f2;
-}
-
-  ${({ isBgOrange }) =>
-    isBgOrange && 'color:  #ffffff; background-color: #f59256'};
-     ${({ isBgOrange }) =>
-       isBgOrange &&
-       '&:hover, :focus {color:  #111111; background-color: #fdf7f2'}};
-       
-  
+    color: #111111;
+  }
   @media (min-width: 768px) {
     width: 160px;
+    &:nth-child(3) {
+      margin-right: 12px;
+      margin-top: 0px;
+    }
   } ;
 `;
 
@@ -115,20 +112,58 @@ export const BtnWrapper = styled.div`
     margin-top: 32px;
     margin-bottom: 32px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
   }
 `;
 
 export const FavoriteBtnImg = styled.img`
   width: 13.33px;
   height: 11.89px;
-  margin-left: 9.33px;
+  margin-left: 5px;
 `;
 
 export const DesktopWrapper = styled.div`
   @media (min-width: 768px) {
     display: flex;
     margin-top: 32px;
+  }
+`;
+
+export const StyledTelLink = styled.a`
+  border: none;
+  width: 240px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background-color: #f59256;
+  border-radius: 40px;
+  border: 2px solid #f59256;
+  cursor: pointer;
+  transition: all 200ms linear;
+  text-decoration: none;
+
+  margin-bottom: 12px;
+  @media (min-width: 768px) {
+    margin-bottom: 0px;
+    margin-left: 12px;
+    width: 160px;
+  }
+
+  &:hover,
+  :focus {
+    color: #111111;
+    background-color: #fdf7f2;
+  }
+`;
+
+export const RightContent = styled.div`
+  margin-left: 40px;
+  @media (min-width: 768px) {
+    margin-left: 50px;
+  }
 `;
 
 export const customStyles = {
@@ -139,7 +174,6 @@ export const customStyles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(17, 17, 17, 0.6)',
-    overflow: 'hidden',
     zIndex: '2',
   },
   content: {
@@ -151,6 +185,7 @@ export const customStyles = {
     transform: 'translate(-50%, -50%)',
     width: '280px',
     maxHeight: '100%',
+    minHeight: '400px',
     borderRadius: '20px',
     backgroundColor: '#FFFFFF',
     overflowY: 'scroll',

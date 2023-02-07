@@ -17,7 +17,9 @@ const AddNoticeButton = ({ onClickOpen }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const onClickOpenModal = () => {
-    return isLoggedIn ? onClickOpen() : toast.info('You have to log in');
+    return isLoggedIn
+      ? onClickOpen()
+      : toast.info('You have to log in', { autoClose: 2500 });
   };
 
   return (

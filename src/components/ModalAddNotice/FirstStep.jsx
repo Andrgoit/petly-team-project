@@ -18,14 +18,6 @@ import {
 
 const today = new Date();
 
-function parseDateString(value, originalValue) {
-  const parsedDate = isDate(originalValue)
-    ? originalValue
-    : parse(originalValue, 'dd.MM.yyyy', new Date());
-
-  return parsedDate;
-}
-
 const validationSchema = yup.object({
   title: yup
     .string()

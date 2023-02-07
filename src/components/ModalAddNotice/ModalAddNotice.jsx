@@ -31,8 +31,9 @@ const ModalAddNotice = ({ isModalOpen, setIsModalOpen }) => {
     <Modal
       closeTimeoutMS={250}
       shouldCloseOnEsc
-      ariaHideApp={false}
       isOpen={isModalOpen}
+      onRequestClose={() => setIsModalOpen(false)}
+      ariaHideApp={false}
       style={{
         ...customStyles,
 
@@ -44,7 +45,6 @@ const ModalAddNotice = ({ isModalOpen, setIsModalOpen }) => {
             }
           : { ...customStyles.content },
       }}
-      onRequestClose={() => setIsModalOpen(false)}
     >
       <ModalCloseBtn closeModal={() => setIsModalOpen(false)} />
       <Title>Add pet</Title>
