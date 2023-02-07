@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 
 export const Item = styled.li`
@@ -127,7 +127,7 @@ export const AddToFavoriteBtn = styled.button`
   }
   &:hover > svg {
     background: rgba(245, 146, 86, 1);
-    fill: ${props => props.theme.colors.white};;
+    fill: ${props => props.theme.colors.white};
   }
 `;
 export const Span = styled.span`
@@ -141,6 +141,12 @@ export const AddIcon = styled(AiOutlineHeart)`
   color: rgba(245, 146, 86, 1);
 `;
 
+export const FavoriteIcon = styled(AiFillHeart)`
+  width: 28px;
+  height: 28px;
+  color: rgba(245, 146, 86, 1);
+`;
+
 export const Image = styled.img`
   height: 288px;
 `;
@@ -149,5 +155,3 @@ export const DelIcon = styled(RiDeleteBin5Fill)`
   color: rgba(245, 146, 86, 1);
   width: 24px;
 `;
-
-

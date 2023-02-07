@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getNotices } from './notices-operation';
+
+import { getNotices, removeNotice } from './notices-operation';
 
 const initialState = {
   data: [],
@@ -20,11 +21,25 @@ const noticesSlice = createSlice({
       data: payload,
       loading: false,
     }),
-
     [getNotices.rejected]: (store, { payload }) => ({
       ...store,
       loading: false,
       error: payload,
+    }),
+    [removeNotice.pending]: (store, { payload }) => ({
+      ...store,
+      loading: true,
+    }),
+    [removeNotice.fulfilled]: (store, { payload }) => {
+      const newNotices = store.data.filter(notice => notice._id !== payload);
+
+      return { ...store, loading: false, data: newNotices };
+    },
+
+    [removeNotice.rejected]: (store, { payload }) => ({
+      ...store,
+      error: payload,
+      loading: false,
     }),
   },
 });
