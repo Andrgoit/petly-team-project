@@ -12,7 +12,7 @@ import { UserContainer, UserWrapper, PetsWrapper } from './UserPage.styled';
 //import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
 import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
-
+import Loader from 'components/Loader/Loader';
 const UserPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -39,7 +39,7 @@ const UserPage = () => {
   const isLogin = useAuth();
   return (
     <section>
-      {loading && <p>...Loading</p>}
+      {loading && <Loader />}
       {/* {error && <p>Oops!</p>} */}
       {!loading && data && isLogin && (
         <MainContainer>
