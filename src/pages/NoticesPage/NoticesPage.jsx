@@ -9,29 +9,37 @@ import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import { getNotices } from 'redux/notices/notices-operation';
 import { getAllNotices, getLoading, getError } from 'redux/notices/notices-selectors';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
+///////////
+import { useParams } from 'react-router-dom';
+///////////
 
 function NoticesPage() {
-  const [q, setQ] = useState('');
-  const dispatch = useDispatch();
-  let ref = useRef(false);
-
-  useEffect(() => {
-    ref.current = true;
-    dispatch(getNotices());
-  }, [dispatch]);
+  ////////
+  const { categoryName } = useParams();
+  ///////////
 
   const notices = useSelector(getAllNotices);
   const loading = useSelector(getLoading);
   const error = useSelector(getError);
 
-const filteredNotices = () => {
-  const data = notices.filter(el =>
-    el.title.toLowerCase().includes(q.toLowerCase())
-  );
-  return data;
-};
-    const noticesToLayout = filteredNotices();
+  const [query, setQ] = useState('');
+  const dispatch = useDispatch();
+  let ref = useRef(false);
 
+  useEffect(() => {
+    ref.current = true;
+    dispatch(getNotices({ categoryName }));
+  }, [dispatch, categoryName, query]);
+
+
+
+  const filteredNotices = () => {
+    const data = notices.filter(el =>
+      el.title.toLowerCase().includes(query.toLowerCase())
+    );
+    return data;
+  };
+  const noticesToLayout = filteredNotices();
 
   return (
     <Section>
@@ -49,7 +57,7 @@ const filteredNotices = () => {
         )}
 
         {!loading && ref.current && !Boolean(noticesToLayout.length) && (
-          <p>Собак по данному запиту немає</p>
+          <p>Not found</p>
         )}
       </MainContainer>
     </Section>

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { fetchPets, fetchPetsDelete } from 'services/API/API';
 import { fetchPets } from 'services/API/API';
+import { fetchPetsDelete } from 'services/API/API';
+
 //добавления питомца
 export const addPet = createAsyncThunk(
   'pets/addPet',
@@ -19,13 +20,13 @@ export const addPet = createAsyncThunk(
 );
 
 //delete Pet
-// export const deletePet = id => {
-//   createAsyncThunk('pets/deletePet', async (_, { rejectWithValue }) => {
-//     try {
-//       const response = fetchPetsDelete(id);
-//       return response.data;
-//     } catch (error) {
-//       throw rejectWithValue(error.message);
-//     }
-//   });
-// };
+export const deletePet = id => {
+  createAsyncThunk('pets/deletePet', async (_, { rejectWithValue }) => {
+    try {
+      const response = fetchPetsDelete(id);
+      return response.data;
+    } catch (error) {
+      throw rejectWithValue(error.message);
+    }
+  });
+};

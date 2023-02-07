@@ -40,6 +40,7 @@ export const loginUser = async credentials => {
   return data;
 };
 
+
 export const logoutUser = async credentials => {
   const { data } = await instance.post('/auth/logout', credentials);
   clearAuthHeader(selectAccessToken);
@@ -51,7 +52,13 @@ export const fetchNotices = async () => {
   const { data } = await instance.get('/notices/category/sell');
   return data;
 };
+
 export const fetchPets = async credentials => {
   const { data } = await instance.post('/pets', credentials);
+  return data;
+};
+
+export const fetchPetsDelete = async id => {
+  const { data } = await instance.delete(`/pets/${id}`);
   return data;
 };
