@@ -7,18 +7,21 @@ import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 // import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
 
 import { getNotices } from 'redux/notices/notices-operation';
-import { getAllNotices, getLoading, getError } from 'redux/notices/notices-selectors';
+import {
+  getAllNotices,
+  getLoading,
+  getError,
+} from 'redux/notices/notices-selectors';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
-///////////
+import { selectUserData } from 'redux/auth/authSelectors';
+
 import { useParams } from 'react-router-dom';
-///////////
 
 function NoticesPage() {
-  ////////
   const { categoryName } = useParams();
-  ///////////
 
   const notices = useSelector(getAllNotices);
+  const { favorite } = useSelector(selectUserData) || [];
   const loading = useSelector(getLoading);
   const error = useSelector(getError);
 
@@ -30,8 +33,6 @@ function NoticesPage() {
     ref.current = true;
     dispatch(getNotices({ categoryName }));
   }, [dispatch, categoryName, query]);
-
-
 
   const filteredNotices = () => {
     const data = notices.filter(el =>
@@ -53,7 +54,10 @@ function NoticesPage() {
         {error && <p>Что-то пошло не так</p>}
         {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
         {!loading && notices && (
-          <NoticesCategoriesList notices={noticesToLayout} />
+          <NoticesCategoriesList
+            notices={noticesToLayout}
+            favorite={favorite}
+          />
         )}
 
         {!loading && ref.current && !Boolean(noticesToLayout.length) && (
@@ -62,6 +66,6 @@ function NoticesPage() {
       </MainContainer>
     </Section>
   );
-};
+}
 
 export default NoticesPage;
