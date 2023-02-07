@@ -86,6 +86,7 @@ const authSlice = createSlice({
 
     builder.addCase(refreshUser.rejected, state => {
       state.isRefreshing = false;
+      state.isLoading = false;
     });
 
     builder.addCase(getUser.pending, state => {

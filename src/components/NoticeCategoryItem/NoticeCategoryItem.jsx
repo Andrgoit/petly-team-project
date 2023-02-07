@@ -29,7 +29,8 @@ import { selectUserData } from 'redux/auth/authSelectors';
 
 function OurFriensItem(notices) {
   const dispatch = useDispatch();
-  const { _id: userId } = useSelector(selectUserData);
+  const user = useSelector(selectUserData);
+  const userId = user?._id || null;
 
   const {
     _id,
