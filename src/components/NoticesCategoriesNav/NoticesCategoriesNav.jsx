@@ -1,10 +1,10 @@
-// import { useSelector } from 'react-redux';
-// import { selectIsLogin } from 'redux/auth/auth-selectors';
+// import { selectIsLoggedIn } from 'redux/auth/authSelectors';
 import { NavLink, Nav, AuthWrapper } from './NoticesCategoriesNav.styled';
+// import { useSelector } from 'react-redux';
 // import { AddNoticeButton } from 'components/AddNoticeButton/AddNoticeButton';
 
 export const NoticesCategoriesNav = () => {
-  // const isLoggedIn = useSelector(selectIsLogin);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <Nav>
@@ -21,7 +21,7 @@ export const NoticesCategoriesNav = () => {
       {/* {isLoggedIn && (
         <AuthWrapper>
           <NavLink to="/notices/favorite">favorite ads</NavLink>
-          <NavLink to="/notices/own">my ads</NavLink>
+        <NavLink to="/notices/own">my ads</NavLink>
         </AuthWrapper>
       )} */}
     </Nav>
