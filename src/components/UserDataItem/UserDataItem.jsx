@@ -8,6 +8,7 @@ import logoutBtn from '../../img/logoutBtn.png';
 // import { OnLogout } from 'components/Logout/Logout';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/auth/authOperations';
+import { updateUser } from '../../redux/users/users-operations';
 
 export const UserData = ({ user }) => {
   const { avatar, name, email, birthdate, location, phone } = user;
@@ -79,6 +80,7 @@ export const UserData = ({ user }) => {
       const disabledButton = e.currentTarget.children[0].children[2];
       disabledButton.className = 'data-edit-info';
       setIconStyle('edit-btn');
+      dispatch(updateUser({ name: input.value }));
     }
     if ((e.currentTarget.children[1].htmlFor = 'email')) {
       const input = e.currentTarget.children[1].children[1];
@@ -89,6 +91,7 @@ export const UserData = ({ user }) => {
       const disabledButton = e.currentTarget.children[1].children[2];
       disabledButton.className = 'data-edit-info';
       setIconStyle('edit-btn');
+      dispatch(updateUser({ email: input.value }));
     }
     if ((e.currentTarget.children[2].htmlFor = 'birthday')) {
       const input = e.currentTarget.children[2].children[1];
@@ -99,6 +102,7 @@ export const UserData = ({ user }) => {
       const disabledButton = e.currentTarget.children[2].children[2];
       disabledButton.className = 'data-edit-info';
       setIconStyle('edit-btn');
+      dispatch(updateUser({ birthday: input.value }));
     }
     if ((e.currentTarget.children[3].htmlFor = 'phone')) {
       const input = e.currentTarget.children[3].children[1];
@@ -109,6 +113,7 @@ export const UserData = ({ user }) => {
       const disabledButton = e.currentTarget.children[3].children[2];
       disabledButton.className = 'data-edit-info';
       setIconStyle('edit-btn');
+      dispatch(updateUser({ birthday: input.value }));
     }
     if ((e.currentTarget.children[3].htmlFor = 'city')) {
       const input = e.currentTarget.children[4].children[1];
@@ -119,6 +124,7 @@ export const UserData = ({ user }) => {
       const disabledButton = e.currentTarget.children[4].children[2];
       disabledButton.className = 'data-edit-info';
       setIconStyle('edit-btn');
+      dispatch(updateUser({ birthday: input.value }));
     }
   };
 

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUser } from './users-operations';
+import { getUser, updateUser } from './users-operations';
 
 const initialState = {
   data: [],
@@ -25,6 +25,11 @@ const UsersSlice = createSlice({
       ...store,
       loading: false,
       error: payload,
+    }),
+    [updateUser.fulfilled]: (store, { payload }) => ({
+      ...store,
+      user: payload,
+      Loading: false,
     }),
   },
 });

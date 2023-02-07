@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { fetchUserData } from '../../services/API/API';
+import { editUserInfo, fetchUserData } from '../../services/API/API';
 
 export const getUser = createAsyncThunk(
   'users/getUser',
@@ -11,6 +11,18 @@ export const getUser = createAsyncThunk(
       return data;
     } catch (error) {
       throw rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await editUserInfo(credentials);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

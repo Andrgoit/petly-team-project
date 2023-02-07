@@ -62,3 +62,7 @@ export const fetchPetsDelete = async id => {
   const { data } = await instance.delete(`/pets/${id}`);
   return data;
 };
+export const editUserInfo = async credentials => {
+  const { data } = await instance.put(`/update`, credentials);
+  return data;
+};
