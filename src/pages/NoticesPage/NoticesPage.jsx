@@ -5,9 +5,13 @@ import { PageTitle, Container, Section } from './NoticesPage.styled';
 import { MainContainer } from '../../components/App.styled';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 // import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
-
+import Loader from 'components/Loader/Loader';
 import { getNotices } from 'redux/notices/notices-operation';
-import { getAllNotices, getLoading, getError } from 'redux/notices/notices-selectors';
+import {
+  getAllNotices,
+  getLoading,
+  getError,
+} from 'redux/notices/notices-selectors';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
 ///////////
 import { useParams } from 'react-router-dom';
@@ -31,8 +35,6 @@ function NoticesPage() {
     dispatch(getNotices({ categoryName }));
   }, [dispatch, categoryName, query]);
 
-
-
   const filteredNotices = () => {
     const data = notices.filter(el =>
       el.title.toLowerCase().includes(query.toLowerCase())
@@ -49,7 +51,7 @@ function NoticesPage() {
           <NoticesSearch setQ={setQ} />
           <NoticesCategoriesNav></NoticesCategoriesNav>
         </Container>
-
+        {loading && <Loader />}
         {error && <p>Что-то пошло не так</p>}
         {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
         {!loading && notices && (
@@ -62,6 +64,6 @@ function NoticesPage() {
       </MainContainer>
     </Section>
   );
-};
+}
 
 export default NoticesPage;
