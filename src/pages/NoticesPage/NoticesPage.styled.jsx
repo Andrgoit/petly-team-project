@@ -45,3 +45,9 @@ export const PageTitle = styled.h2`
     font-size: ${p => p.theme.fontSizes.j};
   }
 `;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;

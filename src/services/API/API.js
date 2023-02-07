@@ -24,7 +24,6 @@ export const fetchFriends = async () => {
 
 export const fetchUserData = async () => {
   const { data } = await instance.get('/users/current');
-  // console.log(data);
   return data;
 };
 
@@ -53,13 +52,23 @@ export const fetchNotices = async () => {
 };
 // під питанням
 
+export const fetchNoticeById = async id => {
+  const { data } = await instance.get(`/notices/notice/${id}`);
+  return data;
+};
+
+export const addNotice = async (values, config) => {
+  const { data } = await instance.post('/notices/notice', values, config);
+  return data;
+};
+
 export const fetchPets = async credentials => {
   const { data } = await instance.post('/users/pets', credentials);
   return data;
 };
 
 export const fetchPetsDelete = async id => {
-  const { data } = await instance.delete(`/pets/${id}`);
+  const { data } = await instance.delete(`/users/pets/${id}`);
   return data;
 };
 
