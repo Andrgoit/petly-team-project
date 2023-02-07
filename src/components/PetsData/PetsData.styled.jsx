@@ -114,13 +114,13 @@ export const Pictures = styled.div`
   text-align: center;
 
   @media screen and (min-width: 768px) {
-    flex-direction: row;
+    /* flex-direction: row; */
     width: 704px;
     padding: 20px;
-    text-align: center;
+    /* text-align: center; */
   }
   @media screen and (min-width: 1300px) {
-    flex-direction: row;
+    /* flex-direction: row; */
     width: 821px;
     padding: 20px;
   }
