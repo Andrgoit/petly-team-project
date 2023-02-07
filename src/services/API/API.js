@@ -24,7 +24,6 @@ export const fetchFriends = async () => {
 
 export const fetchUserData = async () => {
   const { data } = await instance.get('/users/current');
-  console.log(data);
   return data;
 };
 
@@ -64,5 +63,10 @@ export const addNotice = async (values, config) => {
 
 export const fetchPets = async credentials => {
   const { data } = await instance.post('/pets', credentials);
+  return data;
+};
+
+export const fetchPetsDelete = async id => {
+  const { data } = await instance.delete(`/pets/${id}`);
   return data;
 };

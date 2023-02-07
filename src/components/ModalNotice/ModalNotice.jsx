@@ -2,8 +2,9 @@ import Modal from 'react-modal/lib/components/Modal';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { fetchNoticeById } from 'services/API/API';
-import { selectUserData } from 'redux/auth/authSelectors';
+
 import { useSelector } from 'react-redux';
+import { getAllUserData } from 'redux/users/users-selectors';
 
 import { toast } from 'react-toastify';
 import {
@@ -40,8 +41,18 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
   const [noticeInfo, setNoticeInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const isTablet = useMediaQuery({ minWidth: 768 });
+  const { user } = useSelector(getAllUserData);
 
-  const user = useSelector(selectUserData);
+  function changeCategory(category) {
+    if (category === 'ingoodhands') {
+      return 'in good hands';
+    }
+    if (category === 'lostfound') {
+      return 'lost/found';
+    } else {
+      return category;
+    }
+  }
 
   useEffect(() => {
     const fetchNotice = async () => {
@@ -73,12 +84,14 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
         ariaHideApp={false}
       >
         <ModalCloseBtn closeModal={() => setIsModalOpen(false)} />
-        {Object.keys(noticeInfo).length && (
+        {Object.keys(noticeInfo).length ? (
           <>
             <DesktopWrapper>
               <ImageWrapper>
                 <StyledImg src={noticeInfo.notice.avatar.url} />
-                <StyledSticker>{noticeInfo.notice.category}</StyledSticker>
+                <StyledSticker>
+                  {changeCategory(noticeInfo.notice.category)}
+                </StyledSticker>
               </ImageWrapper>
               <div>
                 <Title>{noticeInfo.notice.title}</Title>
@@ -91,11 +104,9 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
                     <ContentText isBold>The sex:</ContentText>
                     <ContentText isBold>Email:</ContentText>
                     <ContentText isBold>Phone:</ContentText>
-                    {
-                      (noticeInfo.notice.category = 'sell' && (
-                        <ContentText isBold>Price:</ContentText>
-                      ))
-                    }
+                    {noticeInfo.notice.category === 'sell' && (
+                      <ContentText isBold>Price:</ContentText>
+                    )}
                   </div>
                   <RightContent>
                     <ContentText>{noticeInfo.notice.name}</ContentText>
@@ -107,11 +118,9 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
                     <ContentText>{noticeInfo.notice.sex}</ContentText>
                     <ContentText>{noticeInfo.user.email}</ContentText>
                     <ContentText>{noticeInfo.user.phone}</ContentText>
-                    {
-                      (noticeInfo.notice.category = 'sell' && (
-                        <ContentText>{noticeInfo.notice.price}$</ContentText>
-                      ))
-                    }
+                    {noticeInfo.notice.category === 'sell' && (
+                      <ContentText>{noticeInfo.notice.price}$</ContentText>
+                    )}
                   </RightContent>
                 </ContentWrapper>
               </div>
@@ -133,7 +142,7 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
                   alt="heart icon"
                 />{' '}
               </NoticeModalBtn>
-              {user.email === noticeInfo.user.email && (
+              {user?.email === noticeInfo.user.email && (
                 <NoticeModalBtn>
                   <span>Delete</span>
                   <DelIcon />
@@ -141,6 +150,8 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
               )}
             </BtnWrapper>
           </>
+        ) : (
+          <h2>Something went wrong</h2>
         )}
       </Modal>
     );

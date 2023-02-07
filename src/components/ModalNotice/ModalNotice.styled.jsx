@@ -63,6 +63,10 @@ export const ContentText = styled.p`
   &:not(:last-child) {
     margin-bottom: 8px;
   }
+  @media (min-width: 768px) {
+font-size: 16px;
+line-height: 22px;
+  }
 `;
 
 export const CommentsText = styled.p`

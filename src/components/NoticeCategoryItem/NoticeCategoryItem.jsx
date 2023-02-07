@@ -22,8 +22,10 @@ import noImage from '../../img/noImage.png';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function NoticeCategoryItem(notices) {
-  const { title, birthdate, breed, location, avatar, price, id } = notices;
+  const { id, title, birthdate, breed, location, avatar, price, category } =
+    notices;
   const { url } = avatar;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function getAge() {
@@ -34,6 +36,20 @@ function NoticeCategoryItem(notices) {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
+    const ageWords = numWords(age);
+
+    return ageWords;
+  }
+
+  function changeCategory() {
+    if (category === 'ingoodhands') {
+      return 'in good hands';
+    }
+    if (category === 'lostfound') {
+      return 'lost/found';
+    } else {
+      return category;
+    }
   }
   // const ageWords = numWords(age);
 
@@ -42,7 +58,7 @@ function NoticeCategoryItem(notices) {
   return (
     <Item key={id}>
       <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
-      <CategoryTitle>selll</CategoryTitle>
+      <CategoryTitle>{changeCategory()}</CategoryTitle>
       {/* <AddToFavoriteBtn
         onClick={() => {
           isLogined
@@ -71,16 +87,12 @@ function NoticeCategoryItem(notices) {
             <Span>Age:</Span>
             {getAge()} {getAge() === 'one' ? 'year' : 'years'}
           </Text>
-          {/* {category === 'sell' && (
+          {category === 'sell' && (
             <Text>
               <Span>Price:</Span>
               {price ? `${price} $` : '--------'}
             </Text>
-          )} */}
-          <Text>
-            <Span>Price:</Span>
-            {price ? `${price} $` : '--------'}
-          </Text>
+          )}
         </Wrapper>
         <LearnMoreBtn onClick={() => setIsModalOpen(true)}>
           Learn more

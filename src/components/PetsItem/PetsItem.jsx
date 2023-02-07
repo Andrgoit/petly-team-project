@@ -10,8 +10,8 @@ import {
   DeleteImage,
 } from './PetsItem.styled';
 
-export default function PetsItem({ avatar, name, date, breed, comments }) {
-  return (
+export default function PetsItem({ id, avatar, name, date, breed, comments, deletePets }) {
+  return (<>
     <PetItem>
       <PetImage src={avatar} alt={name} />
       <ListInfo>
@@ -20,9 +20,10 @@ export default function PetsItem({ avatar, name, date, breed, comments }) {
         <ListInfoItem>Breed: {breed}</ListInfoItem>
         <ListInfoItem>Comments: {comments}</ListInfoItem>
       </ListInfo>
-      <DeleteIcon>
+      <DeleteIcon onClick= {deletePets(id)}>
         <DeleteImage src={deleteIcon} alt="Delete Icon" />
       </DeleteIcon>
     </PetItem>
+    </>
   );
 }

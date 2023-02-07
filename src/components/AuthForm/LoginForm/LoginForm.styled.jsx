@@ -2,37 +2,44 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const LoginContainer = styled.div`
-  width: 100%;
-  margin-top: 45px;
+  width: 320px;
   margin-bottom: 45px;
   text-align: center;
 
+  margin-left: auto;
+  margin-right: auto;
   @media (min-width: 768px) {
-    margin-top: 205px;
     width: 608px;
-    margin-left: auto;
-    margin-right: auto;
+
     padding: 60px 80px;
     background: #fff;
     box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
     border-radius: 40px;
   }
-
   @media (min-width: 1300px) {
     width: 618px;
-    margin-top: 80px;
   }
 `;
 export const ErrorInput = styled.div`
   color: rgb(228, 70, 70);
   position: absolute;
-  bottom: -15px;
-  font-size: ${p => p.theme.fontSizes.a};
+  bottom: 0;
   left: 24px;
 `;
 export const InputBox = styled.div`
   position: relative;
-  margin-bottom: ${({ lastMargin }) => (lastMargin ? '40px' : '16px')};
+`;
+export const ErrBox = styled.div`
+  position: absolute;
+  white-space: nowrap;
+  bottom: 0px;
+  left: 15px;
+  color: red;
+  font-size: 14px;
+  font-style: italic;
+  @media (min-width: 768px) {
+    left: 33px;
+  }
 `;
 export const Input = styled.input`
   background: #fdf7f2;
@@ -55,6 +62,31 @@ line-height: 25px;
    width: 458px;
   }
  }
+`;
+export const ShowPassword = styled.span`
+  display: inline-block;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: 38px;
+  top: 13px;
+  color: grey;
+  cursor: pointer;
+  svg {
+    width: inherit;
+    height: inherit;
+    @media (min-width: 768px) {
+      right: 15px;
+    }
+  }
+`;
+export const ForgotPassword = styled.button`
+  position: absolute;
+  right: 0px;
+  bottom: 0;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
 `;
 export const Title = styled.h3`
   color: #111111;
@@ -84,18 +116,15 @@ export const Label = styled.label`
 export const Button = styled.button`
   background: #f59256;
   border-radius: 40px;
-  margin-top: 40px;
-  display: flex;
-  flex-direction: row;
+
+  margin: 40px auto;
+  position: relative;
   justify-content: center;
   align-items: center;
-  padding: 10px 28px;
   margin-bottom: 40px;
-  padding: 10px 28px;
   font-size: 20px;
   line-height: 27px;
   display: flex;
-  align-items: center;
   letter-spacing: 0.04em;
   border: none;
   cursor: pointer;

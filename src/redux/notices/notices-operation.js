@@ -1,16 +1,52 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-import { fetchNotices, addNotice } from 'services/API/API';
+import axios from 'axios';
+import { addNotice } from 'services/API/API';
 import { toast } from 'react-toastify';
+axios.defaults.baseURL = 'https://petly-backend.onrender.com/api/';
 
 export const getNotices = createAsyncThunk(
-  'notices/getAll',
-  async (_, { rejectWithValue }) => {
+  'notices/categoryName',
+  async ({ categoryName }, thunkApi) => {
+    function changeFetch() {
+      const fetchFree = '/category/ingoodhands';
+      const routFree = 'for-free';
+
+      const fetchLost = '/category/lostfound';
+      const routLost = 'lost-found';
+
+      const fetchSell = '/category/sell';
+      const routSell = 'sell';
+
+      const fetchFavorite = '/favorite';
+      const routFavorite = 'favorite';
+
+      const fetchOwn = '/current';
+      const routOwn = 'own';
+
+      if (categoryName === routFree) {
+        return fetchFree;
+      }
+      if (categoryName === routLost) {
+        return fetchLost;
+      }
+      if (categoryName === routSell) {
+        return fetchSell;
+      }
+      if (categoryName === routFavorite) {
+        return fetchFavorite;
+      }
+      if (categoryName === routOwn) {
+        return fetchOwn;
+      } else {
+        return categoryName;
+      }
+    }
+
     try {
-      const data = await fetchNotices();
+      const { data } = await axios.get(`/notices${changeFetch(categoryName)}`);
       return data;
     } catch (error) {
-      throw rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
@@ -35,3 +71,15 @@ export const createNotice = createAsyncThunk(
     }
   }
 );
+
+// export const getNotices = createAsyncThunk(
+//   'notices/categoryName',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const data = await fetchNotices();
+//       return data;
+//     } catch (error) {
+//       throw rejectWithValue(error.message);
+//     }
+//   }
+// );

@@ -1,4 +1,5 @@
 import { Formik, ErrorMessage } from 'formik';
+import { useState } from 'react';
 import * as yup from 'yup';
 import {
   SexIcon,
@@ -72,6 +73,8 @@ const SecondStep = ({
   initialValues,
   setIsFirstStep,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
   const token = useSelector(selectAccessToken);
 
@@ -108,14 +111,16 @@ const SecondStep = ({
           price: formValues.sellCategory ? formValues.price : null,
           birthdate: parseDateToISO(formValues.birthdate),
         };
-        console.log(valuesToSend);
         try {
+          setIsLoading(true);
           await dispatch(createNotice({ valuesToSend, token }));
           setFormValues(initialValues);
           setIsFirstStep(true);
           closeModal();
+          setIsLoading(false);
         } catch (error) {
           console.log(error.message);
+          setIsLoading(false);
         }
       }}
     >
@@ -234,10 +239,10 @@ const SecondStep = ({
             />
           </InputWrapper>
           <MainBtnsWrapper>
-            <MainNoticeBtn type="submit" isBgOrange>
+            <MainNoticeBtn disabled={isLoading} type="submit" isBgOrange>
               Done
             </MainNoticeBtn>
-            <MainNoticeBtn onClick={goBack} type="button">
+            <MainNoticeBtn disabled={isLoading} onClick={goBack} type="button">
               Back
             </MainNoticeBtn>
           </MainBtnsWrapper>

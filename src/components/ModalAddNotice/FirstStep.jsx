@@ -90,13 +90,13 @@ const FirstStep = ({
               />
               <RadioBtnText>lost/found</RadioBtnText>
             </RadioBtnWrapper>
-            <RadioBtnWrapper htmlFor="in good hands">
+            <RadioBtnWrapper htmlFor="ingoodhands">
               <RadioBtn
                 type="radio"
                 name="category"
-                value="in good hands"
-                id="in good hands"
-                checked={values.category === 'in good hands'}
+                value="ingoodhands"
+                id="ingoodhands"
+                checked={values.category === 'ingoodhands'}
               />
               <RadioBtnText>in good hands</RadioBtnText>
             </RadioBtnWrapper>
