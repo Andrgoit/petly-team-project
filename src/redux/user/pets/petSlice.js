@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { addPet, deletePet } from './petOperations';
+import { deletePet } from './petOperations';
 import { addPet } from './petOperations';
 
 const initialState = {
@@ -22,22 +22,22 @@ const petsSlise = createSlice({
   initialState,
   extraReducers: {
     [addPet.pending]: handlePending,
-    // [deletePet.pending]: handlePending,
+    [deletePet.pending]: handlePending,
 
     [addPet.fulfilled]: (store, { playload }) => ({
       ...store,
       pets: playload,
       isLoading: false,
     }),
-    // [deletePet.fulfilled]: (store, { playload }) => {
-    //   store.isLoading = false;
-    //   store.error = null;
-    //   const index = store.items.findIndex(task => task.id === playload);
-    //   store.items.splice(index, 1, playload);
-    // },
+    [deletePet.fulfilled]: (store, { playload }) => {
+      store.isLoading = false;
+      store.error = null;
+      const index = store.items.findIndex(task => task.id === playload);
+      store.items.splice(index, 1, playload);
+    },
 
     [addPet.rejected]: handleReject,
-    // [deletePet.rejected]: handleReject,
+    [deletePet.rejected]: handleReject,
   },
 });
 

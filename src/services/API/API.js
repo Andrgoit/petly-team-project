@@ -52,8 +52,14 @@ export const fetchNotices = async () => {
   return data;
 };
 // під питанням
+
 export const fetchPets = async credentials => {
-  const { data } = await instance.post('/pets', credentials);
+  const { data } = await instance.post('/users/pets', credentials);
+  return data;
+};
+
+export const fetchPetsDelete = async id => {
+  const { data } = await instance.delete(`/pets/${id}`);
   return data;
 };
 
