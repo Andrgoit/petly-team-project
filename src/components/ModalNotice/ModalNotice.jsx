@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import { fetchNoticeById } from 'services/API/API';
 
 import { useSelector } from 'react-redux';
-import { getAllUserData } from 'redux/users/users-selectors';
+import { selectUserData } from 'redux/auth/authSelectors';
 
 import { toast } from 'react-toastify';
 import {
@@ -37,11 +37,20 @@ const convertISOToString = dateISO => {
   }.${string.getFullYear()}`;
 };
 
-const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
+const ModalNotice = ({
+  isModalOpen,
+  setIsModalOpen,
+  id,
+  onClickDelete,
+  addToFavorite,
+  isFavorite,
+}) => {
   const [noticeInfo, setNoticeInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   const isTablet = useMediaQuery({ minWidth: 768 });
-  const { user } = useSelector(getAllUserData);
+
+  const user = useSelector(selectUserData);
 
   function changeCategory(category) {
     if (category === 'ingoodhands') {
@@ -133,8 +142,8 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
               <StyledTelLink href={`tel:${noticeInfo.user.phone}`}>
                 <span>Contact</span>
               </StyledTelLink>
-              <NoticeModalBtn>
-                <span>Add to</span>
+              <NoticeModalBtn onClick={addToFavorite}>
+                <span>{isFavorite ? 'Remove from' : 'Add to'}</span>
                 <FavoriteBtnImg
                   width="13px"
                   height="12px"
@@ -143,7 +152,12 @@ const ModalNotice = ({ isModalOpen, setIsModalOpen, id }) => {
                 />{' '}
               </NoticeModalBtn>
               {user?.email === noticeInfo.user.email && (
-                <NoticeModalBtn>
+                <NoticeModalBtn
+                  onClick={() => {
+                    onClickDelete();
+                    setIsModalOpen(false);
+                  }}
+                >
                   <span>Delete</span>
                   <DelIcon />
                 </NoticeModalBtn>

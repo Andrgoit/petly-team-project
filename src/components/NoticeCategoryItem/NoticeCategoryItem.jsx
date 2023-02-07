@@ -13,20 +13,48 @@ import {
   Image,
   DeleteBtn,
   DelIcon,
+  FavoriteIcon,
 } from './NoticeCategoryItem.styled';
 
 import numWords from 'num-words';
 import ModalNotice from 'components/ModalNotice/ModalNotice';
 import noImage from '../../img/noImage.png';
+import {
+  addNoticeToFavorite,
+  removeNoticeWithFavorite,
+} from 'redux/auth/authOperations';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeNotice } from 'redux/notices/notices-operation';
+import { selectUserData } from 'redux/auth/authSelectors';
 
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function NoticeCategoryItem(notices) {
-  const { id, title, birthdate, breed, location, avatar, price, category } =
-    notices;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector(selectUserData);
+  const userId = user?._id || null;
+
+  const {
+    _id,
+    title,
+    birthdate,
+    breed,
+    location,
+    avatar,
+    price,
+    favorite,
+    owner,
+    category,
+  } = notices;
   const { url } = avatar;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  let isFavorite = favorite?.includes(_id) || false;
+  let isDisplayed = false;
+
+  if (owner === userId) {
+    isDisplayed = true;
+  }
 
   function getAge() {
     const today = new Date();
@@ -35,10 +63,11 @@ function NoticeCategoryItem(notices) {
     const m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
-    }
-    const ageWords = numWords(age);
 
-    return ageWords;
+      const ageWords = numWords(age);
+
+      return ageWords;
+    }
   }
 
   function changeCategory() {
@@ -51,12 +80,21 @@ function NoticeCategoryItem(notices) {
       return category;
     }
   }
-  // const ageWords = numWords(age);
-
   // url === null ? url === undefined : noImage;
+  const onClickFavoriteButton = () => {
+    if (!isFavorite) {
+      dispatch(addNoticeToFavorite(_id));
+    } else {
+      dispatch(removeNoticeWithFavorite(_id));
+    }
+  };
+
+  const onClickDeleteButton = () => {
+    dispatch(removeNotice(_id));
+  };
 
   return (
-    <Item key={id}>
+    <Item key={_id}>
       <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
       <CategoryTitle>{changeCategory()}</CategoryTitle>
       {/* <AddToFavoriteBtn
@@ -69,8 +107,8 @@ function NoticeCategoryItem(notices) {
         <AddIcon />
       </AddToFavoriteBtn> */}
 
-      <AddToFavoriteBtn>
-        <AddIcon />
+      <AddToFavoriteBtn onClick={onClickFavoriteButton}>
+        {isFavorite ? <FavoriteIcon /> : <AddIcon />}
       </AddToFavoriteBtn>
       <Container>
         <Wrapper>
@@ -97,16 +135,23 @@ function NoticeCategoryItem(notices) {
         <LearnMoreBtn onClick={() => setIsModalOpen(true)}>
           Learn more
         </LearnMoreBtn>
-        <DeleteBtn>
+
+        <DeleteBtn
+          onClick={onClickDeleteButton}
+          style={isDisplayed ? {} : { display: 'none' }}
+        >
           Delete
           <DelIcon />
         </DeleteBtn>
       </Container>
       {isModalOpen && (
         <ModalNotice
-          id={id}
+          id={_id}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          onClickDelete={onClickDeleteButton}
+          addToFavorite={onClickFavoriteButton}
+          isFavorite={isFavorite}
         />
       )}
     </Item>

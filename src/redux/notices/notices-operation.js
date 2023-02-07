@@ -2,6 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { addNotice } from 'services/API/API';
 import { toast } from 'react-toastify';
+import { fetchRemoveNotice } from 'services/API/API';
+
 axios.defaults.baseURL = 'https://petly-backend.onrender.com/api/';
 
 export const getNotices = createAsyncThunk(
@@ -44,6 +46,7 @@ export const getNotices = createAsyncThunk(
 
     try {
       const { data } = await axios.get(`/notices${changeFetch(categoryName)}`);
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -83,3 +86,16 @@ export const createNotice = createAsyncThunk(
 //     }
 //   }
 // );
+export const removeNotice = createAsyncThunk(
+  'notices/remove',
+  async (id, { rejectWithValue }) => {
+    console.log(id);
+    try {
+      await fetchRemoveNotice(id);
+
+      return id;
+    } catch (error) {
+      throw rejectWithValue(error.message);
+    }
+  }
+);

@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { selectAccessToken } from 'redux/auth/authSelectors';
+// import { selectAccessToken } from 'redux/auth/authSelectors';
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   instance.defaults.headers.common.Authorization = '';
 };
 export const instance = axios.create({
@@ -29,20 +29,20 @@ export const fetchUserData = async () => {
 
 export const registerUser = async credentials => {
   const { data } = await instance.post('/auth/register', credentials);
-  setAuthHeader(data.token);
+  // setAuthHeader(data.token);
   return data;
 };
 
 export const loginUser = async credentials => {
   const { data } = await instance.post('/auth/login', credentials);
-  setAuthHeader(data.token);
+  // setAuthHeader(data.token);
   return data;
 };
 
 export const logoutUser = async credentials => {
   const { data } = await instance.post('/auth/logout', credentials);
-  clearAuthHeader(selectAccessToken);
-  console.log(data);
+  // clearAuthHeader(selectAccessToken);
+  // console.log(data);
   return data;
 };
 
@@ -50,6 +50,7 @@ export const fetchNotices = async () => {
   const { data } = await instance.get('/notices/category/sell');
   return data;
 };
+// під питанням
 
 export const fetchNoticeById = async id => {
   const { data } = await instance.get(`/notices/notice/${id}`);
@@ -62,11 +63,36 @@ export const addNotice = async (values, config) => {
 };
 
 export const fetchPets = async credentials => {
-  const { data } = await instance.post('/pets', credentials);
+  const { data } = await instance.post('/users/pets', credentials);
   return data;
 };
 
 export const fetchPetsDelete = async id => {
   const { data } = await instance.delete(`/pets/${id}`);
+  return data;
+};
+
+export const fetchRemoveNotice = async id => {
+  const { data } = await instance.delete(`/notices/notice/${id}`, id);
+  return data;
+};
+
+export const fetchAddToFavorite = async id => {
+  const { data } = await instance.post(`/notices/favorite/${id}`, id);
+  return data;
+};
+
+export const fetchRemoveWithFavorite = async id => {
+  const { data } = await instance.delete(`/notices/favorite/${id}`, id);
+  return data;
+};
+
+export const fetchGetUserFavorite = async () => {
+  const { data } = await instance.get('/notices/favorite');
+  return data;
+};
+
+export const fetchGetUserNotices = async () => {
+  const { data } = await instance.get('/notices/current');
   return data;
 };

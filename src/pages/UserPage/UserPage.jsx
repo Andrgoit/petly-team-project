@@ -1,64 +1,53 @@
 import { UserData } from '../../components/UserData/UserData';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  getAllUserData,
-  getLoading,
-  //getError,
-} from '../../redux/users/users-selectors';
-import { getUser } from '../../redux/users/users-operations';
 import { useEffect } from 'react';
 import PetsData from 'components/PetsData/PetsData';
+
 import { UserContainer, UserWrapper, PetsWrapper } from './UserPage.styled';
-//import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
+// import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
-import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
+import {
+  selectError,
+  selectIsLoading,
+  selectIsLoggedIn,
+  selectUserData,
+} from '../../redux/auth/authSelectors';
+import { getUser } from 'redux/auth/authOperations';
 
 const UserPage = () => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUserData);
+
+  const loading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const isLogin = useSelector(selectIsLoggedIn);
+
   useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+    if (!user) {
+      dispatch(getUser());
+    }
+  }, [dispatch, user]);
 
-  //const [showModal, setShowModal] = useState(false);
-
-  const data = useSelector(getAllUserData);
-  const loading = useSelector(getLoading);
-  // const error = useSelector(getError);
-
-  const useAuth = () => {
-    const result = useSelector(selectIsLoggedIn);
-    return result;
-  };
+  // const [showModal, setShowModal] = useState(false);
 
   //const onClose = () => {
   //  setShowModal(true);
   //};
 
-  const { user } = data;
-  const { pets } = data;
-  const isLogin = useAuth();
+  // const { pets } = user;
+
   return (
     <section>
       {loading && <p>...Loading</p>}
-      {/* {error && <p>Oops!</p>} */}
-      {!loading && data && isLogin && (
+      {error && <p>Oops!</p>}
+      {!loading && user && isLogin && (
         <MainContainer>
           <UserContainer>
             <UserWrapper>
               <UserData user={user} />
             </UserWrapper>
             <PetsWrapper>
-              {/*<Wrapper>
-                <PetsTitle>My pets:</PetsTitle>
-                <ButtonWrapper>
-                  <ButtonTitle>Add pet</ButtonTitle>
-                  <AddButton onClick={onClose}>
-                    <TfiPlus color="white" />
-                  </AddButton>
-                </ButtonWrapper>
-                {showModal && <ModalAddsPet setShowModal={setShowModal} />}
-              </Wrapper>*/}
-              <PetsData pets={pets} />
+              <PetsData pets={user.pets} />
             </PetsWrapper>
           </UserContainer>
         </MainContainer>
