@@ -9,7 +9,6 @@ import { getUser } from '../../redux/users/users-operations';
 import { useEffect } from 'react';
 import PetsData from 'components/PetsData/PetsData';
 import { UserContainer, UserWrapper, PetsWrapper } from './UserPage.styled';
-//import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
 import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
 
@@ -19,7 +18,6 @@ const UserPage = () => {
     dispatch(getUser());
   }, [dispatch]);
 
-  //const [showModal, setShowModal] = useState(false);
 
   const data = useSelector(getAllUserData);
   const loading = useSelector(getLoading);
@@ -29,10 +27,6 @@ const UserPage = () => {
     const result = useSelector(selectIsLoggedIn);
     return result;
   };
-
-  //const onClose = () => {
-  //  setShowModal(true);
-  //};
 
   const { user } = data;
   const { pets } = data;
@@ -48,16 +42,6 @@ const UserPage = () => {
               <UserData user={user} />
             </UserWrapper>
             <PetsWrapper>
-              {/*<Wrapper>
-                <PetsTitle>My pets:</PetsTitle>
-                <ButtonWrapper>
-                  <ButtonTitle>Add pet</ButtonTitle>
-                  <AddButton onClick={onClose}>
-                    <TfiPlus color="white" />
-                  </AddButton>
-                </ButtonWrapper>
-                {showModal && <ModalAddsPet setShowModal={setShowModal} />}
-              </Wrapper>*/}
               <PetsData pets={pets} />
             </PetsWrapper>
           </UserContainer>

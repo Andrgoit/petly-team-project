@@ -1,4 +1,4 @@
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik, Form, ErrorMessage} from 'formik';
 import * as yup from 'yup';
 
 import { parse } from 'date-fns';
@@ -9,6 +9,7 @@ import {
   ButtonGroup,
   ButtonNext,
   ButtonCancel,
+  MsgError,
 } from './ModalStep.styled.jsx';
 
 const today = new Date();
@@ -22,7 +23,7 @@ const validationSchema = yup.object({
     .required(),
   date: yup
     .date()
-    .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
+    .test('len', 'must be exactly DD.MM.YYYY', (value, { originalValue }) => {
       if (originalValue) {
         return originalValue.length === 10;
       }
@@ -60,17 +61,13 @@ export default function ModalStepOne({ data, setFormData, next, onClose }) {
       <Form autoComplete="on">
         <Label htmlFor="name">Name pet</Label>
         <Input type="text" name="name" placeholder="Type name pet" />
-        <ErrorMessage name="name" render={msg => <div>{msg}</div>} />
+        <ErrorMessage name="name" render={msg => <MsgError>{msg}</MsgError>} />
         <Label htmlFor="date">Date of birth</Label>
         <Input name="date" placeholder="Type date of birth" />
-        <ErrorMessage name="date" render={msg => <div>{msg}</div>} />
-
+        <ErrorMessage name="date" render={msg => <MsgError>{msg}</MsgError>} />
         <Label htmlFor="breed">Breed</Label>
-        <div style={{ position: 'relative' }}>
-          <Input name="breed" placeholder="Type breed" autoComplete="off" />
-        </div>
-        <ErrorMessage name="breed" render={msg => <div>{msg}</div>} />
-
+        <Input name="breed" placeholder="Type breed" autoComplete="off" />
+        <ErrorMessage name="breed" render={msg => <MsgError>{msg}</MsgError>} />
         <ButtonGroup>
           <ButtonCancel type="button" onClick={() => onClose()}>
             Cancel

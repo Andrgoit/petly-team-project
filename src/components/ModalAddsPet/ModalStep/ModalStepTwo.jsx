@@ -14,6 +14,7 @@ import {
   ButtonGroup,
   ButtonDone,
   ButtonBack,
+  MsgError,
 } from './ModalStep.styled';
 
 const validationSchema = yup.object({
@@ -79,7 +80,7 @@ export default function ModalStepTwo({ next, data, setFormData, prev }) {
               onChange={e => selectFile(e, setFieldValue)}
             />
           </LabelPhoto>
-          <ErrorMessage name="image" render={msg => <div>{msg}</div>} />
+          <ErrorMessage name="image" render={msg => <MsgError>{msg}</MsgError>} />
           <CentredTextarea>
             <Label>Comments</Label>
             <Textarea
@@ -87,9 +88,8 @@ export default function ModalStepTwo({ next, data, setFormData, prev }) {
               name="comments"
               placeholder="Type comments"
             ></Textarea>
-            <ErrorMessage name="comments" render={msg => <div>{msg}</div>} />
+            <ErrorMessage name="comments" render={msg => <MsgError>{msg}</MsgError>} />
           </CentredTextarea>
-
           <ButtonGroup>
             <ButtonBack type="button" onClick={prev}>
               Back

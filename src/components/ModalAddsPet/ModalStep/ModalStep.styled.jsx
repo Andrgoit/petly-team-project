@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
 
+export const MsgError = styled.div`
+  font-weight: 400;
+  font-size: 16px;
+  color: ${p => p.theme.colors.news.readMoreFocus};
+  margin-bottom: 20px;
+`;
 export const Label = styled.label`
   display: block;
   font-size: ${p => p.theme.fontSizes.d};
@@ -41,6 +47,9 @@ export const Input = styled(Field)`
       font-size: 16px;
       line-height: 1.62;
     }
+  }
+  &:focus {
+    color: ${p => p.theme.colors.news.readMoreFocus}
   }
 `;
 export const ButtonNext = styled.button`
@@ -100,6 +109,7 @@ export const BtnPhoto = styled.button`
   border-radius: 20px;
   background: #fdf7f2;
   border: none;
+  cursor: pointer;
 `;
 export const Textarea = styled(Field)`
   width: 100%;
@@ -124,6 +134,9 @@ export const Textarea = styled(Field)`
       font-size: 16px;
       line-height: 1.62;
     }
+  }
+  &:focus {
+    color: ${p => p.theme.colors.news.readMoreFocus}
   }
 `;
 export const CentredTextarea = styled.div`
@@ -150,20 +163,7 @@ export const InputFile = styled.input`
     cursor: pointer;
   }
 `;
-export const InputComment = styled.input`
-  box-sizing: border-box;
-  width: 240px;
-  height: 100px;
-  border-radius: 20px;
-  background: linear-gradient(0deg, #fdf7f2, #fdf7f2),
-    linear-gradient(0deg, rgba(245, 146, 86, 0.5), rgba(245, 146, 86, 0.5));
-  border: 1px solid rgba(245, 146, 86, 0.5);
 
-  @media (min-width: 768px) {
-    width: 394px;
-    height: 116px;
-  }
-`;
 export const ButtonCancel = styled.button`
   width: 100%;
   font-size: 16px;
