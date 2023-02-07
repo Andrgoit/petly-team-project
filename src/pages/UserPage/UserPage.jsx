@@ -3,16 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   getAllUserData,
   getLoading,
-  getError,
+  //getError,
 } from '../../redux/users/users-selectors';
 import { getUser } from '../../redux/users/users-operations';
 import { useEffect } from 'react';
 import PetsData from 'components/PetsData/PetsData';
-import {
-  UserContainer,
-  UserWrapper,
-  PetsWrapper,
-} from './UserPage.styled';
+import { UserContainer, UserWrapper, PetsWrapper } from './UserPage.styled';
 //import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
 import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
@@ -27,7 +23,7 @@ const UserPage = () => {
 
   const data = useSelector(getAllUserData);
   const loading = useSelector(getLoading);
-  const error = useSelector(getError);
+  // const error = useSelector(getError);
 
   const useAuth = () => {
     const result = useSelector(selectIsLoggedIn);
@@ -44,7 +40,7 @@ const UserPage = () => {
   return (
     <section>
       {loading && <p>...Loading</p>}
-      {error && <p>Oops!</p>}
+      {/* {error && <p>Oops!</p>} */}
       {!loading && data && isLogin && (
         <MainContainer>
           <UserContainer>

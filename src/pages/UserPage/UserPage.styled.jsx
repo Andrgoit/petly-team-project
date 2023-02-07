@@ -42,3 +42,46 @@ export const PetsWrapper = styled.div`
     width: auto;
   }
 `;
+// export const ButtonWrapper = styled.div`
+//   position: absolute;
+//   top: 0px;
+//   right: 0;
+//   display: flex;
+//   align-items: center;
+//   margin-bottom: 31px;
+//   margin-top: -6px;
+
+//   @media screen and (min-width: 768px) {
+//     position: absolute;
+//     top: 0px;
+//     right: 0;
+//     margin-top: 0;
+//   }
+//   @media screen and (min-width: 1300px) {
+//     position: absolute;
+//     top: 0px;
+//     right: 0px;
+//     margin-top: 0;
+//   }
+// `;
+// export const AddButton = styled.button`
+//   display: flex;
+//   cursor: pointer;
+//   width: 40px;
+//   height: 40px;
+//   padding: 0;
+//   justify-content: center;
+//   align-items: center;
+//   border: ${p => p.theme.colors.home.buttonBorder};
+//   border-radius: ${p => p.theme.radii.round};
+//   background-color: ${p => p.theme.colors.home.buttonBorder};
+//   color: ${p => p.theme.colors.secondaryBackground};
+//   position: relative;
+//   overflow-x: hidden;
+//   overflow-y: hidden;
+//   :hover,
+//   :focus {
+//     transform: scale(1.05);
+//     background-color: #eb7f3c;
+//   }
+// `;
