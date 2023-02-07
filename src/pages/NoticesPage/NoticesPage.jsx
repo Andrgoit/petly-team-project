@@ -13,16 +13,15 @@ import {
   getError,
 } from 'redux/notices/notices-selectors';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
-///////////
+import { selectUserData } from 'redux/auth/authSelectors';
+
 import { useParams } from 'react-router-dom';
-///////////
 
 function NoticesPage() {
-  ////////
   const { categoryName } = useParams();
-  ///////////
 
   const notices = useSelector(getAllNotices);
+  const { favorite } = useSelector(selectUserData) || [];
   const loading = useSelector(getLoading);
   const error = useSelector(getError);
 
@@ -55,7 +54,10 @@ function NoticesPage() {
         {error && <p>Что-то пошло не так</p>}
         {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
         {!loading && notices && (
-          <NoticesCategoriesList notices={noticesToLayout} />
+          <NoticesCategoriesList
+            notices={noticesToLayout}
+            favorite={favorite}
+          />
         )}
 
         {!loading && ref.current && !Boolean(noticesToLayout.length) && (

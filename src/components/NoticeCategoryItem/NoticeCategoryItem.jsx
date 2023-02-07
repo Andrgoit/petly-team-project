@@ -12,20 +12,47 @@ import {
   Image,
   DeleteBtn,
   DelIcon,
+  FavoriteIcon,
 } from './NoticeCategoryItem.styled';
 
 import numWords from 'num-words';
 import noImage from '../../img/noImage.png';
-
-
+import {
+  addNoticeToFavorite,
+  removeNoticeWithFavorite,
+} from 'redux/auth/authOperations';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeNotice } from 'redux/notices/notices-operation';
+import { selectUserData } from 'redux/auth/authSelectors';
 
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function OurFriensItem(notices) {
-  const { _id, title, birthdate, breed, location, avatar, price, category } =
-    notices;
+  const dispatch = useDispatch();
+  const user = useSelector(selectUserData);
+  const userId = user?._id || null;
+
+  const {
+    _id,
+    title,
+    birthdate,
+    breed,
+    location,
+    avatar,
+    price,
+    favorite,
+    owner,
+    category,
+  } = notices;
   const { url } = avatar;
-  
+
+  let isFavorite = favorite?.includes(_id) || false;
+  let isDisplayed = false;
+
+  if (owner === userId) {
+    isDisplayed = true;
+  }
+
   function getAge() {
     const today = new Date();
     const birthDate = new Date(birthdate);
@@ -33,16 +60,14 @@ function OurFriensItem(notices) {
     const m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
-    }
-    const ageWords = numWords(age);
 
-    return ageWords;
+      const ageWords = numWords(age);
+
+      return ageWords;
+    }
   }
 
   function changeCategory() {
-
-
-
     if (category === 'ingoodhands') {
       return 'in good hands';
     }
@@ -53,7 +78,19 @@ function OurFriensItem(notices) {
       return category;
     }
   }
-   
+  // url === null ? url === undefined : noImage;
+  const onClickFavoriteButton = () => {
+    if (!isFavorite) {
+      dispatch(addNoticeToFavorite(_id));
+    } else {
+      dispatch(removeNoticeWithFavorite(_id));
+    }
+  };
+
+  const onClickDeleteButton = () => {
+    dispatch(removeNotice(_id));
+  };
+
   return (
     <Item key={_id}>
       <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
@@ -68,8 +105,8 @@ function OurFriensItem(notices) {
         <AddIcon />
       </AddToFavoriteBtn> */}
 
-      <AddToFavoriteBtn>
-        <AddIcon />
+      <AddToFavoriteBtn onClick={onClickFavoriteButton}>
+        {isFavorite ? <FavoriteIcon /> : <AddIcon />}
       </AddToFavoriteBtn>
       <Container>
         <Wrapper>
@@ -92,9 +129,13 @@ function OurFriensItem(notices) {
               {price ? `${price} $` : '--------'}
             </Text>
           )}
-         </Wrapper>
+        </Wrapper>
         <LearnMoreBtn>Learn more</LearnMoreBtn>
-        <DeleteBtn>
+
+        <DeleteBtn
+          onClick={onClickDeleteButton}
+          style={isDisplayed ? {} : { display: 'none' }}
+        >
           Delete
           <DelIcon />
         </DeleteBtn>

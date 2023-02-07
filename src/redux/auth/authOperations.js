@@ -1,6 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { loginUser, registerUser, logoutUser } from 'services/API/API';
+import {
+  loginUser,
+  registerUser,
+  logoutUser,
+  setAuthHeader,
+  fetchUserData,
+  clearAuthHeader,
+  fetchRemoveWithFavorite,
+  fetchAddToFavorite,
+} from 'services/API/API';
 
 // Регистрация
 export const register = createAsyncThunk(
@@ -8,6 +17,8 @@ export const register = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const data = await registerUser(credentials);
+
+      setAuthHeader(data.token);
 
       toast.success('Congratulations! Your account is created.');
 
@@ -29,6 +40,9 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const data = await loginUser(credentials);
+
+      setAuthHeader(data.token);
+
       return data;
     } catch (error) {
       return rejectWithValue();
@@ -41,9 +55,76 @@ export const logout = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const result = await logoutUser();
+
+      clearAuthHeader();
+
       return result;
     } catch (error) {
       return rejectWithValue(error);
+    }
+  }
+);
+
+export const refreshUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.accessToken;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+
+    try {
+      setAuthHeader(persistedToken);
+
+      const data = await fetchUserData();
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getUser = createAsyncThunk(
+  'users/getUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await fetchUserData();
+
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw rejectWithValue(error);
+    }
+  }
+);
+
+export const addNoticeToFavorite = createAsyncThunk(
+  'auth/addToFavorite',
+  async (id, { rejectWithValue }) => {
+    try {
+      await fetchAddToFavorite(id);
+
+      return id;
+    } catch (error) {
+      throw rejectWithValue(error.message);
+    }
+  }
+);
+
+export const removeNoticeWithFavorite = createAsyncThunk(
+  'auth/removeWithFavorite',
+  async (id, { rejectWithValue }) => {
+    // const state = getState();
+    // console.log(state.auth.user);
+    try {
+      await fetchRemoveWithFavorite(id);
+
+      return id;
+    } catch (error) {
+      throw rejectWithValue(error.message);
     }
   }
 );

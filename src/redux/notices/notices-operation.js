@@ -1,50 +1,49 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-axios.defaults.baseURL =
-  'https://petly-backend.onrender.com/api/';
+import { fetchRemoveNotice } from 'services/API/API';
 
+axios.defaults.baseURL = 'https://petly-backend.onrender.com/api/';
 
 export const getNotices = createAsyncThunk(
   'notices/categoryName',
   async ({ categoryName }, thunkApi) => {
-        function changeFetch() {
-          const fetchFree = '/category/ingoodhands';
-          const routFree = 'for-free';
+    function changeFetch() {
+      const fetchFree = '/category/ingoodhands';
+      const routFree = 'for-free';
 
-          const fetchLost = '/category/lostfound';
-          const routLost = 'lost-found';
+      const fetchLost = '/category/lostfound';
+      const routLost = 'lost-found';
 
-          const fetchSell = '/category/sell';
-          const routSell = 'sell';
+      const fetchSell = '/category/sell';
+      const routSell = 'sell';
 
-          const fetchFavorite = '/favorite';
-          const routFavorite = 'favorite';
+      const fetchFavorite = '/favorite';
+      const routFavorite = 'favorite';
 
-          const fetchOwn = '/current';
-          const routOwn = 'own';
+      const fetchOwn = '/current';
+      const routOwn = 'own';
 
+      if (categoryName === routFree) {
+        return fetchFree;
+      }
+      if (categoryName === routLost) {
+        return fetchLost;
+      }
+      if (categoryName === routSell) {
+        return fetchSell;
+      }
+      if (categoryName === routFavorite) {
+        return fetchFavorite;
+      }
+      if (categoryName === routOwn) {
+        return fetchOwn;
+      } else {
+        return categoryName;
+      }
+    }
 
-                    if (categoryName === routFree) {
-                      return fetchFree;
-                    } if (categoryName === routLost) {
-                      return fetchLost;
-                    } if (categoryName === routSell) {
-                      return fetchSell;
-                    } if (categoryName === routFavorite) {
-                      return fetchFavorite;
-                    }
-                    if (categoryName === routOwn) {
-                      return fetchOwn;
-                    } else {
-                      return categoryName;
-                    }
-          };
-
-        
     try {
-      const { data } = await axios.get(
-        `/notices${changeFetch(categoryName)}`
-      );
+      const { data } = await axios.get(`/notices${changeFetch(categoryName)}`);
       console.log(data);
       return data;
     } catch (error) {
@@ -53,15 +52,16 @@ export const getNotices = createAsyncThunk(
   }
 );
 
+export const removeNotice = createAsyncThunk(
+  'notices/remove',
+  async (id, { rejectWithValue }) => {
+    console.log(id);
+    try {
+      await fetchRemoveNotice(id);
 
-// export const getNotices = createAsyncThunk(
-//   'notices/categoryName',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const data = await fetchNotices();
-//       return data;
-//     } catch (error) {
-//       throw rejectWithValue(error.message);
-//     }
-//   }
-// );
+      return id;
+    } catch (error) {
+      throw rejectWithValue(error.message);
+    }
+  }
+);
