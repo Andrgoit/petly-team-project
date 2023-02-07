@@ -1,15 +1,53 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { fetchRemoveNotice } from 'services/API/API';
 
-import { fetchNotices, fetchRemoveNotice } from 'services/API/API';
+axios.defaults.baseURL = 'https://petly-backend.onrender.com/api/';
 
 export const getNotices = createAsyncThunk(
-  'notices/getAll',
-  async (_, { rejectWithValue }) => {
+  'notices/categoryName',
+  async ({ categoryName }, thunkApi) => {
+    function changeFetch() {
+      const fetchFree = '/category/ingoodhands';
+      const routFree = 'for-free';
+
+      const fetchLost = '/category/lostfound';
+      const routLost = 'lost-found';
+
+      const fetchSell = '/category/sell';
+      const routSell = 'sell';
+
+      const fetchFavorite = '/favorite';
+      const routFavorite = 'favorite';
+
+      const fetchOwn = '/current';
+      const routOwn = 'own';
+
+      if (categoryName === routFree) {
+        return fetchFree;
+      }
+      if (categoryName === routLost) {
+        return fetchLost;
+      }
+      if (categoryName === routSell) {
+        return fetchSell;
+      }
+      if (categoryName === routFavorite) {
+        return fetchFavorite;
+      }
+      if (categoryName === routOwn) {
+        return fetchOwn;
+      } else {
+        return categoryName;
+      }
+    }
+
     try {
-      const data = await fetchNotices();
+      const { data } = await axios.get(`/notices${changeFetch(categoryName)}`);
+      console.log(data);
       return data;
     } catch (error) {
-      throw rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
@@ -19,12 +57,10 @@ export const removeNotice = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     console.log(id);
     try {
-      console.log('test operation');
-      const data = await fetchRemoveNotice(id);
-      console.log(data);
+      await fetchRemoveNotice(id);
+
       return id;
     } catch (error) {
-      console.log(error);
       throw rejectWithValue(error.message);
     }
   }

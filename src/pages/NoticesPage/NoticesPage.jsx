@@ -15,24 +15,28 @@ import {
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
 import { selectUserData } from 'redux/auth/authSelectors';
 
-function NoticesPage() {
-  const [q, setQ] = useState('');
-  const dispatch = useDispatch();
-  let ref = useRef(false);
+import { useParams } from 'react-router-dom';
 
-  useEffect(() => {
-    ref.current = true;
-    dispatch(getNotices());
-  }, [dispatch]);
+function NoticesPage() {
+  const { categoryName } = useParams();
 
   const notices = useSelector(getAllNotices);
   const { favorite } = useSelector(selectUserData) || [];
   const loading = useSelector(getLoading);
   const error = useSelector(getError);
 
+  const [query, setQ] = useState('');
+  const dispatch = useDispatch();
+  let ref = useRef(false);
+
+  useEffect(() => {
+    ref.current = true;
+    dispatch(getNotices({ categoryName }));
+  }, [dispatch, categoryName, query]);
+
   const filteredNotices = () => {
     const data = notices.filter(el =>
-      el.title.toLowerCase().includes(q.toLowerCase())
+      el.title.toLowerCase().includes(query.toLowerCase())
     );
     return data;
   };
@@ -57,7 +61,7 @@ function NoticesPage() {
         )}
 
         {!loading && ref.current && !Boolean(noticesToLayout.length) && (
-          <p>Собак по данному запиту немає</p>
+          <p>Not found</p>
         )}
       </MainContainer>
     </Section>

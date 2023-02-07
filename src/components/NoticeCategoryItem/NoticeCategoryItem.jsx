@@ -41,17 +41,16 @@ function OurFriensItem(notices) {
     price,
     favorite,
     owner,
+    category,
   } = notices;
   const { url } = avatar;
 
   let isFavorite = favorite?.includes(_id) || false;
   let isDisplayed = false;
-  // console.log('owner', owner);
-  // console.log('userId=', userId);
+
   if (owner === userId) {
     isDisplayed = true;
   }
-  console.log('isDisplayed', isDisplayed);
 
   function getAge() {
     const today = new Date();
@@ -60,12 +59,24 @@ function OurFriensItem(notices) {
     const m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
-    }
-    const ageWords = numWords(age);
 
-    return ageWords;
+      const ageWords = numWords(age);
+
+      return ageWords;
+    }
   }
 
+  function changeCategory() {
+    if (category === 'ingoodhands') {
+      return 'in good hands';
+    }
+
+    if (category === 'lostfound') {
+      return 'lost/found';
+    } else {
+      return category;
+    }
+  }
   // url === null ? url === undefined : noImage;
   const onClickFavoriteButton = () => {
     if (!isFavorite) {
@@ -76,16 +87,13 @@ function OurFriensItem(notices) {
   };
 
   const onClickDeleteButton = () => {
-    // console.log('DELETE', _id);
-    // console.log(userId);
-    // console.log('OWNER', owner);
     dispatch(removeNotice(_id));
   };
 
   return (
     <Item key={_id}>
       <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
-      <CategoryTitle>selll</CategoryTitle>
+      <CategoryTitle>{changeCategory()}</CategoryTitle>
       {/* <AddToFavoriteBtn
         onClick={() => {
           isLogined
@@ -114,16 +122,12 @@ function OurFriensItem(notices) {
             <Span>Age:</Span>
             {getAge()} {getAge() === 'one' ? 'year' : 'years'}
           </Text>
-          {/* {category === 'sell' && (
+          {category === 'sell' && (
             <Text>
               <Span>Price:</Span>
               {price ? `${price} $` : '--------'}
             </Text>
-          )} */}
-          <Text>
-            <Span>Price:</Span>
-            {price ? `${price} $` : '--------'}
-          </Text>
+          )}
         </Wrapper>
         <LearnMoreBtn>Learn more</LearnMoreBtn>
 
