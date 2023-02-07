@@ -23,7 +23,7 @@ const UserPage = () => {
 
   const data = useSelector(getAllUserData);
   const loading = useSelector(getLoading);
-  const error = useSelector(getError);
+  // const error = useSelector(getError);
 
   const useAuth = () => {
     const result = useSelector(selectIsLoggedIn);
