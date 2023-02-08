@@ -19,6 +19,7 @@ import {
 function PetsData() {
   const [showModal, setShowModal] = useState(false);
   const pets = useSelector(selectUserPets);
+  const petsLeng = pets.length;
 
   const onClose = () => {
     setShowModal(true);
@@ -37,10 +38,10 @@ function PetsData() {
       </StyledButtonSection>
 
       {showModal && <ModalAddsPet setShowModal={setShowModal} />}
-      {!pets ? (
-        <Pictures>You don't have any pets added.</Pictures>
-      ) : (
+      {petsLeng > 0 ? (
         <PetsList pets={pets} />
+      ) : (
+        <Pictures>You don't have any pets added.</Pictures>
       )}
     </Wrapper>
   );

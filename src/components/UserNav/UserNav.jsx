@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import { selectUserData } from 'redux/auth/authSelectors';
 import {
   StyledContainer,
   StyledButton,
@@ -6,14 +8,18 @@ import {
 } from './UserNav.styled';
 
 export default function UserNav() {
-  return (
-    <StyledContainer>
-      <StyledButton to="/user">
-        <StyledIconContainer>
-          <StyledIcon />
-        </StyledIconContainer>
-        Account
-      </StyledButton>
-    </StyledContainer>
-  );
+  const user = useSelector(selectUserData);
+
+  if (user) {
+    return (
+      <StyledContainer>
+        <StyledButton to="/user">
+          <StyledIconContainer>
+            <StyledIcon />
+          </StyledIconContainer>
+          {user ? user.name : 'Account'}
+        </StyledButton>
+      </StyledContainer>
+    );
+  }
 }
