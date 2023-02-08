@@ -53,7 +53,8 @@ function NoticeCategoryItem(notices) {
     category,
   } = notices;
   const { url } = avatar;
-
+  
+  
   let isFavorite = favorite?.includes(_id) || false;
   let isDisplayed = false;
 

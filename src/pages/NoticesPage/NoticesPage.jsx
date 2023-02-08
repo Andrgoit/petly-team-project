@@ -6,7 +6,6 @@ import { MainContainer } from '../../components/App.styled';
 import { NoticesCategoriesList } from '../../components/NoticesCategoriesList/NoticesCategoriesList';
 import {
   PageTitle,
-  // Container,
   Section,
   ButtonsWrapper,
   ContainerWrapp,
@@ -22,12 +21,15 @@ import {
   getLoading,
   getError,
 } from 'redux/notices/notices-selectors';
+
+
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
-import { selectUserData } from 'redux/auth/authSelectors';
+import { selectUserData, selectAccessToken } from 'redux/auth/authSelectors';
 
 import { useParams } from 'react-router-dom';
 
 function NoticesPage() {
+  const token = useSelector(selectAccessToken);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const { categoryName } = useParams();
 
@@ -42,7 +44,7 @@ function NoticesPage() {
 
   useEffect(() => {
     ref.current = true;
-    dispatch(getNotices({ categoryName }));
+    dispatch(getNotices({ categoryName, token }));
   }, [dispatch, categoryName, query]);
 
   const filteredNotices = () => {

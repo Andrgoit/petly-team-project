@@ -8,7 +8,15 @@ axios.defaults.baseURL = 'https://petly-backend.onrender.com/api/';
 
 export const getNotices = createAsyncThunk(
   'notices/categoryName',
-  async ({ categoryName }, thunkApi) => {
+  async ({ categoryName, token }, thunkApi) => {
+  const config = {
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
     function changeFetch() {
       const fetchFree = '/category/ingoodhands';
       const routFree = 'for-free';
@@ -42,10 +50,21 @@ export const getNotices = createAsyncThunk(
       } else {
         return categoryName;
       }
+    };
+
+    function addToken(categoryName) {
+      const routFavorite = 'favorite';
+      const routOwn = 'own';
+
+      if (categoryName === routFavorite || categoryName === routOwn) {
+        return config;
+      }
+      return;
     }
 
     try {
-      const { data } = await axios.get(`/notices${changeFetch(categoryName)}`);
+      const { data } = await axios.get(
+        `/notices${changeFetch(categoryName)}`,addToken(categoryName));
 
       return data;
     } catch (error) {
@@ -53,6 +72,19 @@ export const getNotices = createAsyncThunk(
     }
   }
 );
+
+export const FavoritesNotices = createAsyncThunk(
+  'notices/fetchFavoritesNotices',
+  async (_, thunkApi) => {
+    try {
+      const { data } = await axios.get(`/notices/favorites`);
+      return data.favorites;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 
 export const createNotice = createAsyncThunk(
   'notices/createNotice',
