@@ -37,7 +37,7 @@ function OurFriensItem({
   const listDropmenu = timeList.map((time, i) => (
     <ListDropmenu key={i} isToday={days[i] === today}>
       <p>{days[i]}</p>
-      {time === '' ? <p>-------------</p> : <p>{time}</p>}
+      {time === '' ? <p>Зачинено</p> : <p>{time}</p>}
     </ListDropmenu>
   ));
 
