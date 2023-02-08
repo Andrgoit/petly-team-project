@@ -9,6 +9,7 @@ import {
   clearAuthHeader,
   fetchRemoveWithFavorite,
   fetchAddToFavorite,
+  fetchPetsDelete,
 } from 'services/API/API';
 
 // Регистрация
@@ -125,6 +126,19 @@ export const removeNoticeWithFavorite = createAsyncThunk(
       return id;
     } catch (error) {
       throw rejectWithValue(error.message);
+    }
+  }
+);
+
+//удаление питомца
+export const deletePet = createAsyncThunk(
+  'users/deletePet',
+  async (id, { rejectWithValue }) => {
+    try {
+      await fetchPetsDelete(id);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

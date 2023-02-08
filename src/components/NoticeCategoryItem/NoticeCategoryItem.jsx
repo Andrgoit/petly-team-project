@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Item,
   LearnMoreBtn,
@@ -16,6 +17,7 @@ import {
 } from './NoticeCategoryItem.styled';
 
 import numWords from 'num-words';
+import ModalNotice from 'components/ModalNotice/ModalNotice';
 import noImage from '../../img/noImage.png';
 import {
   addNoticeToFavorite,
@@ -27,7 +29,8 @@ import { selectUserData } from 'redux/auth/authSelectors';
 
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-function OurFriensItem(notices) {
+function NoticeCategoryItem(notices) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(selectUserData);
   const userId = user?._id || null;
@@ -71,7 +74,6 @@ function OurFriensItem(notices) {
     if (category === 'ingoodhands') {
       return 'in good hands';
     }
-
     if (category === 'lostfound') {
       return 'lost/found';
     } else {
@@ -130,7 +132,9 @@ function OurFriensItem(notices) {
             </Text>
           )}
         </Wrapper>
-        <LearnMoreBtn>Learn more</LearnMoreBtn>
+        <LearnMoreBtn onClick={() => setIsModalOpen(true)}>
+          Learn more
+        </LearnMoreBtn>
 
         <DeleteBtn
           onClick={onClickDeleteButton}
@@ -140,8 +144,18 @@ function OurFriensItem(notices) {
           <DelIcon />
         </DeleteBtn>
       </Container>
+      {isModalOpen && (
+        <ModalNotice
+          id={_id}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          onClickDelete={onClickDeleteButton}
+          addToFavorite={onClickFavoriteButton}
+          isFavorite={isFavorite}
+        />
+      )}
     </Item>
   );
 }
 
-export default OurFriensItem;
+export default NoticeCategoryItem;

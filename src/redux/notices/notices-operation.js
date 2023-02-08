@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { addNotice } from 'services/API/API';
+import { toast } from 'react-toastify';
 import { fetchRemoveNotice } from 'services/API/API';
 
 axios.defaults.baseURL = 'https://petly-backend.onrender.com/api/';
@@ -44,7 +46,7 @@ export const getNotices = createAsyncThunk(
 
     try {
       const { data } = await axios.get(`/notices${changeFetch(categoryName)}`);
-      console.log(data);
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -52,6 +54,38 @@ export const getNotices = createAsyncThunk(
   }
 );
 
+export const createNotice = createAsyncThunk(
+  'notices/createNotice',
+  async ({ valuesToSend, token }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      const { data } = await addNotice(valuesToSend, config);
+      toast.success('New notice succesfully added');
+      return data;
+    } catch (error) {
+      toast.error(error.message);
+      return rejectWithValue();
+    }
+  }
+);
+
+// export const getNotices = createAsyncThunk(
+//   'notices/categoryName',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const data = await fetchNotices();
+//       return data;
+//     } catch (error) {
+//       throw rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const removeNotice = createAsyncThunk(
   'notices/remove',
   async (id, { rejectWithValue }) => {

@@ -1,11 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NoticesCategoriesList } from '../../components/NoticesCategoriesList/NoticesCategoriesList';
-import { PageTitle, Container, Section } from './NoticesPage.styled';
+import {
+  PageTitle,
+  Container,
+  Section,
+  ButtonsWrapper,
+} from './NoticesPage.styled';
 import { MainContainer } from '../../components/App.styled';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 // import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
 import Loader from 'components/Loader/Loader';
+import AddNoticeButton from 'components/AddNoticeButton/AddNoticeButton';
+import ModalAddNotice from '../../components/ModalAddNotice/ModalAddNotice';
 import { getNotices } from 'redux/notices/notices-operation';
 import {
   getAllNotices,
@@ -18,6 +25,7 @@ import { selectUserData } from 'redux/auth/authSelectors';
 import { useParams } from 'react-router-dom';
 
 function NoticesPage() {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const { categoryName } = useParams();
 
   const notices = useSelector(getAllNotices);
@@ -41,14 +49,16 @@ function NoticesPage() {
     return data;
   };
   const noticesToLayout = filteredNotices();
-
   return (
     <Section>
       <MainContainer>
         <Container>
           <PageTitle>Find your favorite pet</PageTitle>
           <NoticesSearch setQ={setQ} />
-          <NoticesCategoriesNav></NoticesCategoriesNav>
+          <ButtonsWrapper>
+            <NoticesCategoriesNav></NoticesCategoriesNav>
+            <AddNoticeButton onClickOpen={() => setIsAddModalOpen(true)} />
+          </ButtonsWrapper>
         </Container>
         {loading && <Loader />}
         {error && <p>Что-то пошло не так</p>}
@@ -64,6 +74,10 @@ function NoticesPage() {
           <p>Not found</p>
         )}
       </MainContainer>
+      <ModalAddNotice
+        isModalOpen={isAddModalOpen}
+        setIsModalOpen={setIsAddModalOpen}
+      ></ModalAddNotice>
     </Section>
   );
 }

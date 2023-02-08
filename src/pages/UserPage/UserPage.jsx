@@ -49,7 +49,7 @@ const UserPage = () => {
               <UserData user={user} />
             </UserWrapper>
             <PetsWrapper>
-              <PetsData pets={user.pets} />
+              <PetsData />
             </PetsWrapper>
           </UserContainer>
         </MainContainer>
