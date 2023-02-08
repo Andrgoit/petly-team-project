@@ -100,10 +100,7 @@ export const StyledButtonSection = styled.div`
 `;
 
 export const Pictures = styled.div`
-  /* display: flex; */
-  /* flex-direction: column; */
   width: 280px;
-  /* height: min-content; */
   background: ${props => props.theme.colors.white};
   box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
   border-radius: 40px;
@@ -114,13 +111,10 @@ export const Pictures = styled.div`
   text-align: center;
 
   @media screen and (min-width: 768px) {
-    /* flex-direction: row; */
     width: 704px;
     padding: 20px;
-    /* text-align: center; */
   }
   @media screen and (min-width: 1300px) {
-    /* flex-direction: row; */
     width: 821px;
     padding: 20px;
   }

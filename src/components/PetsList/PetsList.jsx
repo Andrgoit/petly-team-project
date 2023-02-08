@@ -1,4 +1,3 @@
-import React from 'react';
 import PetsItem from 'components/PetsItem/PetsItem';
 
 export default function PetsList({ pets }) {

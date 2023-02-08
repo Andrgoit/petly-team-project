@@ -95,8 +95,7 @@ const authSlice = createSlice({
     });
 
     builder.addCase(getUser.fulfilled, (state, { payload }) => {
-      console.log(payload);
-      state.user = payload;
+      state.user = payload.user;
       state.isLoading = false;
     });
 
