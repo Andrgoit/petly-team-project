@@ -41,7 +41,7 @@ const UserPage = () => {
   return (
     <section>
 
-      {loading && <p>...Loading</p>}
+      {loading && <Loader/>}
       {error && <p>Oops!</p>}
       {!loading && user && isLogin && (
 
