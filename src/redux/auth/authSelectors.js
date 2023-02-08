@@ -12,4 +12,6 @@ export const selectAccessToken = state => state.auth.accessToken;
 
 export const getAllUserData = state => state.user.data; // ?
 
+export const selectUserPets = state => state.auth.user.pets;
+
 // export const selectRefreshToken = state => state.auth.refreshToken;

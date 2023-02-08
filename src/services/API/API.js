@@ -68,7 +68,7 @@ export const fetchPets = async credentials => {
 };
 
 export const fetchPetsDelete = async id => {
-  const { data } = await instance.delete(`/users/pets/${id}`);
+  const data = await instance.delete(`/users/pets/${id}`);
   return data;
 };
 
