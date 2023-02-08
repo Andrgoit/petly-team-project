@@ -56,7 +56,7 @@ export const HomeSection = styled.section`
     }
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1300px) {
     width: -webkit-fill-available;
     height: calc(100% - 69px);
     background-size: contain;
