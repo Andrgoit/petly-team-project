@@ -9,6 +9,7 @@ import {
 } from './NoticesPage.styled';
 import { MainContainer } from '../../components/App.styled';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
+
 // import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
 import Loader from 'components/Loader/Loader';
 import AddNoticeButton from 'components/AddNoticeButton/AddNoticeButton';
