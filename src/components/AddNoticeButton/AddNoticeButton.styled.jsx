@@ -28,8 +28,8 @@ export const Wrapper = styled.div`
       color: #f59256;
     }
   }
-  @media (min-width: 1300px) {
-    width: auto;
+  @media (min-width: 1280px) {
+   
   }
 `;
 

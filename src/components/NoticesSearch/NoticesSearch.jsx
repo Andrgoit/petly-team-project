@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Input, Button } from './NoticesSearch.styled';
+import { Form, Input, Button, Wrapper } from './NoticesSearch.styled';
 import { MdSearch, MdHighlightOff } from 'react-icons/md';
 import { useMediaQuery } from 'react-responsive';
 
@@ -29,28 +29,30 @@ function NoticesSearch ({ setQ })  {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Input
-        onChange={handleChange}
-        placeholder="Search"
-        value={inputText}
-      ></Input>
-      {inputText.length ? (
-        <Button type="button" onClick={handleClick}>
-          {!isDesktop ? (
-            <MdHighlightOff style={{ width: '20', height: '20' }} />
-          ) : (
-            <MdHighlightOff style={{ width: '25', height: '25' }} />
-          )}
-        </Button>
-      ) : (
-        <Button type="submit">
-          {!isDesktop ? (
-            <MdSearch style={{ width: '20', height: '20' }} />
-          ) : (
-            <MdSearch style={{ width: '25', height: '25' }} />
-          )}
-        </Button>
-      )}
+      <Wrapper style={{ position: 'relative' }}>
+        <Input
+          onChange={handleChange}
+          placeholder="Search"
+          value={inputText}
+        ></Input>
+        {inputText.length ? (
+          <Button type="button" onClick={handleClick}>
+            {!isDesktop ? (
+              <MdHighlightOff style={{ width: '20', height: '20' }} />
+            ) : (
+              <MdHighlightOff style={{ width: '25', height: '25' }} />
+            )}
+          </Button>
+        ) : (
+          <Button type="submit">
+            {!isDesktop ? (
+              <MdSearch style={{ width: '20', height: '20' }} />
+            ) : (
+              <MdSearch style={{ width: '25', height: '25' }} />
+            )}
+          </Button>
+        )}
+      </Wrapper>
     </Form>
   );
 };

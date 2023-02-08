@@ -1,11 +1,26 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import numWords from 'num-words';
+import noImage from '../../img/noImage.png';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { selectIsLoggedIn } from 'redux/auth/authSelectors';
+import {
+  addNoticeToFavorite,
+  removeNoticeWithFavorite,
+} from 'redux/auth/authOperations';
+import { removeNotice } from 'redux/notices/notices-operation';
+import { selectUserData } from 'redux/auth/authSelectors';
+
+
+import ModalNotice from 'components/ModalNotice/ModalNotice';
+
 import {
   Item,
   LearnMoreBtn,
-  Wrapper,
   Title,
   Text,
-  Container,
+  InfoWrapper,
   CategoryTitle,
   AddToFavoriteBtn,
   Span,
@@ -14,22 +29,12 @@ import {
   DeleteBtn,
   DelIcon,
   FavoriteIcon,
+  BtnWrapper,
 } from './NoticeCategoryItem.styled';
 
-import numWords from 'num-words';
-import ModalNotice from 'components/ModalNotice/ModalNotice';
-import noImage from '../../img/noImage.png';
-import {
-  addNoticeToFavorite,
-  removeNoticeWithFavorite,
-} from 'redux/auth/authOperations';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeNotice } from 'redux/notices/notices-operation';
-import { selectUserData } from 'redux/auth/authSelectors';
-
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 function NoticeCategoryItem(notices) {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(selectUserData);
@@ -80,9 +85,14 @@ function NoticeCategoryItem(notices) {
       return category;
     }
   }
-  // url === null ? url === undefined : noImage;
+  
   const onClickFavoriteButton = () => {
-    if (!isFavorite) {
+     if (!isLoggedIn) {
+       return toast.error(
+         'You need to authorize before adding notices to favorite.');
+     }
+
+    else if (!isFavorite) {
       dispatch(addNoticeToFavorite(_id));
     } else {
       dispatch(removeNoticeWithFavorite(_id));
@@ -94,24 +104,14 @@ function NoticeCategoryItem(notices) {
   };
 
   return (
-    <Item key={_id}>
-      <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
-      <CategoryTitle>{changeCategory()}</CategoryTitle>
-      {/* <AddToFavoriteBtn
-        onClick={() => {
-          isLogined
-            ? dispatch(addToFavorite(_id))
-            : Notify.warning('Sorry, you should to sing in');
-        }}
-      >
-        <AddIcon />
-      </AddToFavoriteBtn> */}
-
-      <AddToFavoriteBtn onClick={onClickFavoriteButton}>
-        {isFavorite ? <FavoriteIcon /> : <AddIcon />}
-      </AddToFavoriteBtn>
-      <Container>
-        <Wrapper>
+    <>
+      <Item key={_id}>
+        <Image src={url ?? noImage} alt="pet" minwidth={288} height={288} />
+        <CategoryTitle>{changeCategory()}</CategoryTitle>
+        <AddToFavoriteBtn onClick={onClickFavoriteButton}>
+          {isFavorite ? <FavoriteIcon /> : <AddIcon />}
+        </AddToFavoriteBtn>
+        <InfoWrapper>
           <Title>{title}</Title>
           <Text>
             <Span>Breed:</Span>
@@ -131,30 +131,32 @@ function NoticeCategoryItem(notices) {
               {price ? `${price} $` : '--------'}
             </Text>
           )}
-        </Wrapper>
-        <LearnMoreBtn onClick={() => setIsModalOpen(true)}>
-          Learn more
-        </LearnMoreBtn>
+        </InfoWrapper>
+        <BtnWrapper>
+          <LearnMoreBtn onClick={() => setIsModalOpen(true)}>
+            Learn more
+          </LearnMoreBtn>
 
-        <DeleteBtn
-          onClick={onClickDeleteButton}
-          style={isDisplayed ? {} : { display: 'none' }}
-        >
-          Delete
-          <DelIcon />
-        </DeleteBtn>
-      </Container>
-      {isModalOpen && (
-        <ModalNotice
-          id={_id}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          onClickDelete={onClickDeleteButton}
-          addToFavorite={onClickFavoriteButton}
-          isFavorite={isFavorite}
-        />
-      )}
-    </Item>
+          <DeleteBtn
+            onClick={onClickDeleteButton}
+            style={isDisplayed ? {} : { display: 'none' }}
+          >
+            Delete
+            <DelIcon />
+          </DeleteBtn>
+        </BtnWrapper>
+        {isModalOpen && (
+          <ModalNotice
+            id={_id}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            onClickDelete={onClickDeleteButton}
+            addToFavorite={onClickFavoriteButton}
+            isFavorite={isFavorite}
+          />
+        )}
+      </Item>
+    </>
   );
 }
 
