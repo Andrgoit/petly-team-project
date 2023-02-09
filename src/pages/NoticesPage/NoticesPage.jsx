@@ -47,6 +47,13 @@ function NoticesPage() {
     dispatch(getNotices({ categoryName, token }));
   }, [dispatch, categoryName, query, token]);
 
+  useEffect(() => {
+    if (categoryName === 'favorite') {
+      dispatch(getNotices({ categoryName, token }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, favorite, token]);
+
   const filteredNotices = () => {
     const data = notices.filter(
       el =>
