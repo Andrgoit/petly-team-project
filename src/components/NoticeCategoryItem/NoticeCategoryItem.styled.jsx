@@ -59,8 +59,7 @@ export const LearnMoreBtn = styled.button`
     margin-top: 20px;
   }
 
-  &:hover,
-  :focus {
+  &:hover {
     background: rgba(255, 97, 1, 1);
     color: ${props => props.theme.colors.white};
   }
