@@ -19,7 +19,7 @@ import {
 function PetsData() {
   const [showModal, setShowModal] = useState(false);
   const pets = useSelector(selectUserPets);
-  const petsLeng = pets.length;
+  const petsLeng = pets?.length;
 
   const onClose = () => {
     setShowModal(true);

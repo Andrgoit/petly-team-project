@@ -9,6 +9,7 @@ import {
   clearAuthHeader,
   fetchRemoveWithFavorite,
   fetchAddToFavorite,
+  updateUserData,
   fetchPetsDelete,
   fetchPetsAdd,
 } from 'services/API/API';
@@ -98,6 +99,29 @@ export const getUser = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
+      throw rejectWithValue(error);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async ({ value, token }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      await updateUserData(value, config);
+      const data = await fetchUserData();
+
+      return data;
+    } catch (error) {
+      toast.error(error.message);
       throw rejectWithValue(error);
     }
   }

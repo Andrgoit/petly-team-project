@@ -1,334 +1,185 @@
-import React from 'react';
 import { useState } from 'react';
-import './UserDataItem.styled.css';
-import cameraLogo from '../../img/Camera_2.svg';
-import { ReactComponent as Pencil } from '../../img/ci_edit.svg';
-import { ReactComponent as DoneButton } from '../../img/done-button.svg';
-import logoutBtn from '../../img/logoutBtn.png';
-// import { OnLogout } from 'components/Logout/Logout';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/auth/authOperations';
+import { Form, Formik, ErrorMessage } from 'formik';
+import * as yup from 'yup';
+import { parse, isDate } from 'date-fns';
+import { toast } from 'react-toastify';
+import {
+  BtnImage,
+  BtnImageDis,
+  BtnImageDone,
+  FieldText,
+  StyledBtn,
+  StyledInput,
+  StyledValue,
+  Wrapper,
+} from './UserDataItem.styled';
 
-export const UserData = ({ user }) => {
-  const { avatar, name, email, birthdate, location, phone } = user;
-  const [userName, setUserName] = useState(name || '-');
-  const [userEmail, setUserEmail] = useState(email || '-');
-  const [userBirthday, setUserBirthday] = useState(birthdate || '-');
-  const [userPhone, setUserPhone] = useState(phone || '-');
-  const [userCity, setUserCity] = useState(location || '-');
+const today = new Date();
+const nameSchema = yup.object({
+  name: yup
+    .string()
+    .min(2)
+    .max(16)
+    .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
+    .required('Field is required!'),
+});
+const emailSchema = yup.object({
+  email: yup.string().email('Invalid email').required('Email is required'),
+});
+const citySchema = yup.object({
+  city: yup
+    .string()
+    .min(2)
+    .max(36)
+    .matches(
+      /(\b[a-zA-Z]+(,\s*)\s*[a-zA-Z]+\b)/g,
+      'Only in format "City, Region"'
+    )
+    .required('Field is required!'),
+});
+const phoneSchema = yup.object({
+  phone: yup
+    .string()
+    .min(13, 'Phone should be in format +380671234567')
+    .max(13, 'Phone should be in format +380671234567')
+    .matches(
+      /^\+[0-9]{3}\d+\d{3}\d{2}\d{2}/,
+      'Phone should be in format +380671234567'
+    ),
+});
+const birthdaySchema = yup.object({
+  birthday: yup
+    .date()
+    .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
+      if (originalValue) {
+        return originalValue.length === 10;
+      }
+    })
+    .transform(function (_, originalValue) {
+      const parsedDate = isDate(originalValue)
+        ? originalValue
+        : parse(originalValue, 'dd.MM.yyyy', new Date());
 
-  const [iconStyle, setIconStyle] = useState('edit-btn');
-  const [editBtnIsDisabled, setEditBtnIsDisabled] = useState(false);
+      return parsedDate;
+    })
+    .typeError('Please enter a valid date')
+    .required()
+    .min('01.01.1950', 'Date is too early')
+    .max(today),
+});
+const capitalize = s => (s && s[0].toUpperCase() + s.slice(1)) || '';
 
-  const dispatch = useDispatch();
-
-  const onLogout = () => {
-    dispatch(logout());
-  };
-
-  const onEditButtonStyle = e => {
-    setIconStyle('edit-btn-react');
-    setEditBtnIsDisabled(true);
-  };
-
-  const onInputChange = e => {
-    const key = e.target.name;
-    switch (key) {
+const UserDataItem = ({
+  field,
+  initValue,
+  setIsDisabledBtn,
+  isDisabledBtn,
+  setUser,
+}) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const addSchema = n => {
+    switch (n) {
       case 'name':
-        return setUserName(e.target.value);
+        return nameSchema;
       case 'email':
-        return setUserEmail(e.target.value);
-      case 'birthday':
-        return setUserBirthday(e.target.value);
-      case 'phone':
-        return setUserPhone(e.target.value);
+        return emailSchema;
+
       case 'city':
-        return setUserCity(e.target.value);
+        return citySchema;
+
+      case 'birthday':
+        return birthdaySchema;
+
+      case 'phone':
+        return phoneSchema;
+
       default:
-        return;
+        return nameSchema;
     }
   };
-
-  const onEditInfo = e => {
-    console.log(e.currentTarget.children[2].children[0].children[0].fill);
-    if (
-      e.target.className.baseVal === 'edit-btn' ||
-      e.target.className === 'data-edit-info'
-    ) {
-      const activeInput = e.currentTarget.children[1];
-      activeInput.disabled = false;
-      activeInput.className = 'data-input-active';
-      const disactiveButton = e.currentTarget.children[2];
-      disactiveButton.className = 'button-none';
-      const activeButton = e.currentTarget.children[3];
-      activeButton.style.display = 'block';
-      setEditBtnIsDisabled(true);
-      setIconStyle('edit-btn-react');
-    }
-    return;
-  };
-
-  const onChangedInput = e => {
-    e.preventDefault();
-    if ((e.currentTarget.children[0].htmlFor = 'name')) {
-      const input = e.currentTarget.children[0].children[1];
-      input.disabled = true;
-      input.className = 'data-input';
-      const activeButton = e.currentTarget.children[0].children[3];
-      activeButton.style.display = 'none';
-      const disabledButton = e.currentTarget.children[0].children[2];
-      disabledButton.className = 'data-edit-info';
-      setIconStyle('edit-btn');
-    }
-    if ((e.currentTarget.children[1].htmlFor = 'email')) {
-      const input = e.currentTarget.children[1].children[1];
-      input.disabled = true;
-      input.className = 'data-input';
-      const activeButton = e.currentTarget.children[1].children[3];
-      activeButton.style.display = 'none';
-      const disabledButton = e.currentTarget.children[1].children[2];
-      disabledButton.className = 'data-edit-info';
-      setIconStyle('edit-btn');
-    }
-    if ((e.currentTarget.children[2].htmlFor = 'birthday')) {
-      const input = e.currentTarget.children[2].children[1];
-      input.disabled = true;
-      input.className = 'data-input';
-      const activeButton = e.currentTarget.children[2].children[3];
-      activeButton.style.display = 'none';
-      const disabledButton = e.currentTarget.children[2].children[2];
-      disabledButton.className = 'data-edit-info';
-      setIconStyle('edit-btn');
-    }
-    if ((e.currentTarget.children[3].htmlFor = 'phone')) {
-      const input = e.currentTarget.children[3].children[1];
-      input.disabled = true;
-      input.className = 'data-input';
-      const activeButton = e.currentTarget.children[3].children[3];
-      activeButton.style.display = 'none';
-      const disabledButton = e.currentTarget.children[3].children[2];
-      disabledButton.className = 'data-edit-info';
-      setIconStyle('edit-btn');
-    }
-    if ((e.currentTarget.children[3].htmlFor = 'city')) {
-      const input = e.currentTarget.children[4].children[1];
-      input.disabled = true;
-      input.className = 'data-input';
-      const activeButton = e.currentTarget.children[4].children[3];
-      activeButton.style.display = 'none';
-      const disabledButton = e.currentTarget.children[4].children[2];
-      disabledButton.className = 'data-edit-info';
-      setIconStyle('edit-btn');
-    }
-  };
-
   return (
-    <div className="user-data-container" key="user-data-container">
-      <h3 className="user-data-title" key="title">
-        My information:
-      </h3>
-      <div className="user-data" key="user-data">
-        <div className="photo-container" key="photo-container">
-          <img
-            src={avatar}
-            className="avatar"
-            alt="avatar"
-            key="photo-container"
-          ></img>
-          <label
-            className="edit-photo-btn-container"
-            key="edit-photo-btn-container"
-          >
-            <input type="file" name="input-avatar" key="input-avatar" />
-            <button className="data-edit-photo" key="data-edit-photo">
-              <img
-                src={cameraLogo}
-                alt="camera logo"
-                className="camera-logo"
-                key="camera-logo"
-              ></img>
-              Edit photo
-            </button>
-          </label>
-        </div>
-        <form
-          className="data-container"
-          onSubmit={onChangedInput}
-          key="data-container"
-        >
-          <label
-            className="input-title"
-            htmlFor="name"
-            key="input-title1"
-            onClick={onEditInfo}
-          >
-            <span className="field" key="field1">
-              Name:
-            </span>
-            <input
-              type="text"
-              name="name"
-              value={userName}
-              className="data-input"
-              key="data-input1"
-              disabled
-              onChange={onInputChange}
+    <Formik
+      validationSchema={addSchema(field)}
+      initialValues={initValue}
+      validateOnBlur={false}
+      validateOnChange={false}
+      onSubmit={values => {
+        if (Object.keys(values)[0] === 'birthday') {
+          setUser({ birthdate: parseDateToISO(values.birthday) });
+          setIsEdit(false);
+          setIsDisabledBtn(false);
+          return;
+        }
+        if (Object.keys(values)[0] === 'city') {
+          setUser({ location: values.city });
+          setIsEdit(false);
+          setIsDisabledBtn(false);
+          return;
+        }
+
+        setUser(values);
+        setIsEdit(false);
+        setIsDisabledBtn(false);
+      }}
+    >
+      {({ values, handleSubmit }) => (
+        <Form>
+          <Wrapper>
+            <FieldText>{capitalize(field)}:</FieldText>
+            {isEdit ? (
+              <StyledInput autoComplete="off" name={field} />
+            ) : (
+              <StyledValue>{values[field]}</StyledValue>
+            )}
+
+            <ErrorMessage
+              name={field}
+              render={msg => (
+                <div style={{ display: 'none', opacity: 0 }}>
+                  {toast.error(msg, { autoClose: 5000 })}
+                </div>
+              )}
             />
-            <button
-              type="button"
-              name="edit-button"
-              className="data-edit-info"
-              onClick={onEditButtonStyle}
-              disabled={editBtnIsDisabled}
-              key="edit-button1"
-            >
-              <Pencil className={iconStyle} name="edit-icon" key="edit-icon1" />
-            </button>
-            <button type="submit" className="done-button" key="done-button1">
-              <DoneButton className="done-icon" key="done-icon1" />
-            </button>
-          </label>
-          <label
-            className="input-title"
-            htmlFor="email"
-            key="input-title2"
-            onClick={onEditInfo}
-          >
-            <span className="field" key="field2">
-              Email:
-            </span>
-            <input
-              type="email"
-              name="email"
-              value={userEmail}
-              className="data-input"
-              disabled
-              onChange={onInputChange}
-              key="data-input2"
-            />
-            <button
-              type="button"
-              className="data-edit-info"
-              onClick={onEditButtonStyle}
-              disabled={editBtnIsDisabled}
-              key="edit-button2"
-            >
-              <Pencil className={iconStyle} key="edit-icon2" />
-            </button>
-            <button type="submit" className="done-button" key="done-button2">
-              <DoneButton className="done-icon" key="done-icon2" />
-            </button>
-          </label>
-          <label
-            className="input-title"
-            htmlFor="birthday"
-            onClick={onEditInfo}
-            key="input-title3"
-          >
-            <span className="field" key="field3">
-              Birthday:
-            </span>
-            <input
-              type="text"
-              name="birthday"
-              value={userBirthday}
-              className="data-input"
-              disabled
-              onChange={onInputChange}
-              key="data-input3"
-            />
-            <button
-              type="button"
-              className="data-edit-info"
-              onClick={onEditButtonStyle}
-              disabled={editBtnIsDisabled}
-              key="edit-button3"
-            >
-              <Pencil className={iconStyle} key="edit-icon3" />
-            </button>
-            <button type="submit" className="done-button" key="done-button3">
-              <DoneButton className="done-icon" key="done-icon3" />
-            </button>
-          </label>
-          <label
-            className="input-title"
-            htmlFor="phone"
-            key="input-title4"
-            onClick={onEditInfo}
-          >
-            <span className="field" key="field4">
-              Phone:
-            </span>
-            <input
-              type="text"
-              name="phone"
-              value={userPhone}
-              className="data-input"
-              disabled
-              onChange={onInputChange}
-              key="data-input4"
-            />
-            <button
-              type="button"
-              className="data-edit-info"
-              onClick={onEditButtonStyle}
-              disabled={editBtnIsDisabled}
-              key="edit-button4"
-            >
-              <Pencil className={iconStyle} key="edit-icon4" />
-            </button>
-            <button type="submit" className="done-button" key="done-button4">
-              <DoneButton className="done-icon" key="done-icon4" />
-            </button>
-          </label>
-          <label
-            className="input-title"
-            htmlFor="city"
-            key="input-title5"
-            onClick={onEditInfo}
-          >
-            <span className="field" key="field5">
-              City:
-            </span>
-            <input
-              type="text"
-              name="city"
-              value={userCity}
-              className="data-input"
-              disabled
-              onChange={onInputChange}
-              key="data-input5"
-            />
-            <button
-              type="button"
-              className="data-edit-info"
-              onClick={onEditButtonStyle}
-              disabled={editBtnIsDisabled}
-              key="edit-button5"
-            >
-              <Pencil className={iconStyle} key="edit-icon5" />
-            </button>
-            <button type="submit" className="done-button" key="done-button5">
-              <DoneButton className="done-icon" key="done-button5" />
-            </button>
-          </label>
-          <button
-            className="log-out-btn"
-            key="log-out-btn"
-            onClick={() => onLogout()}
-          >
-            <img
-              src={logoutBtn}
-              alt="logout-button"
-              className="logout-button"
-              key="logout-button"
-            ></img>
-            Log out
-          </button>
-        </form>
-      </div>
-    </div>
+            {!isEdit && !isDisabledBtn && (
+              <StyledBtn
+                type="button"
+                onClick={() => {
+                  setIsEdit(true);
+                  setIsDisabledBtn(true);
+                }}
+              >
+                <BtnImage />
+              </StyledBtn>
+            )}
+            {isDisabledBtn && !isEdit && (
+              <StyledBtn type="button" disabled isDisabled>
+                <BtnImageDis />
+              </StyledBtn>
+            )}
+            {isEdit && (
+              <StyledBtn type="submit" onClick={handleSubmit}>
+                <BtnImageDone />
+              </StyledBtn>
+            )}
+          </Wrapper>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
-export default UserData;
+export default UserDataItem;
+
+function parseDateToISO(str) {
+  if (str === '00.00.0000') {
+    return null;
+  }
+  const dateParts = str.split('.');
+  const formattedDate = new Date(
+    +dateParts[2],
+    +dateParts[1] - 1,
+    +dateParts[0]
+  );
+
+  return formattedDate.toISOString();
+}

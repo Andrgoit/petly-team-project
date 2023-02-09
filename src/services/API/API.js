@@ -27,6 +27,12 @@ export const fetchUserData = async () => {
   return data;
 };
 
+export const updateUserData = async (values, config) => {
+  const { data } = await instance.put('/auth/update', values, config);
+
+  return data;
+};
+
 export const registerUser = async credentials => {
   const { data } = await instance.post('/auth/register', credentials);
   // setAuthHeader(data.token);
