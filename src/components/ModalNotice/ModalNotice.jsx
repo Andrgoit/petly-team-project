@@ -22,9 +22,10 @@ import {
   DesktopWrapper,
   RightContent,
   StyledTelLink,
+  StyledLink,
 } from './ModalNotice.styled';
 import ModalCloseBtn from 'components/ModalCloseBtn/ModalCloseBtn';
-import heartIcon from '../../img/heart-icon.png';
+
 import { DelIcon } from 'components/NoticeCategoryItem/NoticeCategoryItem.styled';
 import './modal.css';
 
@@ -125,8 +126,16 @@ const ModalNotice = ({
                     <ContentText>{noticeInfo.notice.breed}</ContentText>
                     <ContentText>{noticeInfo.notice.location}</ContentText>
                     <ContentText>{noticeInfo.notice.sex}</ContentText>
-                    <ContentText>{noticeInfo.user.email}</ContentText>
-                    <ContentText>{noticeInfo.user.phone}</ContentText>
+                    <ContentText>
+                      <StyledLink href={`mailto: ${noticeInfo.user.email}`}>
+                        {noticeInfo.user.email}
+                      </StyledLink>
+                    </ContentText>
+                    <ContentText>
+                      <StyledLink href={`tel:${noticeInfo.user.phone}`}>
+                        {noticeInfo.user.phone}
+                      </StyledLink>
+                    </ContentText>
                     {noticeInfo.notice.category === 'sell' && (
                       <ContentText>{noticeInfo.notice.price}$</ContentText>
                     )}
@@ -144,12 +153,7 @@ const ModalNotice = ({
               </StyledTelLink>
               <NoticeModalBtn onClick={addToFavorite}>
                 <span>{isFavorite ? 'Remove from' : 'Add to'}</span>
-                <FavoriteBtnImg
-                  width="13px"
-                  height="12px"
-                  src={heartIcon}
-                  alt="heart icon"
-                />{' '}
+                <FavoriteBtnImg />{' '}
               </NoticeModalBtn>
               {user?.email === noticeInfo.user.email && (
                 <NoticeModalBtn

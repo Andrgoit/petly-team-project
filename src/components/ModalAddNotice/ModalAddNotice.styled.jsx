@@ -189,7 +189,7 @@ export const MainNoticeBtn = styled.button`
     margin-bottom: 12px;
     @media (min-width: 768px) {
       margin-bottom: 0px;
-      margin-right: 12px;
+      margin-left: 12px;
     }
   };
   @media (min-width: 768px){
@@ -216,6 +216,9 @@ export const MainBtnsWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  @media (min-width: 768px) {
+    flex-direction: row-reverse;
+  }
 `;
 
 export const StyledForm = styled(Form)`

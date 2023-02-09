@@ -24,6 +24,7 @@ import { ReactComponent as PlusImg } from '../../img/add-file.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNotice } from 'redux/notices/notices-operation';
 import { selectAccessToken } from 'redux/auth/authSelectors';
+import { toast } from 'react-toastify';
 
 const validationSchema = yup.object({
   sex: yup.string().required('Field is required!'),
@@ -92,6 +93,7 @@ const SecondStep = ({
     if (inputName === 'location') {
       value = makeFirstUpperCaseAndAfterCommas(value);
     }
+
     setFieldValue(inputName, value);
     setFormValues(values => ({ ...values, [inputName]: value }));
   };
@@ -102,13 +104,13 @@ const SecondStep = ({
       initialValues={{
         ...formValues,
         sellCategory: formValues.category === 'sell' ? true : false,
-        price: formValues.sellCategory ? formValues.price : '',
+        price: formValues.category === 'sell' ? formValues.price : '',
       }}
       onSubmit={async values => {
         const formData = (({ sellCategory, ...o }) => o)(values);
         const valuesToSend = {
           ...formData,
-          price: formValues.sellCategory ? formValues.price : null,
+          price: formValues.category === 'sell' ? formValues.price : null,
           birthdate: parseDateToISO(formValues.birthdate),
         };
         try {
@@ -119,7 +121,7 @@ const SecondStep = ({
           closeModal();
           setIsLoading(false);
         } catch (error) {
-          console.log(error.message);
+          toast.error(error.message);
           setIsLoading(false);
         }
       }}
