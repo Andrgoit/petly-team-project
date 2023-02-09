@@ -37,7 +37,7 @@ function OurFriensItem({
     return <AdressLink href={str}>{phone}</AdressLink>;
   };
   const EmailTo = () => {
-    const emailStr = 'mailto:' + `${email}`;
+    const emailStr = 'mailto:'`${email}`;
     console.log(emailStr);
     return <AdressLink href={emailStr}>{email}</AdressLink>;
   };
