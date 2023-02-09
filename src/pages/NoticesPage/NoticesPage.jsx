@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MainContainer } from '../../components/App.styled';
 
-
 import { NoticesCategoriesList } from '../../components/NoticesCategoriesList/NoticesCategoriesList';
 import {
   PageTitle,
@@ -10,7 +9,6 @@ import {
   ButtonsWrapper,
   ContainerWrapp,
   NotFoundText,
-  
 } from './NoticesPage.styled';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 
@@ -25,7 +23,6 @@ import {
   getError,
 } from 'redux/notices/notices-selectors';
 
-
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
 import { selectUserData, selectAccessToken } from 'redux/auth/authSelectors';
 
@@ -39,6 +36,7 @@ function NoticesPage() {
   const notices = useSelector(getAllNotices);
   const { favorite } = useSelector(selectUserData) || [];
   const loading = useSelector(getLoading);
+
   const error = useSelector(getError);
 
   const [query, setQ] = useState('');

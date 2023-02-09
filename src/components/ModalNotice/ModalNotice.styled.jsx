@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ReactComponent as HeartLogo } from '../../img/heart-icon.svg';
 
 export const StyledImg = styled.img`
   width: 100%;
@@ -20,7 +21,8 @@ export const StyledSticker = styled.span`
   height: 28px;
   position: absolute;
   top: 20px;
-  padding: 6px 53px 6px 20px;
+  padding: 6px 0px;
+  text-align: center;
   border-radius: 0 20px 20px 0;
 `;
 
@@ -90,16 +92,32 @@ export const NoticeModalBtn = styled.button`
   border: 2px solid #f59256;
   cursor: pointer;
   transition: all 200ms linear;
+  color: #f59256;
+  &:hover,
+  :focus {
+    background-color: #f59256;
+    color: #ffffff;
+  }
+  &:nth-child(2) span {
+    color: #111111;
+  }
+  &:nth-child(2):hover,
+  :focus {
+    & span {
+      color: #ffffff;
+    }
+  }
+
   &:nth-child(3) {
     margin-top: 12px;
     color: #f59256;
+    &:hover,
+    :focus {
+      background-color: #fdf7f2;
+      color: #111111;
+    }
   }
 
-  &:hover,
-  :focus {
-    background-color: #fdf7f2;
-    color: #111111;
-  }
   @media (min-width: 768px) {
     width: 160px;
     &:nth-child(3) {
@@ -121,9 +139,9 @@ export const BtnWrapper = styled.div`
   }
 `;
 
-export const FavoriteBtnImg = styled.img`
-  width: 13.33px;
-  height: 11.89px;
+export const FavoriteBtnImg = styled(HeartLogo)`
+  width: 16px;
+  height: 16px;
   margin-left: 5px;
 `;
 
@@ -168,6 +186,11 @@ export const RightContent = styled.div`
   @media (min-width: 768px) {
     margin-left: 50px;
   }
+`;
+
+export const StyledLink = styled.a`
+  font-weight: 700;
+  color: #f59256;
 `;
 
 export const customStyles = {
