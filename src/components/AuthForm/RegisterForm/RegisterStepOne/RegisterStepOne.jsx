@@ -14,9 +14,8 @@ import {
 } from '../../AuthForm.styled';
 
 export const RegisterStepOne = ({ next, data }) => {
-  // const passwordRexExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
-  // eslint-disable-next-line
-  const emailRexExp = /^(\w{2,})+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const emailRexExp =
+    /^([a-z0-9_-]+\.)*([a-z0-9_-]{2,})+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
   const passwordRexExp = /^\S{7,32}$/;
 
   const [showPassword, setShowPassword] = useState(true);
@@ -35,7 +34,7 @@ export const RegisterStepOne = ({ next, data }) => {
       .matches(/^[^ ]{7,32}$/, 'The password should not contain a space')
       .matches(
         passwordRexExp,
-        'Password must contain any alphabetic characters'
+        'Password must contain any alphabetic characters and special characters'
       )
       .required('Password is required'),
     confirmPassword: yup
