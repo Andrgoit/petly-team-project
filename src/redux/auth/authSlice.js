@@ -8,6 +8,8 @@ import {
   addNoticeToFavorite,
   removeNoticeWithFavorite,
   updateUser,
+  deletePet,
+  addPet,
 } from './authOperations';
 
 const initialState = {
@@ -96,7 +98,7 @@ const authSlice = createSlice({
     });
 
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-      state.user = payload;
+      state.user = payload.user;
       state.isLoggedIn = true;
       state.isLoading = false;
       state.isRefreshing = false;
@@ -140,6 +142,26 @@ const authSlice = createSlice({
     );
     builder.addCase(removeNoticeWithFavorite.rejected, (state, { payload }) => {
       state.error = payload;
+    });
+
+    //add pet
+    builder.addCase(addPet.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(addPet.fulfilled, (state, { payload }) => {
+      state.user.pets.push(payload);
+      state.isLoading = false;
+      state.error = false;
+    });
+    builder.addCase(addPet.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    });
+
+    builder.addCase(deletePet.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = null;
+      state.user.pets = state.user.pets.filter(pet => pet._id !== payload);
     });
   },
 });

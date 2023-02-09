@@ -10,6 +10,8 @@ import {
   fetchRemoveWithFavorite,
   fetchAddToFavorite,
   updateUserData,
+  fetchPetsDelete,
+  fetchPetsAdd,
 } from 'services/API/API';
 
 // Регистрация
@@ -93,7 +95,7 @@ export const getUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await fetchUserData();
-
+      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -114,7 +116,8 @@ export const updateUser = createAsyncThunk(
         },
       };
 
-      const data = await updateUserData(value, config);
+      await updateUserData(value, config);
+      const data = await fetchUserData();
 
       return data;
     } catch (error) {
@@ -148,6 +151,45 @@ export const removeNoticeWithFavorite = createAsyncThunk(
       return id;
     } catch (error) {
       throw rejectWithValue(error.message);
+    }
+  }
+);
+
+//addPets
+export const addPet = createAsyncThunk(
+  'auth/addPet',
+  async ({ dataForm, token }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      const res = await fetchPetsAdd(dataForm, config);
+      toast.success('Congratulations! You have added your pet');
+      return res;
+    } catch ({ response }) {
+      const error = {
+        status: response.status,
+        message: response.data.message,
+      };
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+//удаление питомца
+export const deletePet = createAsyncThunk(
+  'users/deletePet',
+  async (id, { rejectWithValue }) => {
+    try {
+      await fetchPetsDelete(id);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

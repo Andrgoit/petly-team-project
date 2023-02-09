@@ -1,4 +1,8 @@
 import { useState } from 'react';
+
+import { useSelector } from 'react-redux';
+import { selectUserPets } from '../../redux/auth/authSelectors';
+
 import { TfiPlus } from 'react-icons/tfi';
 import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import PetsList from '../PetsList/PetsList';
@@ -12,8 +16,10 @@ import {
   StyledButtonSection,
 } from './PetsData.styled';
 
-function PetsData({ pets, element }) {
+function PetsData() {
   const [showModal, setShowModal] = useState(false);
+  const pets = useSelector(selectUserPets);
+  const petsLeng = pets?.length;
 
   const onClose = () => {
     setShowModal(true);
@@ -30,12 +36,12 @@ function PetsData({ pets, element }) {
           </AddButton>
         </ButtonWrapper>
       </StyledButtonSection>
-      {/* <PetsList pets={pets} /> */}
+
       {showModal && <ModalAddsPet setShowModal={setShowModal} />}
-      {!element ? (
-        <Pictures>You don't have any pets added.</Pictures>
-      ) : (
+      {petsLeng > 0 ? (
         <PetsList pets={pets} />
+      ) : (
+        <Pictures>You don't have any pets added.</Pictures>
       )}
     </Wrapper>
   );

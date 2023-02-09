@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// import { toast } from 'react-toastify';
 
 import { createPortal } from 'react-dom';
-import { addPet } from '../../redux/user/pets/petOperations';
+import { addPet } from '../../redux/auth/authOperations';
 
 import ModalStepOne from './ModalStep/ModalStepOne';
 import ModalStepTwo from './ModalStep/ModalStepTwo';
 import { GrClose } from 'react-icons/gr';
+
+import { selectAccessToken } from 'redux/auth/authSelectors';
 
 import {
   ModalOverlay,
   ModalContent,
   TitleModal,
   IconClose,
-  // Icon,
 } from './ModalAddsPet.styled';
 
 const modalRoot = document.getElementById('modal-root');
 
 export default function ModalAddsPet({ setShowModal }) {
   const dispatch = useDispatch();
+  const token = useSelector(selectAccessToken);
 
   const [formData, setFormData] = useState({
     name: '',
-    date: '',
+    birthdate: '',
     breed: '',
-    avatar: '',
+    avatar: null,
     comments: '',
   });
   const [page, setPage] = useState(0);
@@ -49,9 +52,23 @@ export default function ModalAddsPet({ setShowModal }) {
   };
 
   const fetchPets = form => {
-    console.log(form);
-    dispatch(addPet({ form }));
+    const dataForm = {
+      ...form,
+      birthdate: parseDateToISO(form.birthdate),
+    };
+    dispatch(addPet({ dataForm, token }));
   };
+
+  function parseDateToISO(str) {
+    const dateParts = str.split('.');
+    const formattedDate = new Date(
+      +dateParts[2],
+      dateParts[1] - 1,
+      +dateParts[0]
+    );
+
+    return formattedDate.toISOString();
+  }
 
   const onClose = () => {
     setShowModal(false);
@@ -63,10 +80,8 @@ export default function ModalAddsPet({ setShowModal }) {
 
     if (final) {
       try {
-        console.log(newData);
         await fetchPets(newData);
         onClose();
-        return;
       } catch (error) {
         console.log(error);
       }

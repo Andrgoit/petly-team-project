@@ -11,14 +11,15 @@ export const NoticesList = styled.ul`
   position: absolute;
   left: 50%;
   transform: translate(-50%);
+  margin-top: 18px;
 
   @media only screen and (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 40px;
+    margin-top: 44px;
   }
   @media screen and (min-width: 1300px) {
     grid-template-columns: repeat(4, 1fr);
-    margin-top: 60px;
+    margin-top: 44px;
   }
 `;

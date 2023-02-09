@@ -15,6 +15,8 @@ import {
 
 export const RegisterStepOne = ({ next, data }) => {
   // const passwordRexExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+  // eslint-disable-next-line
+  const emailRexExp = /^(\w{2,})+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const passwordRexExp = /^\S{7,32}$/;
 
   const [showPassword, setShowPassword] = useState(true);
@@ -24,13 +26,17 @@ export const RegisterStepOne = ({ next, data }) => {
     email: yup
       .string()
       .email('Email is not valid')
+      .matches(emailRexExp, 'Email is not valid')
       .required('Email is required'),
     password: yup
       .string()
       .min(7, 'Password must be at least 7 characters')
       .max(32)
       .matches(/^[^ ]{7,32}$/, 'The password should not contain a space')
-      .matches(passwordRexExp, 'Password is not valid')
+      .matches(
+        passwordRexExp,
+        'Password must contain any alphabetic characters'
+      )
       .required('Password is required'),
     confirmPassword: yup
       .string()

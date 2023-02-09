@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FriendList } from '../../components/OurFriends/OurFriendList/OurFriendsList';
 import { PageTitle, Container, Section } from './OurFriendsPage.styled';
 import { MainContainer } from '../../components/App.styled';
-
+import Loader from 'components/Loader/Loader';
 import {
   getAllFriends,
   getLoading,
@@ -28,7 +28,7 @@ function OurFriendsPage() {
       <MainContainer>
         <Container>
           <PageTitle>Our friends</PageTitle>
-          {loading && <p>...Loading</p>}
+          {loading && <Loader />}
           {error && <p>Что-то пошло не так</p>}
           {!loading && friends && <FriendList friends={friends} />}
         </Container>
