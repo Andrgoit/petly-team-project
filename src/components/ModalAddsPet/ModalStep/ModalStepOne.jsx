@@ -1,7 +1,7 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
-// import { parse } from 'date-fns';
+import { parse } from 'date-fns';
 
 import {
   Label,
@@ -29,6 +29,13 @@ const validationSchema = yup.object({
       if (originalValue) {
         return originalValue.length === 10;
       }
+    })
+    .transform(function (value, originalValue) {
+      if (this.isType(value)) {
+        return value;
+      }
+      const result = parse(originalValue, 'dd.MM.yyyy', new Date());
+      return result;
     })
     .typeError('Please enter a valid date')
     .required()

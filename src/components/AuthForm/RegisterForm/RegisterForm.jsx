@@ -29,7 +29,6 @@ export const RegisterForm = () => {
 
     if (final) {
       try {
-        console.log(newData);
         await dispatch(register(newData));
       } catch (error) {
         toast.error(error);
