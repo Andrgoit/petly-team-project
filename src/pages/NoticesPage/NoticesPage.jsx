@@ -48,7 +48,7 @@ function NoticesPage() {
   useEffect(() => {
     ref.current = true;
     dispatch(getNotices({ categoryName, token }));
-  }, [dispatch, categoryName, query]);
+  }, [dispatch, categoryName, query, token]);
 
   const filteredNotices = () => {
     const data = notices.filter(el =>
