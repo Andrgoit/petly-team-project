@@ -31,7 +31,6 @@ function NoticesSearch ({ setQ })  {
     };
   });
 
-
   const handleSubmit = e => {
     e.preventDefault();
     if (!inputText.length) {
@@ -40,8 +39,6 @@ function NoticesSearch ({ setQ })  {
     }
     setQ(inputText);
   };
-
-  
 
   const handleClick = () => {
     setInputText('');
