@@ -15,8 +15,8 @@ import {
 
 export const RegisterStepOne = ({ next, data }) => {
   const emailRexExp =
-    /^([a-z0-9_-]+\.)*([a-z0-9_-]{2,})+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
-  const passwordRexExp = /^\S{7,32}$/;
+    /^[a-zA-Z0-9]+[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9]+$/;
+  const passwordRexExp = /^[a-zA-Zа-яА-Я0-9]+$/;
 
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
@@ -26,6 +26,8 @@ export const RegisterStepOne = ({ next, data }) => {
       .string()
       .email('Email is not valid')
       .matches(emailRexExp, 'Email is not valid')
+      .min(10, 'Email must be at least 10 characters')
+      .max(63)
       .required('Email is required'),
     password: yup
       .string()
