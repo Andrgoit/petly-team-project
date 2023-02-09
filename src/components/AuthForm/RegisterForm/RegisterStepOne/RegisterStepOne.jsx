@@ -15,6 +15,7 @@ import {
 
 export const RegisterStepOne = ({ next, data }) => {
   // const passwordRexExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+  // eslint-disable-next-line
   const emailRexExp = /^(\w{2,})+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const passwordRexExp = /^\S{7,32}$/;
 
