@@ -21,7 +21,7 @@ export default function SharedLayout() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.pathname);
+  
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
