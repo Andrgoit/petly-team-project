@@ -4,8 +4,9 @@ import {
   HomeWrapp,
   HomeTitle,
   HomeSection,
+  MainContainer,
 } from './HomePage.styled';
-import { MainContainer } from '../../components/App.styled';
+
 import portrait from '../../img/portrait.png';
 import portrait2x from '../../img/portrait@2x.png';
 import portrait3x from '../../img/portrait@3x.png';

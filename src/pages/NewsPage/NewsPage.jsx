@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PuffLoader from 'react-spinners/PuffLoader';
-
+import Loader from 'components/Loader/Loader';
 import { Section, Container, Title } from './NewsPage.styled';
 import { MainContainer } from '../../components/App.styled';
 
@@ -11,9 +10,9 @@ import NewsSearchForm from 'components/News/NewsSearchForm';
 import { getAllNews, getLoading, getError } from 'redux/news/news-selectors';
 import { getNews } from 'redux/news/news-operations';
 
-const spinnerStyles = {
-  marginTop: '20px',
-};
+// const spinnerStyles = {
+//   marginTop: '20px',
+// };
 
 function NewsPage() {
   const [q, setQ] = useState('');
@@ -44,16 +43,7 @@ function NewsPage() {
         <Container>
           <Title>News</Title>
           <NewsSearchForm setQ={setQ} />
-
-          {loading && (
-            <PuffLoader
-              size={100}
-              color={'rgb(245, 146, 86)'}
-              cssOverride={spinnerStyles}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
-          )}
+          {loading && <Loader />}
           {error && <p>Что-то пошло не так</p>}
           {!loading && news && <NewsList data={newsToLayout} />}
           {!loading && ref.current && !Boolean(newsToLayout.length) && (

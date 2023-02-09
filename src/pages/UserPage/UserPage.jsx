@@ -6,6 +6,8 @@ import PetsData from 'components/PetsData/PetsData';
 import { UserContainer, UserWrapper, PetsWrapper } from './UserPage.styled';
 // import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
+import Loader from 'components/Loader/Loader';
+
 import {
   selectError,
   selectIsLoading,
@@ -38,7 +40,7 @@ const UserPage = () => {
 
   return (
     <section>
-      {loading && <p>...Loading</p>}
+      {loading && <Loader />}
       {error && <p>Oops!</p>}
       {!loading && user && isLogin && (
         <MainContainer>
@@ -47,7 +49,7 @@ const UserPage = () => {
               <UserData user={user} />
             </UserWrapper>
             <PetsWrapper>
-              <PetsData pets={user.pets} />
+              <PetsData />
             </PetsWrapper>
           </UserContainer>
         </MainContainer>

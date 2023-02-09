@@ -1,13 +1,14 @@
-import React from 'react';
 import PetsItem from 'components/PetsItem/PetsItem';
 
 export default function PetsList({ pets }) {
+  console.log(pets);
   if (pets) {
     const elements = pets.map(
       ({ _id, avatar, name, date, breed, comments }) => {
         return (
           <PetsItem
             key={_id}
+            id={_id}
             name={name}
             avatar={avatar}
             date={date}
@@ -17,6 +18,6 @@ export default function PetsList({ pets }) {
         );
       }
     );
-    return <div>{elements}</div>;
+    return <>{elements}</>;
   }
 }

@@ -7,13 +7,34 @@ import frame from '../../img/Frame.png';
 import frame2x from '../../img/Frame@2x.png';
 import heart from '../../img/Heart.png';
 import heart2x from '../../img/Heart@2x.png';
+export const MainContainer = styled.div`
+  width: 320px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: -webkit-fill-available;
+  @media (min-width: 768px) {
+    width: 768px;
+    padding: 0 32px;
+  }
 
+  @media (min-width: 1300px) {
+    width: 1300px;
+    padding: 0 16px;
+  }
+`;
 export const HomeSection = styled.section`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
   background-image: url('${vector}');
   background-repeat: no-repeat;
   background-position: center 0;
   background-size: cover;
   padding-top: 60px;
+
+  width: -webkit-fill-available;
+  height: calc(100% - 56px);
 
   @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
@@ -25,7 +46,8 @@ export const HomeSection = styled.section`
   @media screen and (min-width: 768px) {
     background-image: url('${vectorTablet}');
     padding-top: 90px;
-
+    width: -webkit-fill-available;
+    height: calc(100% - 56px);
     @media (min-device-pixel-ratio: 2),
       (-webkit-min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -34,7 +56,12 @@ export const HomeSection = styled.section`
     }
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1300px) {
+    width: -webkit-fill-available;
+    height: calc(100% - 69px);
+    background-size: contain;
+    background-position: bottom;
+
     background-image: url('${frame}');
     padding-top: 60px;
 
@@ -71,8 +98,9 @@ export const HomeTitle = styled.h1`
   }
 `;
 export const Image = styled.img`
-  @media screen and (max-width: 320px) {
-  }
+  min-width: 320px;
+  min-height: 337px;
+
   @media screen and (min-width: 768px) {
     max-width: 645px;
     max-height: 715px;
@@ -86,18 +114,33 @@ export const Image = styled.img`
 `;
 
 export const HomeWrapp = styled.div`
+  height: -webkit-fill-available;
   @media screen and (min-width: 1300px) {
     display: flex;
   }
 `;
 
 export const ImagesWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+  }
+
   @media screen and (min-width: 1300px) {
+    position: static;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
     background-image: url('${heart}');
     background-repeat: no-repeat;
     background-position: top 42px left 88px;
     width: auto;
-    height: 640px;
     margin-left: 0px;
     margin-right: 10px;
 

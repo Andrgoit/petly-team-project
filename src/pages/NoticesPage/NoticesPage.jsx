@@ -13,6 +13,9 @@ import {
   
 } from './NoticesPage.styled';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
+
+// import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
+import Loader from 'components/Loader/Loader';
 import AddNoticeButton from 'components/AddNoticeButton/AddNoticeButton';
 import ModalAddNotice from '../../components/ModalAddNotice/ModalAddNotice';
 import { getNotices } from 'redux/notices/notices-operation';
@@ -65,6 +68,7 @@ function NoticesPage() {
             <NoticesCategoriesNav></NoticesCategoriesNav>
             <AddNoticeButton onClickOpen={() => setIsAddModalOpen(true)} />
           </ButtonsWrapper>
+
           {/* </Container> */}
 
           {error && <p>Что-то пошло не так</p>}
