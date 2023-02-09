@@ -4,14 +4,14 @@ export default function PetsList({ pets }) {
   console.log(pets);
   if (pets) {
     const elements = pets.map(
-      ({ _id, avatar, name, date, breed, comments }) => {
+      ({ _id, avatar, name, birthdate, breed, comments }) => {
         return (
           <PetsItem
             key={_id}
             id={_id}
             name={name}
             avatar={avatar}
-            date={date}
+            birthdate={birthdate}
             breed={breed}
             comments={comments}
           />
