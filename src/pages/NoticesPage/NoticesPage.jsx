@@ -70,7 +70,7 @@ function NoticesPage() {
           </ButtonsWrapper>
 
           {/* </Container> */}
-
+          {loading && <Loader />}
           {error && <p>Что-то пошло не так</p>}
           {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
           {!loading && notices && (
