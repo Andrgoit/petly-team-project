@@ -116,6 +116,9 @@ export const FriendContentItemTime = styled.div`
     }
   }
 `;
+export const FriendContentItemTimeEmpty = styled.div`
+  display: inline-block;
+`;
 export const FriendContentItemWorkTime = styled.div`
   display: none;
   position: absolute;
