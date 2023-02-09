@@ -9,6 +9,7 @@ import {
   FriendLogoImg,
   AdressLink,
   ListDropmenu,
+  FriendContentItemTimeEmpty,
 } from '../OurFriendItem/OurFriensItem.styled';
 
 const fish = '----------------------------';
@@ -29,6 +30,18 @@ function OurFriensItem({
   const d = new Date();
   const n = d.getDay();
   const today = days[n - 1];
+
+  const TelTo = () => {
+    const telNumber = phone.replace(/[^0-9+]/g, '');
+    const str = `tel:  ${telNumber}`;
+    return <AdressLink href={str}>{phone}</AdressLink>;
+  };
+  const EmailTo = () => {
+    const emailStr = `mailto: ${email}`;
+
+    return <AdressLink href={emailStr}>{email}</AdressLink>;
+  };
+
   let timeList = [];
   worktime.toString() === ''
     ? timeList.push('', '', '', '', '', '', '')
@@ -53,34 +66,45 @@ function OurFriensItem({
           </FriendLogo>
           <FriendContentList>
             <li>
-              <FriendContentItemTime>
-                Time:
-                <br />
-                {timeList[0] ? timeList[0] : fish}
-                <FriendContentItemWorkTime>
-                  <ul>{listDropmenu}</ul>
-                </FriendContentItemWorkTime>
-              </FriendContentItemTime>
+              {worktime.toString() === '' ? (
+                <FriendContentItemTimeEmpty>
+                  Time: <br />
+                  {fish}
+                </FriendContentItemTimeEmpty>
+              ) : (
+                <FriendContentItemTime>
+                  Time:
+                  <br />
+                  {timeList[n - 1]}
+                  <FriendContentItemWorkTime>
+                    <ul>{listDropmenu}</ul>
+                  </FriendContentItemWorkTime>
+                </FriendContentItemTime>
+              )}
             </li>
             <li>
               <p>
                 Address:
                 <br />
-                <AdressLink href={addressUrl} target="_blank">
-                  {adress ? adress : fish}
-                </AdressLink>
+                {adress ? (
+                  <AdressLink href={addressUrl} target="_blank">
+                    {adress}
+                  </AdressLink>
+                ) : (
+                  fish
+                )}
               </p>
             </li>
             <li>
               <p>
                 Email:
-                <br /> {email ? email : fish}
+                <br /> {email ? <EmailTo /> : fish}
               </p>
             </li>
             <li>
               <p>
                 Phone:
-                <br /> {phone ? phone : fish}
+                <br /> {phone ? <TelTo /> : fish}
               </p>
             </li>
           </FriendContentList>

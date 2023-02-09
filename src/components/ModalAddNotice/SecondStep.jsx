@@ -1,5 +1,5 @@
 import { Formik, ErrorMessage } from 'formik';
-import { useState } from 'react';
+
 import * as yup from 'yup';
 import {
   SexIcon,
@@ -23,7 +23,12 @@ import {
 import { ReactComponent as PlusImg } from '../../img/add-file.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNotice } from 'redux/notices/notices-operation';
+
 import { selectAccessToken } from 'redux/auth/authSelectors';
+import { getLoading } from 'redux/notices/notices-selectors';
+
+import { toast } from 'react-toastify';
+import Loader from 'components/Loader/Loader';
 
 const validationSchema = yup.object({
   sex: yup.string().required('Field is required!'),
@@ -73,10 +78,10 @@ const SecondStep = ({
   initialValues,
   setIsFirstStep,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
-
   const dispatch = useDispatch();
   const token = useSelector(selectAccessToken);
+
+  const isLoading = useSelector(getLoading);
 
   const handleFileChange = (e, setFieldValue) => {
     const imgFile = e.target.files[0];
@@ -92,6 +97,7 @@ const SecondStep = ({
     if (inputName === 'location') {
       value = makeFirstUpperCaseAndAfterCommas(value);
     }
+
     setFieldValue(inputName, value);
     setFormValues(values => ({ ...values, [inputName]: value }));
   };
@@ -102,25 +108,22 @@ const SecondStep = ({
       initialValues={{
         ...formValues,
         sellCategory: formValues.category === 'sell' ? true : false,
-        price: formValues.sellCategory ? formValues.price : '',
+        price: formValues.category === 'sell' ? formValues.price : '',
       }}
       onSubmit={async values => {
         const formData = (({ sellCategory, ...o }) => o)(values);
         const valuesToSend = {
           ...formData,
-          price: formValues.sellCategory ? formValues.price : null,
+          price: formValues.category === 'sell' ? formValues.price : null,
           birthdate: parseDateToISO(formValues.birthdate),
         };
         try {
-          setIsLoading(true);
           await dispatch(createNotice({ valuesToSend, token }));
           setFormValues(initialValues);
           setIsFirstStep(true);
           closeModal();
-          setIsLoading(false);
         } catch (error) {
-          console.log(error.message);
-          setIsLoading(false);
+          toast.error(error.message);
         }
       }}
     >
@@ -130,6 +133,7 @@ const SecondStep = ({
             <LegendText>The sex*:</LegendText>
             <SexLabel htmlFor="male">
               <SexRadioBtn
+                disabled={isLoading}
                 type="radio"
                 id="male"
                 name="sex"
@@ -143,6 +147,7 @@ const SecondStep = ({
 
             <SexLabel htmlFor="female">
               <SexRadioBtn
+                disabled={isLoading}
                 type="radio"
                 id="female"
                 name="sex"
@@ -164,6 +169,7 @@ const SecondStep = ({
               Location*:
             </InputLabel>
             <StyledInput
+              disabled={isLoading}
               id="location"
               name="location"
               placeholder="Type location"
@@ -182,6 +188,7 @@ const SecondStep = ({
                 Price*:
               </InputLabel>
               <StyledInput
+                disabled={isLoading}
                 id="price"
                 name="price"
                 placeholder="Type price"
@@ -208,6 +215,7 @@ const SecondStep = ({
               )}
 
               <FileInput
+                disabled={isLoading}
                 id="avatar"
                 name="avatar"
                 type="file"
@@ -225,6 +233,7 @@ const SecondStep = ({
               Comments
             </InputLabel>
             <TextArea
+              disabled={isLoading}
               component="textarea"
               id="comments"
               name="comments"
@@ -246,6 +255,7 @@ const SecondStep = ({
               Back
             </MainNoticeBtn>
           </MainBtnsWrapper>
+          {isLoading && <Loader />}
         </StyledForm>
       )}
     </Formik>

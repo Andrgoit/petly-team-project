@@ -47,8 +47,14 @@ export const login = createAsyncThunk(
       setAuthHeader(data.token);
 
       return data;
-    } catch (error) {
-      return rejectWithValue();
+    } catch ({ response }) {
+      const error = {
+        status: response.status,
+        message: response.data.message,
+      };
+
+      toast.error(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -95,7 +101,7 @@ export const getUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await fetchUserData();
-      console.log(data);
+
       return data;
     } catch (error) {
       console.log(error);
