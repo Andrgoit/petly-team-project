@@ -104,7 +104,6 @@ export const getUser = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log(error);
       throw rejectWithValue(error);
     }
   }
@@ -149,8 +148,6 @@ export const addNoticeToFavorite = createAsyncThunk(
 export const removeNoticeWithFavorite = createAsyncThunk(
   'auth/removeWithFavorite',
   async (id, { rejectWithValue }) => {
-    // const state = getState();
-    // console.log(state.auth.user);
     try {
       await fetchRemoveWithFavorite(id);
 
