@@ -6,11 +6,12 @@ export const Label = styled.label`
   font-size: ${p => p.theme.fontSizes.d};
   font-weight: 500;
   line-height: 1.44;
-  margin-bottom: 8px;
+  position: relative;
+  margin-bottom: ${({ lastMargin }) => (lastMargin ? '40px' : '16px')};
   @media screen and (min-width: 768px) {
     font-size: ${p => p.theme.fontSizes.f};
     line-height: 1.1;
-    margin-bottom: 12px;
+    margin-bottom: ${({ lastMargin }) => (lastMargin ? '40px' : '28px')};
   }
 `;
 export const Input = styled(Field)`
@@ -24,13 +25,14 @@ export const Input = styled(Field)`
   border-radius: 40px;
   outline: none;
   padding: 11px 14px 12px;
-  margin-bottom: 16px;
+  margin-top: 8px;
+
   @media screen and (min-width: 768px) {
     height: 48px;
     font-size: 16px;
     line-height: 1.63;
     padding: 11px 16px 10px;
-    margin-bottom: 28px;
+    margin-top: 12px;
   }
   &::placeholder {
     font-size: 14px;
@@ -41,6 +43,11 @@ export const Input = styled(Field)`
       font-size: 16px;
       line-height: 1.62;
     }
+  }
+  &:focus {
+    outline: none;
+    box-shadow: rgb(51 51 51 / 11%) 0px 3px 9px;
+    border-color: ${p => p.theme.colors.login.secButton};
   }
 `;
 export const ButtonNext = styled.button`
@@ -61,6 +68,11 @@ export const ButtonNext = styled.button`
     font-size: 20px;
     line-height: 1.35;
   }
+
+  &:hover,
+  &:focus {
+    background-color: #eb7f3c;
+  }
 `;
 export const ButtonDone = styled(ButtonNext)``;
 export const TextModal = styled.p`
@@ -80,6 +92,10 @@ export const TextModal = styled.p`
 export const LabelPhoto = styled.div`
   position: relative;
   margin: 0 auto 20px;
+
+  @media screen and (min-width: 768px) {
+    margin: 0 auto 40px;
+  }
 `;
 export const ImgPhoto = styled.img`
   width: 208px;
@@ -111,9 +127,14 @@ export const Textarea = styled(Field)`
   padding: 12px 14px;
   outline: none;
   resize: none;
+  margin-top: 8px;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+
   @media screen and (min-width: 768px) {
     height: 116px;
     padding: 16px;
+    margin-top: 12px;
   }
   &::placeholder {
     font-size: 14px;
@@ -124,6 +145,11 @@ export const Textarea = styled(Field)`
       font-size: 16px;
       line-height: 1.62;
     }
+  }
+  &:focus {
+    outline: none;
+    box-shadow: rgb(51 51 51 / 11%) 0px 3px 9px;
+    border-color: ${p => p.theme.colors.login.secButton};
   }
 `;
 export const CentredTextarea = styled.div`
@@ -142,28 +168,39 @@ export const InputFile = styled.input`
   top: 0;
   bottom: 0;
   opacity: 0;
-  width: 100%;
+  width: 208px;
   height: 100%;
   cursor: pointer;
+  margin: auto;
 
   &::-webkit-file-upload-button {
     cursor: pointer;
   }
-`;
-export const InputComment = styled.input`
-  box-sizing: border-box;
-  width: 240px;
-  height: 100px;
-  border-radius: 20px;
-  background: linear-gradient(0deg, #fdf7f2, #fdf7f2),
-    linear-gradient(0deg, rgba(245, 146, 86, 0.5), rgba(245, 146, 86, 0.5));
-  border: 1px solid rgba(245, 146, 86, 0.5);
 
-  @media (min-width: 768px) {
-    width: 394px;
-    height: 116px;
+  &:focus {
+    box-shadow: rgb(51 51 51 / 11%) 0px 3px 9px;
   }
 `;
+// export const InputComment = styled.input`
+//   box-sizing: border-box;
+//   width: 240px;
+//   height: 100px;
+//   border-radius: 20px;
+//   background: linear-gradient(0deg, #fdf7f2, #fdf7f2),
+//     linear-gradient(0deg, rgba(245, 146, 86, 0.5), rgba(245, 146, 86, 0.5));
+//   border: 1px solid rgba(245, 146, 86, 0.5);
+
+//   &:focus {
+//     outline: none;
+//     box-shadow: rgb(51 51 51 / 11%) 0px 3px 9px;
+//     border-color: ${p => p.theme.colors.login.secButton};
+//   }
+
+//   @media (min-width: 768px) {
+//     width: 394px;
+//     height: 116px;
+//   }
+// `;
 export const ButtonCancel = styled.button`
   width: 100%;
   font-size: 16px;
@@ -187,6 +224,12 @@ export const ButtonCancel = styled.button`
       margin-right: 20px;
     }
   }
+
+  &:hover,
+  &:focus {
+    background-color: ${p => p.theme.colors.login.secButton};
+    color: ${p => p.theme.colors.white};
+  }
 `;
 export const ButtonBack = styled(ButtonCancel)``;
 export const ButtonGroup = styled.div`
@@ -199,4 +242,14 @@ export const ButtonGroup = styled.div`
     justify-content: center;
     margin-top: 12px;
   }
+`;
+export const Error = styled.div`
+  position: absolute;
+  bottom: -20px;
+  font-size: 14px;
+  color: rgb(228, 70, 70);
+  text-align: ${({ imgError }) => (imgError ? 'center' : 'left')};
+  left: ${({ imgError }) => (imgError ? '0' : '19px')};
+  bottom: ${({ imgError }) => (imgError ? '-30px' : '-20px')};
+  width: 100%;
 `;

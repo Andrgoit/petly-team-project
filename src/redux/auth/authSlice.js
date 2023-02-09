@@ -8,6 +8,7 @@ import {
   addNoticeToFavorite,
   removeNoticeWithFavorite,
   deletePet,
+  addPet,
 } from './authOperations';
 
 const initialState = {
@@ -121,6 +122,20 @@ const authSlice = createSlice({
       }
     );
     builder.addCase(removeNoticeWithFavorite.rejected, (state, { payload }) => {
+      state.error = payload;
+    });
+
+    //add pet
+    builder.addCase(addPet.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(addPet.fulfilled, (state, { payload }) => {
+      state.user.pets.push(payload);
+      state.isLoading = false;
+      state.error = false;
+    });
+    builder.addCase(addPet.rejected, (state, { payload }) => {
+      state.isLoading = false;
       state.error = payload;
     });
 

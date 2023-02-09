@@ -62,8 +62,8 @@ export const addNotice = async (values, config) => {
   return data;
 };
 
-export const fetchPets = async credentials => {
-  const { data } = await instance.post('/users/pets', credentials);
+export const fetchPetsAdd = async (credentials, config) => {
+  const { data } = await instance.post('/users/pets', credentials, config);
   return data;
 };
 

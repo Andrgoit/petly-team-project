@@ -33,13 +33,13 @@ export const ModalContent = styled.div`
 export const TitleModal = styled.h3`
   font-weight: ${p => p.theme.fontWeights.preBold};
 
-  font-size: 36px;
+  font-size: 24px;
   line-height: 1.38;
   text-align: center;
   color: ${p => p.theme.colors.profile.text};
   margin-bottom: 28px;
   @media screen and (min-width: 768px) {
-    font-size: ${p => p.theme.fontSizes.k};
+    font-size: 36px;
     font-weight: ${p => p.theme.fontWeights.bold};
     line-height: 1.36;
   }

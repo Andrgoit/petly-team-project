@@ -1,7 +1,7 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
-import { parse } from 'date-fns';
+// import { parse } from 'date-fns';
 
 import {
   Label,
@@ -9,30 +9,27 @@ import {
   ButtonGroup,
   ButtonNext,
   ButtonCancel,
+  Error,
 } from './ModalStep.styled.jsx';
 
 const today = new Date();
-
+const namePetRegExp = /^[a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії]{2,16}$/;
+const breedPetRegExp = /^[a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії\s]{2,24}$/;
+const birthdatePetRegExp =
+  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?)$/;
 const validationSchema = yup.object({
   name: yup
     .string()
     .min(2)
     .max(16)
-    .matches(/^[a-zA-Z ]*$/g, 'Only alphabetic characters are allowed')
-    .required(),
-  date: yup
+    .matches(namePetRegExp, 'Only alphabetic characters are allowed')
+    .required('Name is a required field'),
+  birthdate: yup
     .date()
     .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
       if (originalValue) {
         return originalValue.length === 10;
       }
-    })
-    .transform(function (value, originalValue) {
-      if (this.isType(value)) {
-        return value;
-      }
-      const result = parse(originalValue, 'dd.MM.yyyy', new Date());
-      return result;
     })
     .typeError('Please enter a valid date')
     .required()
@@ -41,12 +38,12 @@ const validationSchema = yup.object({
   breed: yup
     .string()
     .min(2)
-    .max(30)
-    .matches(/^[a-zA-Z, ]*$/g, 'Only alphanumeric characters are allowed')
-    .required(),
+    .max(24)
+    .matches(breedPetRegExp, 'Only alphanumeric characters are allowed')
+    .required('Breed is a required field'),
 });
 
-export default function ModalStepOne({ data, setFormData, next, onClose }) {
+export default function ModalStepOne({ data, next, onClose }) {
   const handleSubmit = values => {
     next({ ...values }, false);
   };
@@ -58,19 +55,35 @@ export default function ModalStepOne({ data, setFormData, next, onClose }) {
       validationSchema={validationSchema}
     >
       <Form autoComplete="on">
-        <Label htmlFor="name">Name pet</Label>
-        <Input type="text" name="name" placeholder="Type name pet" />
-        <ErrorMessage name="name" render={msg => <div>{msg}</div>} />
-        <Label htmlFor="date">Date of birth</Label>
-        <Input name="date" placeholder="Type date of birth" />
-        <ErrorMessage name="date" render={msg => <div>{msg}</div>} />
-
-        <Label htmlFor="breed">Breed</Label>
-        <div style={{ position: 'relative' }}>
-          <Input name="breed" placeholder="Type breed" autoComplete="off" />
-        </div>
-        <ErrorMessage name="breed" render={msg => <div>{msg}</div>} />
-
+        <Label htmlFor="name">
+          Name pet
+          <Input
+            id="name"
+            type="text"
+            name="name"
+            placeholder="Type name pet"
+          />
+          <ErrorMessage name="name" render={msg => <Error>{msg}</Error>} />
+        </Label>
+        <Label htmlFor="birthdate">
+          Date of birth
+          <Input
+            id="birthdate"
+            name="birthdate"
+            placeholder="Type date of birth"
+          />
+          <ErrorMessage name="birthdate" render={msg => <Error>{msg}</Error>} />
+        </Label>
+        <Label htmlFor="breed" lastMargin>
+          Breed
+          <Input
+            id="breed"
+            name="breed"
+            placeholder="Type breed"
+            autoComplete="off"
+          />
+          <ErrorMessage name="breed" render={msg => <Error>{msg}</Error>} />
+        </Label>
         <ButtonGroup>
           <ButtonCancel type="button" onClick={() => onClose()}>
             Cancel
