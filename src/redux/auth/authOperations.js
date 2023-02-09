@@ -9,6 +9,7 @@ import {
   clearAuthHeader,
   fetchRemoveWithFavorite,
   fetchAddToFavorite,
+  updateUserData,
 } from 'services/API/API';
 
 // Регистрация
@@ -96,6 +97,28 @@ export const getUser = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
+      throw rejectWithValue(error);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async ({ value, token }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const data = await updateUserData(value, config);
+
+      return data;
+    } catch (error) {
+      toast.error(error.message);
       throw rejectWithValue(error);
     }
   }

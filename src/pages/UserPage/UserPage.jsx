@@ -3,7 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import PetsData from 'components/PetsData/PetsData';
 
-import { UserContainer, UserWrapper, PetsWrapper } from './UserPage.styled';
+import {
+  UserContainer,
+  UserWrapper,
+  PetsWrapper,
+  UserTitle,
+} from './UserPage.styled';
 // import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
 import {
@@ -44,6 +49,7 @@ const UserPage = () => {
         <MainContainer>
           <UserContainer>
             <UserWrapper>
+              <UserTitle>My information:</UserTitle>
               <UserData user={user} />
             </UserWrapper>
             <PetsWrapper>

@@ -7,6 +7,7 @@ import {
   getUser,
   addNoticeToFavorite,
   removeNoticeWithFavorite,
+  updateUser,
 } from './authOperations';
 
 const initialState = {
@@ -85,6 +86,24 @@ const authSlice = createSlice({
     });
 
     builder.addCase(refreshUser.rejected, state => {
+      state.isRefreshing = false;
+      state.isLoading = false;
+    });
+    builder.addCase(updateUser.pending, state => {
+      state.isRefreshing = true;
+      state.error = '';
+      state.isLoading = true;
+    });
+
+    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+      state.user = payload;
+      state.isLoggedIn = true;
+      state.isLoading = false;
+      state.isRefreshing = false;
+      state.error = '';
+    });
+
+    builder.addCase(updateUser.rejected, state => {
       state.isRefreshing = false;
       state.isLoading = false;
     });

@@ -85,3 +85,23 @@ export const PetsWrapper = styled.div`
 //     background-color: #eb7f3c;
 //   }
 // `;
+
+export const UserTitle = styled.h2`
+  margin-bottom: 18px;
+  font-size: 20px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: #000000;
+  font-weight: 500;
+
+  @media (min-width: 768px) {
+    margin-bottom: 40px;
+    font-size: 28px;
+    line-height: 38px;
+  }
+  @media (min-width: 1300px) {
+    margin-bottom: 24px;
+  }
+`;
