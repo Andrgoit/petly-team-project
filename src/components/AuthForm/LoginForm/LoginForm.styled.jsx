@@ -10,7 +10,7 @@ export const LoginContainer = styled.div`
   margin-right: auto;
   @media (min-width: 768px) {
     width: 608px;
-
+    margin-top: 80px;
     padding: 60px 80px;
     background: #fff;
     box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
@@ -18,6 +18,7 @@ export const LoginContainer = styled.div`
   }
   @media (min-width: 1300px) {
     width: 618px;
+    margin-top: 60px;
   }
 `;
 export const ErrorInput = styled.div`

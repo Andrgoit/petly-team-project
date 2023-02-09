@@ -3,7 +3,7 @@ import React from 'react';
 import { LoginForm } from '../../components/AuthForm/LoginForm/LoginForm';
 import { useSelector } from 'react-redux';
 import PuffLoader from 'react-spinners/PuffLoader';
-import { MainContainer } from 'components/App.styled';
+
 const spinnerStyles = {
   marginTop: '20px',
   marginLeft: '120px',
@@ -22,9 +22,7 @@ const Login = () => {
         />
       ) : (
         <Section>
-          <MainContainer>
-            <LoginForm />
-          </MainContainer>
+          <LoginForm />
         </Section>
       )}
     </>
