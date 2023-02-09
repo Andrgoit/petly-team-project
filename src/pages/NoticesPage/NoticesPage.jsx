@@ -12,7 +12,6 @@ import {
 } from './NoticesPage.styled';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 
-// import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
 import Loader from 'components/Loader/Loader';
 import AddNoticeButton from 'components/AddNoticeButton/AddNoticeButton';
 import ModalAddNotice from '../../components/ModalAddNotice/ModalAddNotice';
@@ -49,8 +48,10 @@ function NoticesPage() {
   }, [dispatch, categoryName, query, token]);
 
   const filteredNotices = () => {
-    const data = notices.filter(el =>
-      el.title.toLowerCase().includes(query.toLowerCase())
+    const data = notices.filter(
+      el =>
+        el.title.toLowerCase().includes(query.toLowerCase()) ||
+        el.breed.toLowerCase().includes(query.toLowerCase())
     );
     return data;
   };
@@ -59,18 +60,14 @@ function NoticesPage() {
     <MainContainer>
       <Section>
         <ContainerWrapp>
-          {/* <Container> */}
           <PageTitle>Find your favorite pet</PageTitle>
           <NoticesSearch setQ={setQ} />
           <ButtonsWrapper>
             <NoticesCategoriesNav></NoticesCategoriesNav>
             <AddNoticeButton onClickOpen={() => setIsAddModalOpen(true)} />
           </ButtonsWrapper>
-
-          {/* </Container> */}
           {loading && <Loader />}
-          {error && <p>Что-то пошло не так</p>}
-          {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
+          {error && <p>Something went wrong...</p>}
           {!loading && notices && (
             <NoticesCategoriesList
               notices={noticesToLayout}
