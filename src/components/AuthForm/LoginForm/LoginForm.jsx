@@ -53,7 +53,7 @@ export const LoginForm = () => {
       formik.resetForm();
     },
   });
-  console.log(formik.touched);
+
   return (
     <>
       <LoginContainer>
