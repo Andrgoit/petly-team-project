@@ -45,8 +45,8 @@ export const ImageWrapper = styled.div`
   height: 233px;
   border-radius: 50%;
   margin-bottom: 12px;
-
   filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.11));
+
   overflow: hidden;
   @media (min-width: 768px) {
     margin-bottom: auto;

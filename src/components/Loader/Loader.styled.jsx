@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const LoaderContainer = styled.div`
-  width: inherit;
   position: fixed;
-  left: 47%;
+
+  left: 50%;
   top: 50%;
+  transform: translate(-50%, -50%);
 `;
