@@ -11,15 +11,24 @@ import {
   DeleteImage,
 } from './PetsItem.styled';
 
-export default function PetsItem({ id, avatar, name, date, breed, comments }) {
+export default function PetsItem({
+  id,
+  avatar,
+  name,
+  birthdate,
+  breed,
+  comments,
+}) {
   const dispatch = useDispatch();
+
+  const newDate = new Date(birthdate).toLocaleString().split(',')[0];
   return (
     <>
       <PetItem>
-        <PetImage src={avatar} alt={name} />
+        <PetImage src={avatar.url} alt={name} />
         <ListInfo>
           <ListInfoItem>Name: {name}</ListInfoItem>
-          <ListInfoItem>Date of birth: {date}</ListInfoItem>
+          <ListInfoItem>Date of birth: {newDate}</ListInfoItem>
           <ListInfoItem>Breed: {breed}</ListInfoItem>
           <ListInfoItem>Comments: {comments}</ListInfoItem>
         </ListInfo>
