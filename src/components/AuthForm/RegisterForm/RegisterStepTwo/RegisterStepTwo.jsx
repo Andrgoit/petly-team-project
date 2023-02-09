@@ -13,7 +13,7 @@ export const RegisterStepTwo = ({ next, data, prev }) => {
   const nameRegex = /^[a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/;
   const locationRegex =
     /^[A-ZА-ЯЁАЩЬЮЯҐЄІЇ][a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії]+,\s?[A-ZА-ЯЁАЩЬЮЯҐЄІЇ][a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії]+$/;
-  const phoneRegex = /^\+\d{11,12}$/;
+  const phoneRegex = /^\+\d{12}$/;
 
   const validationSchema = yup.object().shape({
     name: yup
