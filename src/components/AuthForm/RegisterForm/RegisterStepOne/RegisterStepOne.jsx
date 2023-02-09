@@ -14,10 +14,9 @@ import {
 } from '../../AuthForm.styled';
 
 export const RegisterStepOne = ({ next, data }) => {
-  // const passwordRexExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
-  // eslint-disable-next-line
-  const emailRexExp = /^(\w{2,})+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  const passwordRexExp = /^\S{7,32}$/;
+  const emailRexExp =
+    /^[a-zA-Z0-9]+[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9]+$/;
+  const passwordRexExp = /^[a-zA-Zа-яА-Я0-9]+$/;
 
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
@@ -27,6 +26,8 @@ export const RegisterStepOne = ({ next, data }) => {
       .string()
       .email('Email is not valid')
       .matches(emailRexExp, 'Email is not valid')
+      .min(10, 'Email must be at least 10 characters')
+      .max(63)
       .required('Email is required'),
     password: yup
       .string()
@@ -35,7 +36,7 @@ export const RegisterStepOne = ({ next, data }) => {
       .matches(/^[^ ]{7,32}$/, 'The password should not contain a space')
       .matches(
         passwordRexExp,
-        'Password must contain any alphabetic characters'
+        'Password must contain any alphabetic characters and special characters'
       )
       .required('Password is required'),
     confirmPassword: yup

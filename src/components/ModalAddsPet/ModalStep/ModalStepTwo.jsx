@@ -109,7 +109,7 @@ export default function ModalStepTwo({ next, data, setFormData, prev }) {
             </Label>
           </CentredTextarea>
           <ButtonGroup>
-            <ButtonBack type="button" onClick={prev}>
+            <ButtonBack type="button" onClick={() => prev(setFieldValue)}>
               Back
             </ButtonBack>
             <ButtonDone type="submit">Done</ButtonDone>

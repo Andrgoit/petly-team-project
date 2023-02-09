@@ -35,6 +35,7 @@ function NoticesPage() {
   const notices = useSelector(getAllNotices);
   const { favorite } = useSelector(selectUserData) || [];
   const loading = useSelector(getLoading);
+
   const error = useSelector(getError);
 
   const [query, setQ] = useState('');

@@ -56,6 +56,7 @@ export default function ModalAddsPet({ setShowModal }) {
       ...form,
       birthdate: parseDateToISO(form.birthdate),
     };
+    console.log(dataForm, 'final step');
     dispatch(addPet({ dataForm, token }));
   };
 
@@ -80,8 +81,8 @@ export default function ModalAddsPet({ setShowModal }) {
 
     if (final) {
       try {
-        await fetchPets(newData);
-        onClose();
+        const res = await fetchPets(newData);
+        if (res) onClose();
       } catch (error) {
         console.log(error);
       }
