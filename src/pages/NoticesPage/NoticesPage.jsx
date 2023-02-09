@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MainContainer } from '../../components/App.styled';
 
-
 import { NoticesCategoriesList } from '../../components/NoticesCategoriesList/NoticesCategoriesList';
 import {
   PageTitle,
@@ -10,7 +9,6 @@ import {
   ButtonsWrapper,
   ContainerWrapp,
   NotFoundText,
-  
 } from './NoticesPage.styled';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 
@@ -23,7 +21,6 @@ import {
   getLoading,
   getError,
 } from 'redux/notices/notices-selectors';
-
 
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
 import { selectUserData, selectAccessToken } from 'redux/auth/authSelectors';
@@ -50,8 +47,10 @@ function NoticesPage() {
   }, [dispatch, categoryName, query, token]);
 
   const filteredNotices = () => {
-    const data = notices.filter(el =>
-      el.title.toLowerCase().includes(query.toLowerCase())
+    const data = notices.filter(
+      el =>
+        el.title.toLowerCase().includes(query.toLowerCase()) ||
+        el.breed.toLowerCase().includes(query.toLowerCase())
     );
     return data;
   };
