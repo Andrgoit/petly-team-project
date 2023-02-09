@@ -33,11 +33,11 @@ function OurFriensItem({
 
   const TelTo = () => {
     const telNumber = phone.replace(/[^0-9+]/g, '');
-    const str = 'tel:' + telNumber;
+    const str = `tel:  ${telNumber}`;
     return <AdressLink href={str}>{phone}</AdressLink>;
   };
   const EmailTo = () => {
-    const emailStr = 'mailto:'`${email}`;
+    const emailStr = `mailto: ${email}`;
     console.log(emailStr);
     return <AdressLink href={emailStr}>{email}</AdressLink>;
   };
