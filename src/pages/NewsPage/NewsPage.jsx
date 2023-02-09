@@ -29,8 +29,10 @@ function NewsPage() {
   const error = useSelector(getError);
 
   const filteredNews = () => {
-    const data = news.filter(el =>
-      el.title.toLowerCase().includes(q.toLowerCase())
+    const data = news.filter(
+      el =>
+        el.title.toLowerCase().includes(q.toLowerCase()) ||
+        el.text.toLowerCase().includes(q.toLowerCase())
     );
     return data;
   };
@@ -44,10 +46,10 @@ function NewsPage() {
           <Title>News</Title>
           <NewsSearchForm setQ={setQ} />
           {loading && <Loader />}
-          {error && <p>Что-то пошло не так</p>}
+          {error && <p>Something went wrong...</p>}
           {!loading && news && <NewsList data={newsToLayout} />}
           {!loading && ref.current && !Boolean(newsToLayout.length) && (
-            <p>Новостей по данному запросу нет</p>
+            <p>Not found</p>
           )}
         </Container>
       </MainContainer>
