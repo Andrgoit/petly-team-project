@@ -24,6 +24,10 @@ export default function Header() {
     setShowBurgetMenu(state => !state);
   };
 
+  const onClose = () => {
+    setShowBurgetMenu(false);
+  };
+
   return (
     <MainContainer>
       <StyledHeader>
@@ -32,7 +36,11 @@ export default function Header() {
 
         {isTablet && (
           <StyledMenuContainer>
-            {isLogined ? <UserNav /> : <AuthNav />}
+            {isLogined ? (
+              <UserNav onClick={onClose} />
+            ) : (
+              <AuthNav onClick={toggleBurgerMenu} />
+            )}
           </StyledMenuContainer>
         )}
 
