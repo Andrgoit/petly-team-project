@@ -7,13 +7,13 @@ import {
   StyledIcon,
 } from './UserNav.styled';
 
-export default function UserNav() {
+export default function UserNav({ onClick }) {
   const user = useSelector(selectUserData);
 
   if (user) {
     return (
       <StyledContainer>
-        <StyledButton to="/user">
+        <StyledButton to="/user" onClick={onClick}>
           <StyledIconContainer>
             <StyledIcon />
           </StyledIconContainer>

@@ -9,7 +9,7 @@ import {
   PetsWrapper,
   UserTitle,
 } from './UserPage.styled';
-// import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
+import Loader from 'components/Loader/Loader';
 import { MainContainer } from '../../components/App.styled';
 import {
   selectError,
@@ -33,17 +33,9 @@ const UserPage = () => {
     }
   }, [dispatch, user]);
 
-  // const [showModal, setShowModal] = useState(false);
-
-  //const onClose = () => {
-  //  setShowModal(true);
-  //};
-
-  // const { pets } = user;
-
   return (
     <section>
-      {loading && <p>...Loading</p>}
+      {loading && <Loader />}
       {error && <p>Oops!</p>}
       {!loading && user && isLogin && (
         <MainContainer>

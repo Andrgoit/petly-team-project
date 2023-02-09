@@ -69,12 +69,12 @@ export const addNotice = async (values, config) => {
 };
 
 export const fetchPetsAdd = async (credentials, config) => {
-  const { data } = await instance.post('/users/pets', credentials, config);
+  const { data } = await instance.post('/pets', credentials, config);
   return data;
 };
 
 export const fetchPetsDelete = async id => {
-  const data = await instance.delete(`/users/pets/${id}`);
+  const data = await instance.delete(`/pets/${id}`);
   return data;
 };
 
