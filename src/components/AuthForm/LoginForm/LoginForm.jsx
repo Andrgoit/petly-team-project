@@ -48,7 +48,6 @@ export const LoginForm = () => {
     validationSchema: validationSchema,
 
     onSubmit: values => {
-      console.log(values);
       dispatch(login(values));
       formik.resetForm();
     },
