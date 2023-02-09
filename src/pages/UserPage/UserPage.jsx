@@ -3,11 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import PetsData from 'components/PetsData/PetsData';
 
-import { UserContainer, UserWrapper, PetsWrapper } from './UserPage.styled';
+import {
+  UserContainer,
+  UserWrapper,
+  PetsWrapper,
+  UserTitle,
+} from './UserPage.styled';
 // import ModalAddsPet from '../../components/ModalAddsPet/ModalAddsPet';
 import { MainContainer } from '../../components/App.styled';
-import Loader from 'components/Loader/Loader';
-
 import {
   selectError,
   selectIsLoading,
@@ -40,16 +43,17 @@ const UserPage = () => {
 
   return (
     <section>
-      {loading && <Loader />}
+      {loading && <p>...Loading</p>}
       {error && <p>Oops!</p>}
       {!loading && user && isLogin && (
         <MainContainer>
           <UserContainer>
             <UserWrapper>
+              <UserTitle>My information:</UserTitle>
               <UserData user={user} />
             </UserWrapper>
             <PetsWrapper>
-              <PetsData />
+              <PetsData pets={user.pets} />
             </PetsWrapper>
           </UserContainer>
         </MainContainer>
