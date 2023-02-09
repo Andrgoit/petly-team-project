@@ -1,34 +1,46 @@
-# Правила и полезности
+# Hello everyone, this is our team project dedicated to our small pets
 
-1. Главная ветка - main
-2. Запрещено пушить сразу в main
-3. Каждый пушит только в свою ветку !
-4. Все свои ветки делаются из ветки MAIN
-5. Перед каждым коммитом нужно стягивать возможно обновленные данные с
-   репозитория `git pull`
+## Links:
 
-## Процесс работы:
+- [FrontEnd](https://github.com/Andrgoit/petly-team-project)
+- [BackEnd](https://github.com/Andrgoit/petly-backend)
 
-1. Клонируете себе на ком репозиторий:
-   `git clone https://github.com/Andrgoit/petly-team-project.git`
-2. Создать и перейти в свою ветку `git checkout -b "feature/название ветки"`
-3. Сохранить коммит `git add .` и `git commit -m "название коммита"`
-4. Перейти в ветку main `git checkout main`
-5. Стянуть последние изменения `git pull`
-6. Если нет конфликтов, выполнить пуш `git push`
-7. После этого появится сообщение, что такой ветки не существует на Гит Хабе и
-   предложат скопировать длинный код. Копируете, вставляете и запускаете.
-8. Перейти на Гит Хаб и оформить Pull Request
+---
 
-- если я не ошибся, то будет все нормально))))
+## Our team:
 
-Если нужно внести изменения, то из ветки MAIN создается ветка
+- [Andrey Hlushchenko](https://github.com/Andrgoit)
+- [Yurii-Naumchuk](https://github.com/Yurii-Naumchuk)
+- [Valeriia Chumak](https://github.com/valery-chumak)
+- [pavliv182](https://github.com/pavliv182)
+- [Oleksandr Sediakin](https://github.com/allx-under)
+- [JuliaOraz](https://github.com/JuliaOraz)
+- [Myroslava](https://github.com/MiraVV)
+- [Vlados2741](https://github.com/Vlados2741)
+- [Morov78](https://github.com/Morov78)
+- [kkseni](https://github.com/kkseni)
+- [Alina Domnich](https://github.com/Alina-d87)
+- [Sergey Filatov](https://github.com/Filatov44)
 
-`git checkout -b "fix/название ветки"`
+---
 
-Для удаления ветки на компе используйте команду `git branch -d "название ветки"`
+## Applied skills:
 
-### Команди:
+<div align="left">
 
-- `npm start` &mdash; старт сервера в режимі production
-- `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="40" width="52" alt="html5 logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" width="52" alt="css3 logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" width="52" alt="javascript logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" width="52" alt="react logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" width="52" alt="nodejs logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" height="40" width="52" alt="figma logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" height="40" width="52" alt="express logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="40" width="52" alt="git logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" height="40" width="52" alt="mongodb logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height="40" width="52" alt="redux logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" height="40" width="52" alt="slack logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" height="40" width="52" alt="trello logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="40" width="52" alt="vscode logo"  />
+</div>
+
+###
