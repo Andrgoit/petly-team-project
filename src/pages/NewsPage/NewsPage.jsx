@@ -46,10 +46,10 @@ function NewsPage() {
           <Title>News</Title>
           <NewsSearchForm setQ={setQ} />
           {loading && <Loader />}
-          {error && <p>Chto-to poshlo ne tak</p>}
+          {error && <p>Something went wrong...</p>}
           {!loading && news && <NewsList data={newsToLayout} />}
           {!loading && ref.current && !Boolean(newsToLayout.length) && (
-            <p>Novostey po dannomy zaprosy net</p>
+            <p>Not found</p>
           )}
         </Container>
       </MainContainer>
