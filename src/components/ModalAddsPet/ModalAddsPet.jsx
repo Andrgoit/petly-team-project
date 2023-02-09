@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { toast } from 'react-toastify';
 
 import { createPortal } from 'react-dom';
 import { addPet } from '../../redux/auth/authOperations';
@@ -56,7 +55,6 @@ export default function ModalAddsPet({ setShowModal }) {
       ...form,
       birthdate: parseDateToISO(form.birthdate),
     };
-    console.log(dataForm, 'final step');
     dispatch(addPet({ dataForm, token }));
   };
 
@@ -81,8 +79,8 @@ export default function ModalAddsPet({ setShowModal }) {
 
     if (final) {
       try {
-        const res = await fetchPets(newData);
-        if (res) onClose();
+        await fetchPets(newData);
+        onClose();
       } catch (error) {
         console.log(error);
       }
