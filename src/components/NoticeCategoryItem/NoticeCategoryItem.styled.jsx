@@ -5,11 +5,12 @@ import { RiDeleteBin5Fill } from 'react-icons/ri';
 export const Item = styled.li`
   display: flex;
   flex-direction: column;
-  width: 280px;
+  padding-bottom: 12px;
   position: relative;
   background: ${props => props.theme.colors.white};
-
   border-radius: 0px 0px 20px 20px;
+  box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+  
 
   @media screen and (min-width: 768px) {
     width: 336px;
@@ -20,6 +21,7 @@ export const Item = styled.li`
     width: 288px;
   }
 `;
+
 
 export const LearnMoreBtn = styled.button`
   color: rgba(245, 146, 86, 1);
@@ -33,10 +35,32 @@ export const LearnMoreBtn = styled.button`
   text-align: center;
   display: block;
   padding: 8px;
-  width: 100%;
+  width: 248px;
   margin-bottom: 12px;
+  margin-right: auto;
+  margin-left: auto;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  &:hover {
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    width: 288px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 248px;
+  }
+
+  &:last-child {
+    margin-bottom: 20px;
+    margin-top: 50px;
+  }
+
+  &:first-child:not(:last-child) {
+    margin-top: 20px;
+  }
+
+  &:hover,
+  :focus {
     background: rgba(255, 97, 1, 1);
     color: ${props => props.theme.colors.white};
   }
@@ -56,21 +80,39 @@ export const DeleteBtn = styled.button`
   justify-content: center;
   align-items: center;
   padding: 8px;
+  margin-right: auto;
+  margin-left: auto;
   width: 100%;
+  width: 248px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    width: 288px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 248px;
+  }
+
   &:hover {
     background: rgba(255, 97, 1, 1);
     color: ${props => props.theme.colors.white};
   }
 `;
-export const Container = styled.div`
-  padding: 20px;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
 `;
 
-export const Wrapper = styled.div`
-  padding: 20px, 20px, 12px, 20px;
-  margin-bottom: 50px;
+export const InfoWrapper = styled.div`
+  flex: 1 0 0;
+  padding: 20px;
+  padding-bottom: 0;
 `;
+
 
 export const Title = styled.h2`
   font-weight: 700;
@@ -79,11 +121,19 @@ export const Title = styled.h2`
   letter-spacing: -0.01em;
   color: #111111;
   margin-bottom: 20px;
+  word-wrap: break-word;
 `;
 
 export const Text = styled.p`
-  &:not(last-child) {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.37;
+
+  &:not(:last-child) {
     margin-bottom: 8px;
+  }
+  &:last-child {
+    margin-bottom: 0;
   }
 `;
 
@@ -104,6 +154,12 @@ export const CategoryTitle = styled.span`
   padding-bottom: 6px;
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
+`;
+
+export const Span = styled.span`
+  display: inline-block;
+  margin-right: 37px;
+  width: 50px;
 `;
 
 export const AddToFavoriteBtn = styled.button`
@@ -130,25 +186,27 @@ export const AddToFavoriteBtn = styled.button`
     fill: ${props => props.theme.colors.white};
   }
 `;
-export const Span = styled.span`
-  display: inline-block;
-  margin-right: 37px;
-  width: 50px;
+export const FavoriteIcon = styled(AiFillHeart)`
+  width: 28px;
+  height: 28px;
+  fill: #ff7301;
 `;
+
 export const AddIcon = styled(AiOutlineHeart)`
   width: 28px;
   height: 28px;
   color: rgba(245, 146, 86, 1);
-`;
-
-export const FavoriteIcon = styled(AiFillHeart)`
-  width: 28px;
-  height: 28px;
-  color: rgba(245, 146, 86, 1);
+  :hover {
+    background: rgba(245, 146, 86, 1);
+  }
 `;
 
 export const Image = styled.img`
   height: 288px;
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    width: 336px;
+  }
 `;
 
 export const DelIcon = styled(RiDeleteBin5Fill)`

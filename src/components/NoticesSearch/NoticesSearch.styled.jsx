@@ -1,9 +1,22 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  position: relative;
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 28px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 40px;
+  }
 `;
+
+export const Wrapper = styled.div`
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+`;
+
 
 export const Input = styled.input`
   padding: 11px 12px;

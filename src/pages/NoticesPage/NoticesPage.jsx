@@ -1,13 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { MainContainer } from '../../components/App.styled';
+
+
 import { NoticesCategoriesList } from '../../components/NoticesCategoriesList/NoticesCategoriesList';
 import {
   PageTitle,
-  Container,
   Section,
   ButtonsWrapper,
+  ContainerWrapp,
+  NotFoundText,
+  
 } from './NoticesPage.styled';
-import { MainContainer } from '../../components/App.styled';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 
 // import {AddNoticeButton} from 'components/AddNoticeButton/AddNoticeButton'
@@ -20,12 +24,15 @@ import {
   getLoading,
   getError,
 } from 'redux/notices/notices-selectors';
+
+
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
-import { selectUserData } from 'redux/auth/authSelectors';
+import { selectUserData, selectAccessToken } from 'redux/auth/authSelectors';
 
 import { useParams } from 'react-router-dom';
 
 function NoticesPage() {
+  const token = useSelector(selectAccessToken);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const { categoryName } = useParams();
 
@@ -40,7 +47,7 @@ function NoticesPage() {
 
   useEffect(() => {
     ref.current = true;
-    dispatch(getNotices({ categoryName }));
+    dispatch(getNotices({ categoryName, token }));
   }, [dispatch, categoryName, query]);
 
   const filteredNotices = () => {
@@ -51,35 +58,39 @@ function NoticesPage() {
   };
   const noticesToLayout = filteredNotices();
   return (
-    <Section>
-      <MainContainer>
-        <Container>
+    <MainContainer>
+      <Section>
+        <ContainerWrapp>
+          {/* <Container> */}
           <PageTitle>Find your favorite pet</PageTitle>
           <NoticesSearch setQ={setQ} />
           <ButtonsWrapper>
             <NoticesCategoriesNav></NoticesCategoriesNav>
             <AddNoticeButton onClickOpen={() => setIsAddModalOpen(true)} />
           </ButtonsWrapper>
-        </Container>
-        {loading && <Loader />}
-        {error && <p>Что-то пошло не так</p>}
-        {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
-        {!loading && notices && (
-          <NoticesCategoriesList
-            notices={noticesToLayout}
-            favorite={favorite}
-          />
-        )}
 
-        {!loading && ref.current && !Boolean(noticesToLayout.length) && (
-          <p>Not found</p>
-        )}
-      </MainContainer>
-      <ModalAddNotice
-        isModalOpen={isAddModalOpen}
-        setIsModalOpen={setIsAddModalOpen}
-      ></ModalAddNotice>
-    </Section>
+          {/* </Container> */}
+
+          {error && <p>Что-то пошло не так</p>}
+          {/* {!loading && notices && <NoticesCategoriesList notices={notices} />} */}
+          {!loading && notices && (
+            <NoticesCategoriesList
+              notices={noticesToLayout}
+              favorite={favorite}
+            />
+          )}
+
+          {!loading && ref.current && !Boolean(noticesToLayout.length) && (
+            <NotFoundText>Not found, try again.</NotFoundText>
+          )}
+        </ContainerWrapp>
+
+        <ModalAddNotice
+          isModalOpen={isAddModalOpen}
+          setIsModalOpen={setIsAddModalOpen}
+        ></ModalAddNotice>
+      </Section>
+    </MainContainer>
   );
 }
 
