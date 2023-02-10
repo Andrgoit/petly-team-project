@@ -44,7 +44,7 @@ export default function Header() {
           </StyledMenuContainer>
         )}
 
-        {!isDesktop && <BurgerButton onClick={toggleBurgerMenu} />}
+        {!isDesktop && <BurgerButton onClick={onClose} />}
       </StyledHeader>
 
       {!isDesktop && showBurgerMenu && (
