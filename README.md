@@ -9,6 +9,8 @@
 
 ## Our team:
 
+### Full Stack developers:
+
 - [Andrey Hlushchenko](https://github.com/Andrgoit)
 - [Yurii-Naumchuk](https://github.com/Yurii-Naumchuk)
 - [Valeriia Chumak](https://github.com/valery-chumak)
@@ -21,6 +23,14 @@
 - [kkseni](https://github.com/kkseni)
 - [Alina Domnich](https://github.com/Alina-d87)
 - [Sergey Filatov](https://github.com/Filatov44)
+
+### QA:
+
+- [Oleksandr Turanov](http://linkedin.com/in/olexandr-turanov-384415194)
+- [Victoria Liubchenko](https://www.linkedin.com/in/victoriya-liubchenko-452b84258/)
+- [Victor Zorin](https://www.linkedin.com/in/victor-zorin-qatesting)
+- [Oksana Oliinyk](https://www.linkedin.com/in/%D0%BE%D0%BA%D1%81%D0%B0%D0%BD%D0%B0-%D0%BE%D0%BB%D1%96%D0%B9%D0%BD%D0%B8%D0%BA-764a021b8/)
+- [Yevgeniy Kondakov](http://www.linkedin.com/in/%D0%B5%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BA-4518a2265)
 
 ---
 
@@ -42,5 +52,3 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" height="40" width="52" alt="trello logo"  />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="40" width="52" alt="vscode logo"  />
 </div>
-
-###
