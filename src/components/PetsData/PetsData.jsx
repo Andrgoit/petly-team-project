@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
+
+import { selectError, selectIsLoading } from '../../redux/auth/authSelectors';
 
 import { useSelector } from 'react-redux';
 import { selectUserPets } from '../../redux/auth/authSelectors';
@@ -14,11 +17,14 @@ import {
   Wrapper,
   Pictures,
   StyledButtonSection,
+  LoaderUser,
 } from './PetsData.styled';
 
 function PetsData() {
   const [showModal, setShowModal] = useState(false);
   const pets = useSelector(selectUserPets);
+  const loading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
   const petsLeng = pets?.length;
 
   const onClose = () => {
@@ -38,11 +44,21 @@ function PetsData() {
       </StyledButtonSection>
 
       {showModal && <ModalAddsPet setShowModal={setShowModal} />}
-      {petsLeng > 0 ? (
-        <PetsList pets={pets} />
-      ) : (
+      {petsLeng > 0 && <PetsList pets={pets} />}
+      {!loading && !error && petsLeng === 0 && (
         <Pictures>You don't have any pets added.</Pictures>
       )}
+      {loading && (
+        <LoaderUser>
+          <ThreeDots
+            height="100"
+            width="100"
+            radius="9"
+            color={'rgb(245, 146, 86)'}
+          />
+        </LoaderUser>
+      )}
+      {error && <p>Oops!</p>}
     </Wrapper>
   );
 }

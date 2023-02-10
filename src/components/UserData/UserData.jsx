@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+
 import UserDataItem from '../UserDataItem/UserDataItem';
 import noAvatar from '../../img/no-image.jpeg';
 import logoutIcon from '../../img/logout-icon.png';
@@ -22,6 +23,11 @@ import { logout, updateUser } from 'redux/auth/authOperations';
 import { selectAccessToken } from 'redux/auth/authSelectors';
 
 export const UserData = ({ user }) => {
+  const dispatch = useDispatch();
+  const [isDisabledBtn, setIsDisabledBtn] = useState(false);
+
+  const token = useSelector(selectAccessToken);
+
   const {
     email,
     name,
@@ -30,10 +36,6 @@ export const UserData = ({ user }) => {
     location: city,
     avatar,
   } = user;
-
-  const [isDisabledBtn, setIsDisabledBtn] = useState(false);
-  const dispatch = useDispatch();
-  const token = useSelector(selectAccessToken);
 
   const handleFileChange = async e => {
     const imgFile = e.target.files[0];
