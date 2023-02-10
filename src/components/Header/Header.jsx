@@ -39,12 +39,12 @@ export default function Header() {
             {isLogined ? (
               <UserNav onClick={onClose} />
             ) : (
-              <AuthNav onClick={toggleBurgerMenu} />
+              <AuthNav onClick={onClose} />
             )}
           </StyledMenuContainer>
         )}
 
-        {!isDesktop && <BurgerButton onClick={onClose} />}
+        {!isDesktop && <BurgerButton onClick={toggleBurgerMenu} />}
       </StyledHeader>
 
       {!isDesktop && showBurgerMenu && (
