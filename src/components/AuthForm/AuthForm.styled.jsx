@@ -4,9 +4,12 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 export const AuthContainer = styled.div`
   text-align: center;
+  margin-bottom: 45px;
 
   @media (min-width: 768px) {
     width: 608px;
+    margin-top: 80px;
+
     margin-left: auto;
     margin-right: auto;
     padding: 60px 80px;
@@ -17,6 +20,7 @@ export const AuthContainer = styled.div`
 
   @media (min-width: 1300px) {
     width: 618px;
+    margin-top: 60px;
   }
 `;
 
