@@ -16,7 +16,7 @@ import {
 export const RegisterStepOne = ({ next, data }) => {
   const emailRexExp =
     /^[a-zA-Z0-9]+[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9]+$/;
-  const passwordRexExp = /^[a-zA-Zа-яА-Я0-9]+$/;
+  const passwordRexExp = /^\S{7,32}$/;
 
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);

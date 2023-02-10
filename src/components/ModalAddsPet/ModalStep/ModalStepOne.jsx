@@ -1,7 +1,7 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
-import { parse } from 'date-fns';
+import { parse, isDate } from 'date-fns';
 
 import {
   Label,
@@ -13,6 +13,7 @@ import {
 } from './ModalStep.styled.jsx';
 
 const today = new Date();
+
 const namePetRegExp = /^[a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії]{2,16}$/;
 const breedPetRegExp = /^[a-zA-Zа-яёА-ЯЁА-ЩЬЮЯҐЄІЇа-щьюяґєії\s]{2,24}$/;
 
@@ -25,21 +26,21 @@ const validationSchema = yup.object({
     .required('Name is a required field'),
   birthdate: yup
     .date()
-    .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
+    .test('len', 'Must be exactly DD.MM.YYYY', (_, { originalValue }) => {
       if (originalValue) {
         return originalValue.length === 10;
       }
     })
-    .transform(function (value, originalValue) {
-      if (this.isType(value)) {
-        return value;
-      }
-      const result = parse(originalValue, 'dd.MM.yyyy', new Date());
+    .transform(function (_, originalValue) {
+      const result = isDate(originalValue)
+        ? originalValue
+        : parse(originalValue, 'dd.MM.yyyy', new Date());
+
       return result;
     })
     .typeError('Please enter a valid date')
     .required()
-    .min('1950-11-13', 'Date is too early')
+    .min('01.01.1950', 'Date is too early')
     .max(today),
   breed: yup
     .string()
