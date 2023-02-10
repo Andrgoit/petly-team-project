@@ -119,3 +119,6 @@ export const Pictures = styled.div`
     padding: 20px;
   }
 `;
+export const LoaderUser = styled.div`
+  margin: auto;
+`;

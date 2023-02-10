@@ -1,4 +1,4 @@
-import { UserData } from '../../components/UserData/UserData';
+import { UserData } from 'components/UserData/UserData';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import PetsData from 'components/PetsData/PetsData';
@@ -9,11 +9,9 @@ import {
   PetsWrapper,
   UserTitle,
 } from './UserPage.styled';
-import Loader from 'components/Loader/Loader';
+
 import { MainContainer } from '../../components/App.styled';
 import {
-  selectError,
-  selectIsLoading,
   selectIsLoggedIn,
   selectUserData,
 } from '../../redux/auth/authSelectors';
@@ -21,11 +19,8 @@ import { getUser } from 'redux/auth/authOperations';
 
 const UserPage = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUserData);
-
-  const loading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
   const isLogin = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectUserData);
 
   useEffect(() => {
     if (!user) {
@@ -35,9 +30,7 @@ const UserPage = () => {
 
   return (
     <section>
-      {loading && <Loader />}
-      {error && <p>Oops!</p>}
-      {!loading && user && isLogin && (
+      {user && isLogin && (
         <MainContainer>
           <UserContainer>
             <UserWrapper>
@@ -45,7 +38,7 @@ const UserPage = () => {
               <UserData user={user} />
             </UserWrapper>
             <PetsWrapper>
-              <PetsData pets={user.pets} />
+              <PetsData />
             </PetsWrapper>
           </UserContainer>
         </MainContainer>

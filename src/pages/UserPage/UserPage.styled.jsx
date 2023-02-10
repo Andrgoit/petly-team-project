@@ -30,8 +30,8 @@ export const UserWrapper = styled.div`
 
 export const PetsWrapper = styled.div`
   position: relative;
+  width: 100%;
   @media screen and (min-width: 768px) {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,7 +39,6 @@ export const PetsWrapper = styled.div`
   }
   @media screen and (min-width: 1300px) {
     display: block;
-    width: auto;
   }
 `;
 // export const ButtonWrapper = styled.div`
