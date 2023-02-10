@@ -29,6 +29,7 @@ import { getLoading } from 'redux/notices/notices-selectors';
 
 import { toast } from 'react-toastify';
 import Loader from 'components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
   sex: yup.string().required('Field is required!'),
@@ -83,6 +84,8 @@ const SecondStep = ({
 
   const isLoading = useSelector(getLoading);
 
+  const navigate = useNavigate();
+
   const handleFileChange = (e, setFieldValue) => {
     const imgFile = e.target.files[0];
     if (imgFile) {
@@ -122,6 +125,7 @@ const SecondStep = ({
           setFormValues(initialValues);
           setIsFirstStep(true);
           closeModal();
+          navigate('/notices/own');
         } catch (error) {
           toast.error(error.message);
         }
